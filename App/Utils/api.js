@@ -1,0 +1,17 @@
+/**
+ * Get Data from Trivia API
+ * @type {{getQuestions: (())}}
+ */
+const api = {
+    getQuestions(n) {
+
+        const url = 'https://opentdb.com/api.php?amount=' + n + '&type=multiple';
+        //const url = 'https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986';
+        //const url = 'https://opentdb.com/api.php?amount=10&type=multiple&encode=base64';
+
+        return fetch(url).then((res) => res.json());
+
+    },
+}
+
+module.exports = api;
