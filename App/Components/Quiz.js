@@ -20,6 +20,10 @@ class _Quiz extends Component {
     //     super();
     // }
 
+    componentDidMount() {
+        this.props.getRemoteData();
+    }
+
     nextQuestion(question_number) {
 
         if (( this.props.currentQuestion + 1 ) === this.props.numberQuestions) {
@@ -48,6 +52,7 @@ class _Quiz extends Component {
 
     render() {
 
+
         if (this.props.answerSubmitted) {
             var nextQuestionButton = <TouchableHighlight
                 underlayColor={variables.brandThirdLite}
@@ -59,16 +64,22 @@ class _Quiz extends Component {
             var nextQuestionButton = <Text></Text>
         }
 
-        const __currentQuiz = <Questions
-            arrayData={this.props.getQuestions[this.props.currentQuestion]}
-            answerChosen={(correct) => this.answerChosen(correct)}
-            answerSubmitted={this.props.answerSubmitted}
-        ></Questions>;
-
-        const currentQuiz = <ActivityIndicator
-            animating={true}
-            color="#333"
-            size="large"></ActivityIndicator>;
+        //console.log( 'YYYY', this.props.getQuestions);
+        /**
+         * I need to use a different boolean here...
+         */
+        if ( this.props.getQuestions ) {
+            var currentQuiz = <Questions
+                arrayData={this.props.getQuestions[this.props.currentQuestion]}
+                answerChosen={(correct) => this.answerChosen(correct)}
+                answerSubmitted={this.props.answerSubmitted}
+            ></Questions>;
+        } else {
+            var currentQuiz = <ActivityIndicator
+                animating={true}
+                color="#333"
+                size="large"></ActivityIndicator>;
+        }
 
         return (
             <View style={styles.outerWrap}>
@@ -131,11 +142,14 @@ const mapActionsToProps = (dispatch) => ({
         //api.getQuestions(this.state.numberQuestions).then((res) => {
         api.getQuestions(5).then((res) => {
 
+            console.log( 'api working???????');
+
             /**
              * Shuffle Array
              * @param array
              * @returns {*}
              * @todo use this same function to randomize animation on main page
+             * @todo helper functions file?
              */
             function shuffleArray(array) {
                 for (var i = array.length - 1; i > 0; i--) {
@@ -154,9 +168,6 @@ const mapActionsToProps = (dispatch) => ({
                 trivia_question.incorrect_answers.map((incorrect_answer) => {
                     answers.push({answer: incorrect_answer, correct: false});
                 })
-                /**
-                 * @todo I need to get the key of the correct answer ewre, not inside the render method..
-                 */
                 questions.push({
                     question: trivia_question.question,
                     answers: shuffleArray(answers),

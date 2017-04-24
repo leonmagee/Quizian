@@ -17,17 +17,17 @@ import {
 
 //var arrayData = SampleQuestions[this.props.currentQuestion];
 
-const getQuestionsReducer = (state = [], action) => {
+const getQuestionsReducer = (state = false, action) => {
 
     switch( action.type ) {
         case START_DATA:
-            return [];
+            return false;
             break;
         case DATA_AVAILABLE:
             return action.payload;
             break;
         default:
-            return [];
+            return state;
     }
     //return SampleQuestions;
 }
@@ -88,11 +88,10 @@ const answerSubmittedReducer = (state = false, action) => {
 }
 
 const quizResultsReducer = (state = false, action) => {
-
     switch (action.type) {
-        case QUIZ_RESULTS: {
+        case QUIZ_RESULTS:
             return true;
-        }
+            break;
         case START_NEW_QUIZ:
             return false;
             break;
@@ -140,6 +139,16 @@ const currentQuestionReducer = (state = 0, action) => {
     }
 };
 
+// const dataReceivedReducer = (state = false, action) => {
+//
+//     switch( action.type ) {
+//         case DATA_AVAILABLE:
+//             return true;
+//         default:
+//             return state;
+//     }
+// }
+
 /**
  * Combine State
  * @type {Reducer<S>}
@@ -153,4 +162,5 @@ export const reducer = combineReducers({
     answerSubmitted: answerSubmittedReducer,
     quizResults: quizResultsReducer,
     getQuestions: getQuestionsReducer,
+    //dataReceived: dataReceivedReducer,
 });

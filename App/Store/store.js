@@ -22,8 +22,12 @@ import thunk from 'redux-thunk';
 // }
 
 //const middleware = applyMiddleware(logger, error);
+/**
+ * Right now the middleware doesn't seem to do anything other than enable the logger
+ * I'm not sure what thunk even does...
+ * @type {GenericStoreEnhancer}
+ */
 const middleware = applyMiddleware(thunk, createLogger());
-
 
 //const preloadedState = {currentQuestion: 0};
 //const store = createStore(reducer, preloadedState);
@@ -38,73 +42,10 @@ store.subscribe(() => {
     console.log('store has changed!', store.getState())
 })
 
-store.dispatch((dispatch) => {
-    dispatch({type: 'START_DATA'})
-
-
-
-
-
-    //
-    //
-    //
-    //
-    // //api.getQuestions(this.state.numberQuestions).then((res) => {
-    //     api.getQuestions(5).then((res) => {
-    //
-    //     /**
-    //      * Shuffle Array
-    //      * @param array
-    //      * @returns {*}
-    //      * @todo use this same function to randomize animation on main page
-    //      */
-    //     function shuffleArray(array) {
-    //         for (var i = array.length - 1; i > 0; i--) {
-    //             var j = Math.floor(Math.random() * (i + 1));
-    //             var temp = array[i];
-    //             array[i] = array[j];
-    //             array[j] = temp;
-    //         }
-    //         return array;
-    //     }
-    //
-    //     const questions = [];
-    //     res.results.map((trivia_question) => {
-    //         const answers = [];
-    //         answers.push({answer: trivia_question.correct_answer, correct: true});
-    //         trivia_question.incorrect_answers.map((incorrect_answer) => {
-    //             answers.push({answer: incorrect_answer, correct: false});
-    //         })
-    //         /**
-    //          * @todo I need to get the key of the correct answer ewre, not inside the render method..
-    //          */
-    //         questions.push({
-    //             question: trivia_question.question,
-    //             answers: shuffleArray(answers),
-    //         });
-    //     });
-
-       // console.log('DATA RETRIEVAL WORKING????', questions);
-
-        // this.setState({questions: questions});
-        // this.setState({isLoading: false});
-
-    //});
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // async calls?
-    dispatch({type: 'DATA_AVAILABLE'})
-})
+// store.dispatch((dispatch) => {
+//     dispatch({type: 'TESTER_1'})
+//     // async calls?
+//     dispatch({type: 'TESTER_2'})
+// })
 
 module.exports = store;

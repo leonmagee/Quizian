@@ -6,10 +6,10 @@
 import React, {Component} from 'react';
 import Main from './App/Components/Main'; // homepage component
 //import {Quiz} from './App/Components/Quiz';
-import {MainWrap} from './App/Components/MainWrap';
+//import {MainWrap} from './App/Components/MainWrap';
 import {Provider} from 'react-redux';
 import store from './App/Store/store';
-//import TabView from 'react-native-scrollable-tab-view';
+import TabView from 'react-native-scrollable-tab-view';
 
 import {
     View,
@@ -32,7 +32,10 @@ export default class Quizian extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Main />
+                <TabView>
+                    <Main tabLabel="home"/>
+                    <View tabLabel="start quiz"><Text>Start Quiz</Text></View>
+                </TabView>
             </Provider>
         )
     }

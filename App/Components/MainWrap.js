@@ -4,6 +4,7 @@ import {QuizResults} from './QuizResults';
 import {connect} from 'react-redux';
 import {View} from 'react-native';
 import styles from '../Styles/DefaultStyles'
+import TabView from 'react-native-scrollable-tab-view';
 
 // console.log(this.state);
 //
@@ -25,9 +26,12 @@ class _MainWrap extends Component {
         }
 
         return (
-            <View style={styles.outerWrapMain}>
-                {mainComponent}
-            </View>
+            <TabView>
+                <View tabLabel="quiz" style={styles.outerWrapMain}>
+                    {mainComponent}
+                </View>
+                <View tabLabel="results"></View>
+            </TabView>
         )
     }
 }

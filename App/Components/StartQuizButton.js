@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Quiz from './Quiz';
+//import Quiz from './Quiz';
+import {MainWrap} from './MainWrap';
 
 import {
     StyleSheet,
@@ -30,19 +31,19 @@ class StartQuizButton extends Component {
         super(props);
     }
 
-    startQuiz() {
-        console.log(this.props.navigator);
-        this.props.navigator.push({
-            component: Quiz,
-            title: 'Quizian',
-            navigationBarHidden: false
-        });
-    }
+    // startQuiz() {
+    //     console.log(this.props.navigator);
+    //     this.props.navigator.push({
+    //         component: MainWrap,
+    //         title: 'Quizian',
+    //         navigationBarHidden: false
+    //     });
+    // }
 
     render() {
 
         return (
-            <TouchableHighlight style={styles.buttonWrap} onPress={() => this.startQuiz()}
+            <TouchableHighlight style={styles.buttonWrap} onPress={() => this.props.startQuiz()}
                                 underlayColor="rgba(255,255,255,0.9)">
                 <Text style={styles.button}>{this.props.buttonText}</Text>
             </TouchableHighlight>

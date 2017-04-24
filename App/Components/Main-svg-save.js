@@ -6,8 +6,6 @@ import React, {Component} from 'react';
 //import Quiz from './Quiz';
 //import SvgElement from './SvgElement';
 //import svg_question from '../SVG/question';
-import {MainWrap} from './MainWrap'; // @todo call this quiz wrap instaed? is this needed?
-
 import StartQuizButton from './StartQuizButton';
 
 import {
@@ -59,11 +57,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 1,
-    },
-    questionText: {
-        fontSize: 33,
-        fontWeight: 'bold',
-        color: 'rgba(255,255,255,0.3)',
     }
 });
 
@@ -88,15 +81,11 @@ class Main extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            started: false,
-        }
     }
 
     // startQuiz() {
     //     this.props.navigator.push({
-    //         component: MainWrap,
+    //         component: Quiz,
     //         title: 'Quizian',
     //         navigationBarHidden: false
     //     });
@@ -120,53 +109,39 @@ class Main extends Component {
         Animated.stagger(5000, animated_timing);
     }
 
-    startQuiz() {
-        this.setState({
-            started: true,
-        })
-    }
-
     render() {
 
         const grid = grid_array.map((item, key) => {
 
-            const interpolateColor = this.animatedValue[item].interpolate({
-                inputRange: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-                //inputRange: [0, 1],
-                outputRange: ['#20b2aa', '#089CCA', '#07CA88', '#10CAC0', '#5CCA9D', '#089CCA', '#07CA88', '#10CAC0', '#5CCA9D', '#20b2aa'],
-                //outputRange: ['#fff', '#000'],
-                // white / blue / green / aqua / light green
-            })
-            const animatedStyle = {
-                backgroundColor: interpolateColor,
-            }
+                const interpolateColor = this.animatedValue[item].interpolate({
+                    inputRange: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    //inputRange: [0, 1],
+                    outputRange: ['#20b2aa', '#089CCA', '#07CA88', '#10CAC0', '#5CCA9D', '#089CCA', '#07CA88', '#10CAC0', '#5CCA9D', '#20b2aa'],
+                    //outputRange: ['#fff', '#000'],
+                    // white / blue / green / aqua / light green
+                })
+                const animatedStyle = {
+                    backgroundColor: interpolateColor,
+                }
 
 
             return (
-                <Animated.View style={[styles.gridItem, {width: item_width, height: item_height}, animatedStyle]}
-                               key={key}>
-                    <View>
-                        <Text style={styles.questionText}>?</Text>
+                <Animated.View style={[styles.gridItem, {width: item_width, height: item_height}, animatedStyle]} key={key}>
+                    <View style={styles.svgWrap}>
+                        <Text>X</Text>
+                        <SvgElement fill="rgba(0,0,0,0.1)" svg_data={svg_question}/>
                     </View>
                 </Animated.View>
             )
         })
 
-        if (this.state.started) {
-            var MainComponent = <MainWrap/>
-        } else {
-            var MainComponent = <View style={styles.homeWrap}>
+        return (
+            <View style={styles.homeWrap}>
                 <View style={[styles.homeTextWrap, {width: width, height: height}]}>
                     <Text style={styles.homeText}>QUIZIAN</Text>
-                    <StartQuizButton startQuiz={() => this.startQuiz()} buttonText="START" navigator={this.props.navigator}/>
+                    <StartQuizButton buttonText="START" navigator={this.props.navigator}/>
                 </View>
                 {grid}
-            </View>;
-        }
-
-        return (
-            <View style={{flex: 1}}>
-                {MainComponent}
             </View>
         )
     }
