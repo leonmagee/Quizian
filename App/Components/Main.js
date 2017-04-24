@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
         shadowColor: '#000',
         shadowOpacity: 0.2,
         shadowOffset: {width: 1, height: 1},
+        //fontFamily: 'lalezar_regular',
+        fontFamily: 'Lalezar',
     },
     // buttonWrap: {
     //     backgroundColor: 'rgba(255,255,255,0.8)',
@@ -157,7 +159,7 @@ class Main extends Component {
         } else {
             var MainComponent = <View style={styles.homeWrap}>
                 <View style={[styles.homeTextWrap, {width: width, height: height}]}>
-                    <Text style={styles.homeText}>QUIZIAN</Text>
+                    <Text style={styles.homeText}>Quizian</Text>
                     <StartQuizButton startQuiz={() => this.startQuiz()} buttonText="START" navigator={this.props.navigator}/>
                 </View>
                 {grid}

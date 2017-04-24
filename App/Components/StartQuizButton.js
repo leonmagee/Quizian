@@ -12,15 +12,20 @@ import {
 const styles = StyleSheet.create({
     buttonWrap: {
         backgroundColor: 'rgba(255,255,255,0.8)',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
+        paddingHorizontal: 20,
+        paddingTop: 5,
+        paddingBottom: 0,
         marginTop: 15,
         borderRadius: 5,
     },
     button: {
         color: '#E51D12',
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 28,
+        fontFamily: 'lalezar',
+        // lineHeight: 40,
+        // padding: 0,
+        // margin: 0,
     },
 });
 
