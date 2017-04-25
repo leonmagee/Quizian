@@ -8,7 +8,7 @@ import Main from './App/Components/Main'; // homepage component
 //import {Quiz} from './App/Components/Quiz';
 //import {MainWrap} from './App/Components/MainWrap';
 import {Provider} from 'react-redux';
-import store from './App/Store/store';
+import store from './App/Redux/store';
 import TabView from 'react-native-scrollable-tab-view';
 
 import {

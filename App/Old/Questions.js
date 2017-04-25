@@ -3,7 +3,7 @@ import styles from '../Styles/DefaultStyles'
 import { connect } from 'react-redux'
 //import ADD_POST from '../Store/reducers'
 //const ADD_POST = 'ADD_POST';
-import { ADD_QUESTION } from '../Store/reducers'
+import { ADD_QUESTION } from '../Redux/reducers'
 
 import {
     Text,

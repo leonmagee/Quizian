@@ -5,6 +5,14 @@ import {QuizResults} from './QuizResults';
 import {connect} from 'react-redux';
 import {View} from 'react-native';
 import styles from '../Styles/DefaultStyles'
+import TabView from 'react-native-scrollable-tab-view';
+
+// console.log(this.state);
+//
+// const _MainWrap = () => (
+//     <QuizResults />
+//     // <Quiz />
+// );
 
 class _MainWrap extends Component {
 
@@ -19,9 +27,16 @@ class _MainWrap extends Component {
         }
 
         return (
-            <View style={styles.outerWrapMain}>
-                {mainComponent}
-            </View>
+            <TabView tabBarPosition="bottom">
+                <View tabLabel="quiz" style={styles.outerWrapMain}>
+                    {mainComponent}
+                </View>
+                <View tabLabel="results">
+                    /**
+                     * The results page can be constantly updated depending on the state?
+                     */
+                </View>
+            </TabView>
         )
     }
 }

@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     }
 });
 
-//var background_color_array = [];
+
 const {width, height} = Dimensions.get('window');
 const num_horizontal = 6;
 const num_vertical = 10;
@@ -77,23 +77,7 @@ const total_grid_items = ( num_horizontal * num_vertical );
 const grid_array = [];
 for (i = 0; i < total_grid_items; i++) {
     grid_array.push(i);
-    //background_color_array.push('#20b2aa');
 }
-// console.log('gridz');
-// console.log(grid_array);
-
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array;
-}
-
-let shuffled_grid_array = shuffleArray(grid_array);
-//console.log(shuffled_grid_array);
 
 /**
  * @todo change this to only use grid array?
@@ -106,21 +90,19 @@ class Main extends Component {
 
     constructor(props) {
         super(props);
-        const num_horizontal = 6;
-        const num_vertical = 10;
-        const total_grid_items = ( num_horizontal * num_vertical );
-        //const grid_array = [];
-        var background_color_array = [];
-        for (i = 0; i < total_grid_items; i++) {
-            background_color_array.push('#20b2aa');
-        }
 
         this.state = {
             started: false,
-            background_array: background_color_array
         }
-
     }
+
+    // startQuiz() {
+    //     this.props.navigator.push({
+    //         component: MainWrap,
+    //         title: 'Quizian',
+    //         navigationBarHidden: false
+    //     });
+    // }
 
     componentWillMount() {
         this.animatedValue = [];
@@ -128,37 +110,6 @@ class Main extends Component {
 
             this.animatedValue[item] = new Animated.Value(0);
         })
-    }
-
-    changeColorRecursive(array, length, i, old_i = null, shuffle) {
-
-        // console.log('array', array);
-        // console.log('length', length);
-        //console.log('shuffle', shuffled_grid_array)
-        //console.log( 'i', i);
-        if ( i < ( length ) ) {
-            //console.log( array[i]);
-
-            setTimeout(() => {
-                //array[shuffled_grid_array[i]] = '#07CA88';
-                array[shuffled_grid_array[i]] = '#089CCA';
-                if ( old_i != null ) {
-                    array[old_i] = '#20b2aa'
-                }
-
-                this.setState({
-                    background_array: array,
-                })
-                let oldster = shuffled_grid_array[i];
-                i++;
-                this.changeColorRecursive(array, length, i, oldster);
-            }, 100)
-
-
-        } else {
-            console.log('finalize');
-        }
-
     }
 
     componentDidMount() {
@@ -169,48 +120,6 @@ class Main extends Component {
             }).start()
         });
         Animated.stagger(5000, animated_timing);
-
-        let new_bg_array = this.state.background_array;
-        // new_bg_array[33] = 'green';
-        // this.setState({
-        //     background_array: new_bg_array,
-        // })
-
-        // setTimeout(() => {
-        //     new_bg_array[22] = '#07CA88';
-        //     this.setState({
-        //         background_array: new_bg_array,
-        //     })
-        // }, 3000)
-
-        let i = 0;
-        this.changeColorRecursive(new_bg_array, new_bg_array.length, i);
-
-        /**
-         * I need to pass in a function that will call itself as well...
-         */
-
-        setTimeout(function() {
-            // do something
-            setTimeout(function() {
-                // do second thing
-            }, 1000);
-        }, 1000);
-
-
-
-
-
-
-        // const animated_timing_bg = grid_array.map((a) => {
-        //     new_bg_array[22] = 'green';
-        //     this.setState({
-        //         background_array: new_bg_array,
-        //     })
-        //
-        // });
-        //
-        // Animated.stagger(5000, animated_timing_bg);
     }
 
     startQuiz() {
@@ -224,17 +133,14 @@ class Main extends Component {
         const grid = grid_array.map((item, key) => {
 
             const interpolateColor = this.animatedValue[item].interpolate({
-                inputRange: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                inputRange: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
                 //inputRange: [0, 1],
-                outputRange: ['#20b2aa', '#089CCA', '#07CA88', '#10CAC0', 'black', '#5CCA9D', '#089CCA', '#07CA88', '#10CAC0', '#5CCA9D', '#20b2aa'],
+                outputRange: ['#20b2aa', '#089CCA', '#07CA88', '#10CAC0', '#5CCA9D', '#089CCA', '#07CA88', '#10CAC0', '#5CCA9D', '#20b2aa'],
                 //outputRange: ['#fff', '#000'],
                 // white / blue / green / aqua / light green
             })
             const animatedStyle = {
-                //backgroundColor: interpolateColor,
-                //backgroundColor: '#20b2aa'
-                //backgroundColor: background_color_array[key]
-                backgroundColor: this.state.background_array[key]
+                backgroundColor: interpolateColor,
             }
 
 

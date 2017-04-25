@@ -15,22 +15,23 @@ import {
     DATA_AVAILABLE
 } from './actions';
 
+import {getQuestionsReducer} from './getQuestionsReducer';
+
 //var arrayData = SampleQuestions[this.props.currentQuestion];
 
-const getQuestionsReducer = (state = false, action) => {
-
-    switch( action.type ) {
-        case START_DATA:
-            return false;
-            break;
-        case DATA_AVAILABLE:
-            return action.payload;
-            break;
-        default:
-            return state;
-    }
-    //return SampleQuestions;
-}
+// const getQuestionsReducer = (state = false, action) => {
+//
+//     switch( action.type ) {
+//         case START_DATA:
+//             return false;
+//             break;
+//         case DATA_AVAILABLE:
+//             return action.payload;
+//             break;
+//         default:
+//             return state;
+//     }
+// }
 
 /**
  * Total Number of Questions
@@ -109,12 +110,8 @@ const answerResultStringReducer = (state = '', action) => {
         case INCORRECT_ANSWER:
             return <Text style={[s, {color: variables.brandPrimary}]}>INCORRECT</Text>
             break;
-        // case START_NEW_QUIZ:
-        //     return <Text></Text>
-        //     break;
         default:
             return <Text></Text>
-        //return <Text style={[s, {color: variables.brandSecond}]}>NULL</Text>
     }
 }
 
@@ -139,15 +136,6 @@ const currentQuestionReducer = (state = 0, action) => {
     }
 };
 
-// const dataReceivedReducer = (state = false, action) => {
-//
-//     switch( action.type ) {
-//         case DATA_AVAILABLE:
-//             return true;
-//         default:
-//             return state;
-//     }
-// }
 
 /**
  * Combine State
@@ -162,5 +150,4 @@ export const reducer = combineReducers({
     answerSubmitted: answerSubmittedReducer,
     quizResults: quizResultsReducer,
     getQuestions: getQuestionsReducer,
-    //dataReceived: dataReceivedReducer,
 });

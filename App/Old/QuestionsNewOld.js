@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import styles from '../Styles/DefaultStyles'
 import { connect } from 'react-redux'
-import { NEXT_QUESTION } from '../Store/reducers'
+import { NEXT_QUESTION } from '../Redux/reducers'
 import {SampleQuestions} from './SampleQuestions'
 
 import {
