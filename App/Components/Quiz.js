@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 var api = require('../Utils/api')
 import styles from '../Styles/DefaultStyles'
 import {Questions} from './Questions'
-//import {SampleQuestions} from '../Data/SampleQuestions'
 import {connect} from 'react-redux'
 import variables from '../Styles/Variables'
 
@@ -16,12 +15,8 @@ import {
 
 class _Quiz extends Component {
 
-    // constructor() {
-    //     super();
-    // }
-
     componentDidMount() {
-        this.props.getRemoteData();
+        this.props.getRemoteData(this.props.numberQuestions);
     }
 
     nextQuestion(question_number) {
@@ -64,10 +59,6 @@ class _Quiz extends Component {
             var nextQuestionButton = <Text></Text>
         }
 
-        //console.log( 'YYYY', this.props.getQuestions);
-        /**
-         * I need to use a different boolean here...
-         */
         if ( this.props.getQuestions ) {
             var currentQuiz = <Questions
                 arrayData={this.props.getQuestions[this.props.currentQuestion]}
@@ -104,7 +95,7 @@ class _Quiz extends Component {
                     {nextQuestionButton}
                 </View>
 
-            </View>//outer wrap
+            </View>
         )
     }
 }
@@ -135,14 +126,10 @@ const mapActionsToProps = (dispatch) => ({
     goToResults() {
         dispatch({type: 'QUIZ_RESULTS'})
     },
-    getRemoteData() {
+    getRemoteData(num) {
         dispatch({type: 'START_DATA'})
 
-
-        //api.getQuestions(this.state.numberQuestions).then((res) => {
-        api.getQuestions(5).then((res) => {
-
-            console.log( 'api working???????');
+        api.getQuestions(num).then((res) => {
 
             /**
              * Shuffle Array
@@ -175,10 +162,7 @@ const mapActionsToProps = (dispatch) => ({
             });
 
             dispatch({type: 'DATA_AVAILABLE', payload: questions})
-            //return questions;
         });
-
-
 
     }
 })

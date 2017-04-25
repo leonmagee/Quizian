@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 //import Quiz from './Quiz';
 //import SvgElement from './SvgElement';
 //import svg_question from '../SVG/question';
-import {MainWrap} from './MainWrap'; // @todo call this quiz wrap instaed? is this needed?
+import {QuizWrap} from './QuizWrap'; // @todo call this quiz wrap instaed? is this needed?
 
 import StartQuizButton from './StartQuizButton';
 
@@ -249,7 +249,7 @@ class Main extends Component {
         })
 
         if (this.state.started) {
-            var MainComponent = <MainWrap/>
+            var MainComponent = <QuizWrap/>
         } else {
             var MainComponent = <View style={styles.homeWrap}>
                 <View style={[styles.homeTextWrap, {width: width, height: height}]}>
