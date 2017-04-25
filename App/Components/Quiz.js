@@ -4,6 +4,7 @@ import styles from '../Styles/DefaultStyles'
 import {Questions} from './Questions'
 import {connect} from 'react-redux'
 import variables from '../Styles/Variables'
+import {shuffleArray} from '../Utils/helper';
 
 import {
     Text,
@@ -130,23 +131,6 @@ const mapActionsToProps = (dispatch) => ({
         dispatch({type: 'START_DATA'})
 
         api.getQuestions(num).then((res) => {
-
-            /**
-             * Shuffle Array
-             * @param array
-             * @returns {*}
-             * @todo use this same function to randomize animation on main page
-             * @todo helper functions file?
-             */
-            function shuffleArray(array) {
-                for (var i = array.length - 1; i > 0; i--) {
-                    var j = Math.floor(Math.random() * (i + 1));
-                    var temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
-                }
-                return array;
-            }
 
             const questions = [];
             res.results.map((trivia_question) => {

@@ -1,21 +1,13 @@
-/**
- * Home JS file
- * First file to load - I should break apart the animations into smaller components
- */
 import React, {Component} from 'react';
-//import Quiz from './Quiz';
-//import SvgElement from './SvgElement';
-//import svg_question from '../SVG/question';
 import {QuizWrap} from './QuizWrap'; // @todo call this quiz wrap instaed? is this needed?
-
 import StartQuizButton from './StartQuizButton';
+import {shuffleArray} from '../Utils/helper';
 
 import {
     StyleSheet,
     Text,
     View,
     Dimensions,
-    //TouchableHighlight,
     Animated,
 } from 'react-native';
 
@@ -44,18 +36,6 @@ const styles = StyleSheet.create({
         //fontFamily: 'lalezar_regular',
         fontFamily: 'Lalezar',
     },
-    // buttonWrap: {
-    //     backgroundColor: 'rgba(255,255,255,0.8)',
-    //     paddingHorizontal: 10,
-    //     paddingVertical: 5,
-    //     marginTop: 15,
-    //     borderRadius: 5,
-    // },
-    // button: {
-    //     color: '#E51D12',
-    //     fontWeight: 'bold',
-    //     fontSize: 30,
-    // },
     gridItem: {
         backgroundColor: '#20b2aa', // 'lightseagreen', //#20b2aa
         justifyContent: 'center',
@@ -69,7 +49,6 @@ const styles = StyleSheet.create({
     }
 });
 
-//var background_color_array = [];
 const {width, height} = Dimensions.get('window');
 const num_horizontal = 6;
 const num_vertical = 10;
@@ -77,20 +56,17 @@ const total_grid_items = ( num_horizontal * num_vertical );
 const grid_array = [];
 for (i = 0; i < total_grid_items; i++) {
     grid_array.push(i);
-    //background_color_array.push('#20b2aa');
 }
-// console.log('gridz');
-// console.log(grid_array);
 
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array;
-}
+// function shuffleArray(array) {
+//     for (var i = array.length - 1; i > 0; i--) {
+//         var j = Math.floor(Math.random() * (i + 1));
+//         var temp = array[i];
+//         array[i] = array[j];
+//         array[j] = temp;
+//     }
+//     return array;
+// }
 
 let shuffled_grid_array = shuffleArray(grid_array);
 //console.log(shuffled_grid_array);
@@ -136,13 +112,13 @@ class Homepage extends Component {
         // console.log('length', length);
         //console.log('shuffle', shuffled_grid_array)
         //console.log( 'i', i);
-        if ( i < ( length ) ) {
+        if (i < ( length )) {
             //console.log( array[i]);
 
             setTimeout(() => {
                 //array[shuffled_grid_array[i]] = '#07CA88';
                 array[shuffled_grid_array[i]] = '#089CCA';
-                if ( old_i != null ) {
+                if (old_i != null) {
                     array[old_i] = '#20b2aa'
                 }
 
@@ -190,16 +166,12 @@ class Homepage extends Component {
          * I need to pass in a function that will call itself as well...
          */
 
-        setTimeout(function() {
+        setTimeout(function () {
             // do something
-            setTimeout(function() {
+            setTimeout(function () {
                 // do second thing
             }, 1000);
         }, 1000);
-
-
-
-
 
 
         // const animated_timing_bg = grid_array.map((a) => {
@@ -254,7 +226,8 @@ class Homepage extends Component {
             var MainComponent = <View style={styles.homeWrap}>
                 <View style={[styles.homeTextWrap, {width: width, height: height}]}>
                     <Text style={styles.homeText}>Quizian</Text>
-                    <StartQuizButton startQuiz={() => this.startQuiz()} buttonText="START" navigator={this.props.navigator}/>
+                    <StartQuizButton startQuiz={() => this.startQuiz()} buttonText="START"
+                                     navigator={this.props.navigator}/>
                 </View>
                 {grid}
             </View>;
