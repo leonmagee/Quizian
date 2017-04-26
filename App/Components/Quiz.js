@@ -68,7 +68,7 @@ class _Quiz extends Component {
         if ( this.props.getQuestions ) {
             var currentQuiz = <Questions
                 arrayData={this.props.getQuestions[this.props.currentQuestion]}
-                answerChosen={(correct) => this.answerChosen(correct)}
+                answerChosen={(correct, key) => this.answerChosen(correct, key)}
                 answerSubmitted={this.props.answerSubmitted}
                 answerKey={this.props.answerKey}
             ></Questions>;

@@ -9,7 +9,7 @@ class _QuizWrap extends Component {
 
     render() {
 
-        if (this.props.quizResults) {
+        if ( this.props.quizResults) {
             var mainComponent = <QuizResults />;
         } else {
             var mainComponent = <Quiz />;
