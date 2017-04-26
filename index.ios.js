@@ -1,6 +1,5 @@
 /**
  * IOS Index file
- * @todo use this as a wrapper and import same code into both ios and android
  */
 import React, {Component} from 'react';
 import Homepage from './App/Components/Homepage';

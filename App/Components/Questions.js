@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../Styles/DefaultStyles'
 import variables from '../Styles/Variables'
+import entities from 'htmlentities';
 
 import {
     Text,
@@ -31,7 +32,7 @@ const buttonTextStyles = (correct, answerSubmited) => {
 export const Questions = (props) => (
     <View>
         <View style={styles.questionWrap}>
-            <Text style={styles.questionText}>{props.arrayData.question}</Text>
+            <Text style={styles.questionText}>{entities.decode(props.arrayData.question)}</Text>
         </View>
         {props.arrayData.answers.map((answer, i) => (
             <TouchableHighlight
@@ -40,7 +41,7 @@ export const Questions = (props) => (
                 disabled={props.answerSubmitted}
                 onPress={() => props.answerChosen(answer.correct)}
             >
-                <Text style={[styles.answerText, buttonTextStyles(answer.correct, props.answerSubmitted)]}>{answer.answer}</Text>
+                <Text style={[styles.answerText, buttonTextStyles(answer.correct, props.answerSubmitted)]}>{entities.decode(answer.answer)}</Text>
             </TouchableHighlight>
         ))}
     </View>
