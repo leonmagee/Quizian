@@ -1,5 +1,6 @@
 export const NEXT_QUESTION = 'NEXT_QUESTION';
 export const ANSWER_SUBMITTED = 'ANSWER_SUBMITTED';
+export const ANSWER_KEY = 'ANSWER_KEY';
 export const QUIZ_RESULTS = 'QUIZ_RESULTS';
 export const START_NEW_QUIZ = 'START_NEW_QUIZ';
 export const CORRECT_ANSWER = 'CORRECT_ANSWER';

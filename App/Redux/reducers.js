@@ -10,6 +10,7 @@ import {correctAnswerReducer} from './correctAnswerReducer';
 import {falseAnswerReducer} from './falseAnswerReducer';
 import {answerResultStringReducer} from './answerResultStringReducer';
 import {answerSubmittedReducer} from './answerSubmittedReducer';
+import {answerKeyReducer} from './answerKeyReducer';
 import {quizResultsReducer} from './quizResultsReducer';
 import {getQuestionsReducer} from './getQuestionsReducer';
 
@@ -24,6 +25,7 @@ export const reducer = combineReducers({
     falseAnswer: falseAnswerReducer,
     answerResultString: answerResultStringReducer,
     answerSubmitted: answerSubmittedReducer,
+    answerKey: answerKeyReducer,
     quizResults: quizResultsReducer,
     getQuestions: getQuestionsReducer,
 });

@@ -29,12 +29,17 @@ class _Quiz extends Component {
         }
     }
 
-    answerChosen(correct) {
+    answerChosen(correct, key) {
 
         /**
          * A choice was made
          */
         this.props.answerButtonClicked();
+
+        /**
+         * Get Answer Key
+         */
+        this.props.answerButtonKey(key);
 
         /**
          * Was it correct?
@@ -65,6 +70,7 @@ class _Quiz extends Component {
                 arrayData={this.props.getQuestions[this.props.currentQuestion]}
                 answerChosen={(correct) => this.answerChosen(correct)}
                 answerSubmitted={this.props.answerSubmitted}
+                answerKey={this.props.answerKey}
             ></Questions>;
         } else {
             var currentQuiz = <ActivityIndicator
@@ -106,6 +112,7 @@ const mapStateToProps = (state) => ({
     numberQuestions: state.numberQuestions,
     correctAnswer: state.correctAnswer,
     falseAnswer: state.falseAnswer,
+    answerKey: state.answerKey,
     answerSubmitted: state.answerSubmitted,
     answerResultString: state.answerResultString,
     getQuestions: state.getQuestions,
@@ -117,6 +124,9 @@ const mapActionsToProps = (dispatch) => ({
     },
     answerButtonClicked() {
         dispatch({type: 'ANSWER_SUBMITTED'})
+    },
+    answerButtonKey(key) {
+        dispatch({type: 'ANSWER_KEY', payload: key})
     },
     correctAnswerClicked() {
         dispatch({type: 'CORRECT_ANSWER'})

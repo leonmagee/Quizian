@@ -9,7 +9,11 @@ import {
     TouchableHighlight
 } from 'react-native'
 
-const buttonStyles = (correct, answerSubmited) => {
+const buttonStyles = (correct, answerSubmited, key, answerKey) => {
+    //console.log('correct:', correct);
+    //console.log('answerSubmited:', answerSubmited);
+    console.log('key:', key);
+    console.log(answerKey);
     if ( answerSubmited ) {
         if (correct) {
             return styles.answerCorrect
@@ -36,10 +40,10 @@ export const Questions = (props) => (
         </View>
         {props.arrayData.answers.map((answer, i) => (
             <TouchableHighlight
-                style={[styles.answerWrap, buttonStyles(answer.correct, props.answerSubmitted)]} key={i}
+                style={[styles.answerWrap, buttonStyles(answer.correct, props.answerSubmitted, i, props.answerKey)]} key={i}
                 underlayColor={variables.brandThirdLite}
                 disabled={props.answerSubmitted}
-                onPress={() => props.answerChosen(answer.correct)}
+                onPress={() => props.answerChosen(answer.correct, i)}
             >
                 <Text style={[styles.answerText, buttonTextStyles(answer.correct, props.answerSubmitted)]}>{entities.decode(answer.answer)}</Text>
             </TouchableHighlight>

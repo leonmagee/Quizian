@@ -33,6 +33,8 @@ const defaultStyles = StyleSheet.create({
     headerText: { // text in header
         textAlign: 'center',
         padding: 3,
+        fontWeight: 'bold',
+        color: '#333'
     },
     correctIncorrectWrap: {
         height: 40,
@@ -42,7 +44,7 @@ const defaultStyles = StyleSheet.create({
     },
     correctIncorrectText: {
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 25,
     },
 
     quizWrap: { // wraps middle questions

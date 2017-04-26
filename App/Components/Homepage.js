@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {QuizWrap} from './QuizWrap'; // @todo call this quiz wrap instaed? is this needed?
+import {QuizWrap} from './QuizWrap';
 import StartQuizButton from './StartQuizButton';
 import {shuffleArray} from '../Utils/helper';
+const {width, height} = Dimensions.get('window');
 
 import {
     StyleSheet,
@@ -9,6 +10,7 @@ import {
     View,
     Dimensions,
     Animated,
+    Easing
 } from 'react-native';
 
 
@@ -43,43 +45,31 @@ const styles = StyleSheet.create({
         margin: 1,
     },
     questionText: {
-        fontSize: 33,
+        fontSize: 42,
+        //fontSize: 100,
         fontWeight: 'bold',
-        color: 'rgba(255,255,255,0.3)',
+        //color: 'rgba(255,255,255,0.3)',
+        color: 'white',
         opacity: 0,
     }
 });
-
-/**
- * @todo why is there here instead of in constructor?
- * @todo move this to state?
- */
-const {width, height} = Dimensions.get('window');
-const num_horizontal = 6;
-const num_vertical = 10;
-const total_grid_items = ( num_horizontal * num_vertical );
-const grid_array = [];
-for (i = 0; i < total_grid_items; i++) {
-    grid_array.push(i);
-}
-
-let shuffled_grid_array = shuffleArray(grid_array);
-
-/**
- * @todo change this to only use grid array?
- * @type {Array}
- */
-const item_width = ( ( ( width - 2 ) / num_horizontal ) - 2);
-const item_height = ( ( ( height - 2 ) / num_vertical ) - 2 );
 
 class Homepage extends Component {
 
     constructor(props) {
         super(props);
-        const num_horizontal = 6;
-        const num_vertical = 10;
+
+        const num_horizontal = 6; // 6
+        const num_vertical = 10; // 10
         const total_grid_items = ( num_horizontal * num_vertical );
-        //const grid_array = [];
+        const grid_array = [];
+        for (i = 0; i < total_grid_items; i++) {
+            grid_array.push(i);
+        }
+        const shuffled_grid_array = shuffleArray(grid_array);
+        const item_width = ( ( ( width - 2 ) / num_horizontal ) - 2);
+        const item_height = ( ( ( height - 2 ) / num_vertical ) - 2 );
+
         var grid_styles_array = [];
         for (i = 0; i < total_grid_items; i++) {
             grid_styles_array.push({bg: '#20b2aa', opacity: 0});
@@ -87,40 +77,73 @@ class Homepage extends Component {
 
         this.state = {
             started: false,
-            grid_styles_array: grid_styles_array
+            grid_array: grid_array,
+            shuffled_grid_array: shuffled_grid_array,
+            grid_styles_array: grid_styles_array,
+            item_width: item_width,
+            item_height: item_height,
         }
-
     }
 
     componentWillMount() {
-        // this.animatedValue = [];
-        // grid_array.forEach((item) => {
-        //
-        //     this.animatedValue[item] = new Animated.Value(0);
-        // })
+        this.animatedValue = [];
+        this.animatedValueColor = [];
+        this.state.grid_array.forEach((item) => {
+
+            this.animatedValue[item] = new Animated.Value(0);
+            this.animatedValueColor[item] = new Animated.Value(1);
+        })
     }
 
-    changeColorRecursive(array, length, i, old_i = null) {
+    changeColorRecursive(array, length, i, old_i = null, shuffled) {
 
         if (i < ( length )) {
 
             setTimeout(() => {
-                array[shuffled_grid_array[i]].bg = '#19c3ba';
-                array[shuffled_grid_array[i]].opacity = 1;
+                //array[shuffled_grid_array[i]].bg = '#19c3ba';
 
-                //array[shuffled_grid_array[i]].bg = 'red';
+
+                Animated.timing(this.animatedValue[i], {
+                    toValue: 0.7,
+                    duration: 400,
+                    //easing: Easing.bounce
+                }).start();
+
+                let interpolateColor = this.animatedValueColor[i].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['#20b2aa', '#19c3ba'],
+                })
+
+                array[shuffled[i]].bg = interpolateColor,
+                array[shuffled[i]].opacity = this.animatedValue[i];
+
                 if (old_i != null) {
-                    array[old_i].bg = '#20b2aa'
-                    array[old_i].opacity = 0.8
+                    //array[old_i].bg = '#20b2aa'
+
+
+                    Animated.timing(this.animatedValue[old_i], {
+                        toValue: 0.5,
+                        duration: 400,
+                        //easing: Easing.bounce
+                    }).start();
+                    let interpolateColorOld = this.animatedValueColor[old_i].interpolate({
+                        inputRange: [0, 1],
+                        //outputRange: ['#20b2aa', '#19c3ba'],
+                        outputRange: ['#19c3ba', '#20b2aa'],
+                    })
+
+                    array[shuffled[old_i]].bg = interpolateColorOld;
+                    array[shuffled[old_i]].opacity = this.animatedValue[old_i];
+
                 }
 
                 this.setState({
                     background_array: array,
                 })
-                let oldster = shuffled_grid_array[i];
+                let oldster = i;
                 i++;
-                this.changeColorRecursive(array, length, i, oldster);
-            }, 50)
+                this.changeColorRecursive(array, length, i, oldster, shuffled);
+            }, 800)
 
 
         } else {
@@ -130,18 +153,18 @@ class Homepage extends Component {
     }
 
     componentDidMount() {
-        // const animated_timing = grid_array.map((a) => {
+        // const animated_timing = this.state.grid_array.map((a) => {
         //     Animated.timing(this.animatedValue[a], {
         //         toValue: 9,
         //         duration: 10000,
         //     }).start()
         // });
-        //Animated.stagger(5000, animated_timing);
+        // Animated.stagger(5000, animated_timing);
 
         let new_styles_array = this.state.grid_styles_array;
 
         let i = 0;
-        this.changeColorRecursive(new_styles_array, new_styles_array.length, i);
+        this.changeColorRecursive(new_styles_array, new_styles_array.length, i, null, this.state.shuffled_grid_array);
 
     }
 
@@ -153,7 +176,7 @@ class Homepage extends Component {
 
     render() {
 
-        const grid = grid_array.map((item, key) => {
+        const grid = this.state.grid_array.map((item, key) => {
 
             // const interpolateColor = this.animatedValue[item].interpolate({
             //     inputRange: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -172,11 +195,12 @@ class Homepage extends Component {
 
 
             return (
-                <Animated.View style={[styles.gridItem, {width: item_width, height: item_height}, stylesView]}
+                <Animated.View style={[styles.gridItem, {
+                    width: this.state.item_width,
+                    height: this.state.item_height
+                }, stylesView]}
                                key={key}>
-                    <View>
-                        <Text style={[styles.questionText, stylesText]}>?</Text>
-                    </View>
+                    <Animated.Text style={[styles.questionText, stylesText]}>?</Animated.Text>
                 </Animated.View>
             )
         })
