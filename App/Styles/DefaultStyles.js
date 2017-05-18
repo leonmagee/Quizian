@@ -5,14 +5,16 @@
 
 import React from 'react'
 import variables from './Variables'
-import {Dimensions} from 'react-native'
+//import {Dimensions} from 'react-native'
 
 import {
     StyleSheet,
 } from 'react-native';
 
-const {width} = Dimensions.get('window')
-const button_width = ( width * 0.9 )
+//const {width} = Dimensions.get('window')
+//const button_width = ( width * 0.9 )
+//const button_width = ( width * 0.9 )
+// @todo animate the button width?
 
 const defaultStyles = StyleSheet.create({
     outerWrapMain: { // wraps everything
@@ -52,16 +54,21 @@ const defaultStyles = StyleSheet.create({
         paddingHorizontal: 15,
     },
 
+    // questionComponentOuter: {
+    //     backgroundColor: 'red',
+    //     justifyContent: 'flex-end',
+    // },
+
     questionWrap: {
         backgroundColor: '#FCFCFC',
         marginTop: 15,
         marginBottom: 15,
-        paddingVertical: 10,
+        paddingVertical: 10, // @todo animate this
         paddingHorizontal: 15,
         borderRadius: 5,
         borderColor: variables.brandThirdLite,
         borderWidth: 3,
-        width: button_width
+        //width: button_width
     },
     questionText: {
         fontWeight: 'bold',
@@ -72,14 +79,14 @@ const defaultStyles = StyleSheet.create({
 
     answerWrap: {
         backgroundColor: '#FCFCFC',
-        marginTop: 15,
-        marginBottom: 15,
-        paddingVertical: 10,
+        marginVertical: 15,
+        //marginHorizontal: 85,
+        paddingVertical: 10, // @todo animate this
         paddingHorizontal: 15,
         borderRadius: 5,
         borderColor: variables.brandThirdLite,
         borderWidth: 1,
-        width: button_width
+        //width: button_width
     },
     answerCorrect: {
         backgroundColor: variables.brandSecond,
@@ -134,7 +141,7 @@ const defaultStyles = StyleSheet.create({
         color: variables.brandPrimary,
     },
     quizResultsTextWrap: {
-       paddingBottom: 13,
+        paddingBottom: 13,
     },
     quizResultsText: { // text in header
         textAlign: 'center',

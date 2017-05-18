@@ -6,7 +6,8 @@ import entities from 'htmlentities';
 import {
     Text,
     View,
-    TouchableHighlight
+    TouchableHighlight,
+    Animated
 } from 'react-native'
 
 const buttonStyles = (correct, answerSubmited, key, answerKey) => {
@@ -35,9 +36,9 @@ const buttonTextStyles = (correct, answerSubmited, key, answerKey) => {
 
 export const Questions = (props) => (
     <View>
-        <View style={styles.questionWrap}>
+        <Animated.View style={[styles.questionWrap, {paddingVertical: props.padding, width: props.width}]}>
             <Text style={styles.questionText}>{entities.decode(props.arrayData.question)}</Text>
-        </View>
+        </Animated.View>
         {props.arrayData.answers.map((answer, i) => (
             <TouchableHighlight
                 style={[styles.answerWrap, buttonStyles(answer.correct, props.answerSubmitted, i, props.answerKey)]}

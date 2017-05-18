@@ -13,6 +13,7 @@ import {answerSubmittedReducer} from './answerSubmittedReducer';
 import {answerKeyReducer} from './answerKeyReducer';
 import {quizResultsReducer} from './quizResultsReducer';
 import {getQuestionsReducer} from './getQuestionsReducer';
+import {fadeQuizReducer} from './fadeQuizReducer';
 
 
 /**
@@ -28,4 +29,5 @@ export const reducer = combineReducers({
     answerKey: answerKeyReducer,
     quizResults: quizResultsReducer,
     getQuestions: getQuestionsReducer,
+    fadeQuiz: fadeQuizReducer,
 });

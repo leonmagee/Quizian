@@ -114,7 +114,7 @@ class Homepage extends Component {
                     outputRange: ['#20b2aa', '#19c3ba'],
                 })
 
-                array[shuffled[i]].bg = interpolateColor,
+                //array[shuffled[i]].bg = interpolateColor, // @todo this will change the square color
                 array[shuffled[i]].opacity = this.animatedValue[i];
 
                 if (old_i != null) {
@@ -143,7 +143,7 @@ class Homepage extends Component {
                 let oldster = i;
                 i++;
                 this.changeColorRecursive(array, length, i, oldster, shuffled);
-            }, 800)
+            }, 400)
 
 
         } else {

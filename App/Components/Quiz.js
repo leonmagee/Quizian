@@ -11,13 +11,50 @@ import {
     View,
     TouchableHighlight,
     ActivityIndicator,
+    Animated,
+    Easing,
+    Dimensions,
 } from 'react-native'
+
+const {width} = Dimensions.get('window')
+//const button_width = ( width * 0.9 )
+const button_width = ( width * 0.9 )
+const button_width_start = ( width * 0.8 )
+
+//let animatedOpacity = 0.3;
+let animatedOpacity = new Animated.Value(0);
+let animatedPadding = new Animated.Value(0);
+let animatedWidth = new Animated.Value(button_width_start);
+//paddingVertical // questionWrap // answerWrap
+//new Animated.Value(0);
 
 
 class _Quiz extends Component {
 
     componentDidMount() {
         this.props.getRemoteData(this.props.numberQuestions);
+
+        /**
+         * Change opacity here from 0 to 1, use animate...
+         */
+        Animated.timing(animatedOpacity, {
+            toValue: 1,
+            duration: 1000,
+            //easing: Easing.bounce
+        }).start();
+
+        Animated.timing(animatedPadding, {
+            toValue: 10,
+            duration: 2000,
+            easing: Easing.bounce
+        }).start();
+
+        Animated.timing(animatedWidth, {
+            toValue: button_width,
+            duration: 2000,
+            easing: Easing.bounce
+        }).start();
+
     }
 
     nextQuestion(question_number) {
@@ -53,7 +90,6 @@ class _Quiz extends Component {
 
     render() {
 
-
         if (this.props.answerSubmitted) {
             var nextQuestionButton = <TouchableHighlight
                 underlayColor={variables.brandThirdLite}
@@ -65,12 +101,14 @@ class _Quiz extends Component {
             var nextQuestionButton = <Text></Text>
         }
 
-        if ( this.props.getQuestions ) {
+        if (this.props.getQuestions) {
             var currentQuiz = <Questions
                 arrayData={this.props.getQuestions[this.props.currentQuestion]}
                 answerChosen={(correct, key) => this.answerChosen(correct, key)}
                 answerSubmitted={this.props.answerSubmitted}
                 answerKey={this.props.answerKey}
+                padding={animatedPadding}
+                width={animatedWidth}
             ></Questions>;
         } else {
             var currentQuiz = <ActivityIndicator
@@ -94,9 +132,9 @@ class _Quiz extends Component {
                     </View>
                 </View>
 
-                <View style={styles.quizWrap}>
+                <Animated.View style={[styles.quizWrap, {opacity: animatedOpacity}]}>
                     {currentQuiz}
-                </View>
+                </Animated.View>
 
                 <View style={styles.footerWrap}>
                     {nextQuestionButton}
@@ -137,20 +175,26 @@ const mapActionsToProps = (dispatch) => ({
     goToResults() {
         dispatch({type: 'QUIZ_RESULTS'})
     },
+    fadeInQuiz() {
+        dispatch({type: 'FADE_IN_QUIZ'})
+    },
+    fadeOutQuiz() {
+        dispatch({type: 'FADE_OUT_QUIZ'})
+    },
     getRemoteData(num) {
         dispatch({type: 'START_DATA'})
 
         api.getQuestions(num).then((res) => {
 
             const questions = [];
-            res.results.map((trivia_question) => {
+            res.map((trivia_question) => {
                 const answers = [];
-                answers.push({answer: trivia_question.correct_answer, correct: true});
-                trivia_question.incorrect_answers.map((incorrect_answer) => {
+                answers.push({answer: trivia_question.c, correct: true});
+                trivia_question.i.map((incorrect_answer) => {
                     answers.push({answer: incorrect_answer, correct: false});
                 })
                 questions.push({
-                    question: trivia_question.question,
+                    question: trivia_question.q,
                     answers: shuffleArray(answers),
                 });
             });
