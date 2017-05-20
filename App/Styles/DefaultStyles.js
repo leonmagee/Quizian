@@ -33,7 +33,8 @@ const defaultStyles = StyleSheet.create({
         textAlign: 'center',
         padding: 3,
         fontWeight: 'bold',
-        color: '#333'
+        color: '#EEE',
+        backgroundColor: 'transparent',
     },
     correctIncorrectWrap: {
         height: 40,
@@ -43,6 +44,7 @@ const defaultStyles = StyleSheet.create({
     correctIncorrectText: {
         fontWeight: 'bold',
         fontSize: 25,
+        backgroundColor: 'transparent',
     },
 
     quizWrap: {
@@ -72,8 +74,9 @@ const defaultStyles = StyleSheet.create({
     },
     questionText: {
         fontWeight: 'bold',
-        fontSize: 17,
-        color: variables.brandThird,
+        fontSize: 19,
+        //color: variables.brandThird,
+        color: '#000',
         textAlign: 'center',
     },
 
@@ -99,7 +102,8 @@ const defaultStyles = StyleSheet.create({
     answerText: {
         fontWeight: 'bold',
         fontSize: 17,
-        color: variables.brandThird,
+        //color: variables.brandThird,
+        color: '#222',
         textAlign: 'center',
     },
     answerCorrectText: {

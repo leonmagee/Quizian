@@ -104,7 +104,7 @@ class _Quiz extends Component {
         }
 
         return (
-            <LinearGradient colors={['#83a4d4','#b6fbff']} style={styles.outerWrap}>
+            <LinearGradient colors={['#642B73','#C6426E']} style={styles.outerWrap}>
 
                 <View style={styles.headerWrap}>
                     <Text style={styles.headerText}>

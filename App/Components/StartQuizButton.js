@@ -8,18 +8,21 @@ import {
 
 const styles = StyleSheet.create({
     buttonWrap: {
-        backgroundColor: 'rgba(255,255,255,0.8)',
-        paddingHorizontal: 20,
-        paddingTop: 5,
-        paddingBottom: 0,
-        marginTop: 15,
-        borderRadius: 5,
+        //backgroundColor: 'rgba(255,255,255,0.8)',
+        //paddingHorizontal: 20,
+        //paddingTop: 5,
+        //paddingBottom: 0,
+        //marginTop: 15,
+        //borderRadius: 5,
+        //backgroundColor: 'red',
     },
     button: {
-        color: '#E51D12',
+        //color: '#E51D12',
+        color: '#FFF',
         fontWeight: 'bold',
         fontSize: 28,
         fontFamily: 'lalezar',
+        backgroundColor: 'transparent',
     },
 });
 
@@ -33,7 +36,7 @@ class StartQuizButton extends Component {
 
         return (
             <TouchableHighlight style={styles.buttonWrap} onPress={() => this.props.startQuiz()}
-                                underlayColor="rgba(255,255,255,0.9)">
+                                underlayColor="transparent">
                 <Text style={styles.button}>{this.props.buttonText}</Text>
             </TouchableHighlight>
         )

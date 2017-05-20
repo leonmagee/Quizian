@@ -2,10 +2,7 @@ import React, {Component} from 'react';
 import {QuizWrap} from './QuizWrap';
 import StartQuizButton from './StartQuizButton';
 import {shuffleArray} from '../Utils/helper';
-import LinearGradient from 'react-native-linear-gradient';
-import variables from '../Styles/Variables'
-let {width, height} = Dimensions.get('window');
-height = height - 50; // make space for bottom menu bar
+const {width, height} = Dimensions.get('window');
 
 import {
     StyleSheet,
@@ -13,7 +10,9 @@ import {
     View,
     Dimensions,
     Animated,
+    Easing
 } from 'react-native';
+
 
 const styles = StyleSheet.create({
     homeWrap: {
@@ -21,8 +20,8 @@ const styles = StyleSheet.create({
         padding: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        //backgroundColor: 'rgba(32,178,170,0.85)', // background color behind squares
-        backgroundColor: 'transparent', // background color behind squares
+        backgroundColor: 'rgba(32,178,170,0.85)', // background color behind squares
+        //backgroundColor: 'red',
     },
     homeTextWrap: {
         position: 'absolute',
@@ -40,30 +39,19 @@ const styles = StyleSheet.create({
         fontFamily: 'Lalezar',
     },
     gridItem: {
+        //backgroundColor: '#20b2aa',
+        //backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center',
         margin: 1,
     },
     questionText: {
-        fontSize: 70,
+        fontSize: 42,
+        //fontSize: 100,
         fontWeight: 'bold',
-        //color: 'white',
-        opacity: 0,
-    },
-    menuBar: {
-        height: 50,
-        paddingTop: 10,
-        paddingBottom: 5,
-        backgroundColor: 'rgba(255,255,255,0.2)',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    menuText: {
-        fontSize: 27,
-        fontFamily: 'Lalezar',
-        fontWeight: 'bold',
+        //color: 'rgba(255,255,255,0.3)',
         color: 'white',
-        backgroundColor: 'transparent',
+        opacity: 0,
     }
 });
 
@@ -72,8 +60,8 @@ class Homepage extends Component {
     constructor(props) {
         super(props);
 
-        const num_horizontal = 3; // 6
-        const num_vertical = 6; // 10
+        const num_horizontal = 6; // 6
+        const num_vertical = 10; // 10
         const total_grid_items = ( num_horizontal * num_vertical );
         const grid_array = [];
         for (i = 0; i < total_grid_items; i++) {
@@ -85,7 +73,8 @@ class Homepage extends Component {
 
         var grid_styles_array = [];
         for (i = 0; i < total_grid_items; i++) {
-            grid_styles_array.push({opacity: 0, color: '#FFF'});
+            //grid_styles_array.push({bg: '#20b2aa', opacity: 0});
+            grid_styles_array.push({bg: '#20b2aa', opacity: 0});
         }
 
         this.state = {
@@ -104,6 +93,7 @@ class Homepage extends Component {
         this.state.grid_array.forEach((item) => {
 
             this.animatedValue[item] = new Animated.Value(0);
+            this.animatedValueColor[item] = new Animated.Value(1);
         })
     }
 
@@ -112,22 +102,41 @@ class Homepage extends Component {
         if (i < ( length )) {
 
             setTimeout(() => {
+                //array[shuffled_grid_array[i]].bg = '#19c3ba';
+
 
                 Animated.timing(this.animatedValue[i], {
                     toValue: 0.7,
                     duration: 400,
+                    //easing: Easing.bounce
                 }).start();
 
+                let interpolateColor = this.animatedValueColor[i].interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['#20b2aa', '#19c3ba'],
+                })
+
+                //array[shuffled[i]].bg = interpolateColor, // @todo this will change the square color
                 array[shuffled[i]].opacity = this.animatedValue[i];
 
                 if (old_i != null) {
+                    //array[old_i].bg = '#20b2aa'
+
 
                     Animated.timing(this.animatedValue[old_i], {
                         toValue: 0.5,
                         duration: 400,
+                        //easing: Easing.bounce
                     }).start();
+                    let interpolateColorOld = this.animatedValueColor[old_i].interpolate({
+                        inputRange: [0, 1],
+                        //outputRange: ['#20b2aa', '#19c3ba'],
+                        outputRange: ['#19c3ba', '#20b2aa'],
+                    })
 
+                    array[shuffled[old_i]].bg = interpolateColorOld;
                     array[shuffled[old_i]].opacity = this.animatedValue[old_i];
+
                 }
 
                 this.setState({
@@ -136,31 +145,24 @@ class Homepage extends Component {
                 let oldster = i;
                 i++;
                 this.changeColorRecursive(array, length, i, oldster, shuffled);
-            }, 600)
+            }, 400)
 
 
         } else {
-            //console.log('finalize');
-            //array[i].color = 'blue';
-            console.log(i);
-            let index = i - 1;
-            console.log(array);
-            console.log(array[index]);
-            //array[shuffled[index]].color = '#155799';
-            array[shuffled[index]].color = variables.brandPrimary;
-            array[shuffled[index]].opacity = 1;
-            console.log(array[index]);
-            this.setState({
-                background_array: array,
-            })
-            /**
-             * Do something here to change the color of the final question mark?
-             */
+            console.log('finalize');
         }
 
     }
 
     componentDidMount() {
+        // const animated_timing = this.state.grid_array.map((a) => {
+        //     Animated.timing(this.animatedValue[a], {
+        //         toValue: 9,
+        //         duration: 10000,
+        //     }).start()
+        // });
+        // Animated.stagger(5000, animated_timing);
+
         let new_styles_array = this.state.grid_styles_array;
 
         let i = 0;
@@ -178,14 +180,21 @@ class Homepage extends Component {
 
         const grid = this.state.grid_array.map((item, key) => {
 
+            // const interpolateColor = this.animatedValue[item].interpolate({
+            //     inputRange: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            //     //inputRange: [0, 1],
+            //     outputRange: ['#20b2aa', '#089CCA', '#07CA88', '#10CAC0', 'black', '#5CCA9D', '#089CCA', '#07CA88', '#10CAC0', '#5CCA9D', '#20b2aa'],
+            //     //outputRange: ['#fff', '#000'],
+            //     // white / blue / green / aqua / light green
+            // })
             const stylesView = {
                 backgroundColor: this.state.grid_styles_array[key].bg
             }
 
             const stylesText = {
-                opacity: this.state.grid_styles_array[key].opacity,
-                color: this.state.grid_styles_array[key].color,
+                opacity: this.state.grid_styles_array[key].opacity
             }
+
 
             return (
                 <Animated.View style={[styles.gridItem, {
@@ -204,19 +213,17 @@ class Homepage extends Component {
             var MainComponent = <View style={styles.homeWrap}>
                 <View style={[styles.homeTextWrap, {width: width, height: height}]}>
                     <Text style={styles.homeText}>Quizian</Text>
+                    <StartQuizButton startQuiz={() => this.startQuiz()} buttonText="NEW GAME"
+                                     navigator={this.props.navigator}/>
                 </View>
                 {grid}
             </View>;
         }
 
         return (
-            <LinearGradient colors={['#159957','#155799']} style={{flex: 1}}>
-                    {MainComponent}
-                    <View style={styles.menuBar}>
-                        <StartQuizButton startQuiz={() => this.startQuiz()} buttonText="NEW GAME"
-                                         navigator={this.props.navigator}/>
-                    </View>
-            </LinearGradient>
+            <View style={{flex: 1}}>
+                {MainComponent}
+            </View>
         )
     }
 }
