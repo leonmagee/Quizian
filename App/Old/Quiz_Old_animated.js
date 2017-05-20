@@ -5,7 +5,6 @@ import {Questions} from './Questions'
 import {connect} from 'react-redux'
 import variables from '../Styles/Variables'
 import {shuffleArray} from '../Utils/helper';
-import LinearGradient from 'react-native-linear-gradient';
 
 import {
     Text,
@@ -13,9 +12,18 @@ import {
     TouchableHighlight,
     ActivityIndicator,
     Animated,
+    Easing,
+    Dimensions,
 } from 'react-native'
 
+//const {width} = Dimensions.get('window')
+//const button_width = ( width * 0.9 )
+//const button_width_start = ( width * 0.85 )
+
 let animatedOpacity = new Animated.Value(0);
+//let animatedPadding = new Animated.Value(0);
+//let animatedWidth = new Animated.Value(button_width_start);
+
 
 class _Quiz extends Component {
 
@@ -30,6 +38,18 @@ class _Quiz extends Component {
             toValue: 1,
             duration: 300,
         }).start();
+
+        // Animated.timing(animatedPadding, {
+        //     toValue: 10,
+        //     duration: 1300,
+        //     easing: Easing.bounce
+        // }).start();
+        //
+        // Animated.timing(animatedWidth, {
+        //     toValue: button_width,
+        //     duration: 1500,
+        //     easing: Easing.bounce
+        // }).start();
     }
 
     fadeOutQuiz() {
@@ -38,11 +58,26 @@ class _Quiz extends Component {
             toValue: 0,
             duration: 300,
         }).start();
+
+        // Animated.timing(animatedPadding, {
+        //     toValue: 0,
+        //     duration: 800,
+        //     //easing: Easing.bounce
+        // }).start();
+        //
+        // Animated.timing(animatedWidth, {
+        //     toValue: button_width_start,
+        //     duration: 800,
+        //     //easing: Easing.bounce
+        // }).start();
     }
 
     nextQuestion(question_number) {
+
         this.fadeOutQuiz()
+
         setTimeout(() => this.goToNextQuestion(question_number), 1000)
+
     }
 
     goToNextQuestion(question_number) {
@@ -104,7 +139,7 @@ class _Quiz extends Component {
         }
 
         return (
-            <LinearGradient colors={['#83a4d4','#b6fbff']} style={styles.outerWrap}>
+            <View style={styles.outerWrap}>
 
                 <View style={styles.headerWrap}>
                     <Text style={styles.headerText}>
@@ -126,7 +161,7 @@ class _Quiz extends Component {
                     {nextQuestionButton}
                 </View>
 
-            </LinearGradient>
+            </View>
         )
     }
 }
@@ -184,8 +219,10 @@ const mapActionsToProps = (dispatch) => ({
                     answers: shuffleArray(answers),
                 });
             });
+
             dispatch({type: 'DATA_AVAILABLE', payload: questions})
         });
+
     }
 })
 

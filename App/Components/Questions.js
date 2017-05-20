@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from '../Styles/DefaultStyles'
 import variables from '../Styles/Variables'
-import entities from 'htmlentities';
+//import entities from 'htmlentities';
 
 import {
     Text,
     View,
     TouchableHighlight,
-    Animated
+    //Animated
 } from 'react-native'
 
 const buttonStyles = (correct, answerSubmited, key, answerKey) => {
@@ -34,11 +34,15 @@ const buttonTextStyles = (correct, answerSubmited, key, answerKey) => {
     }
 }
 
+const removeBackSlashes = (input) => {
+    return input.replace(/\\/g, '');
+}
+
 export const Questions = (props) => (
     <View>
-        <Animated.View style={[styles.questionWrap, {paddingVertical: props.padding, width: props.width}]}>
-            <Text style={styles.questionText}>{entities.decode(props.arrayData.question)}</Text>
-        </Animated.View>
+        <View style={styles.questionWrap}>
+            <Text style={styles.questionText}>{removeBackSlashes(props.arrayData.question)}</Text>
+        </View>
         {props.arrayData.answers.map((answer, i) => (
             <TouchableHighlight
                 style={[styles.answerWrap, buttonStyles(answer.correct, props.answerSubmitted, i, props.answerKey)]}
@@ -48,7 +52,7 @@ export const Questions = (props) => (
                 onPress={() => props.answerChosen(answer.correct, i)}
             >
                 <Text
-                    style={[styles.answerText, buttonTextStyles(answer.correct, props.answerSubmitted, i, props.answerKey)]}>{entities.decode(answer.answer)}</Text>
+                    style={[styles.answerText, buttonTextStyles(answer.correct, props.answerSubmitted, i, props.answerKey)]}>{removeBackSlashes(answer.answer)}</Text>
             </TouchableHighlight>
         ))}
     </View>

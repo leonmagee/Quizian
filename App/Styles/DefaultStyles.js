@@ -5,16 +5,14 @@
 
 import React from 'react'
 import variables from './Variables'
-//import {Dimensions} from 'react-native'
+import {Dimensions} from 'react-native'
 
 import {
     StyleSheet,
 } from 'react-native';
 
-//const {width} = Dimensions.get('window')
-//const button_width = ( width * 0.9 )
-//const button_width = ( width * 0.9 )
-// @todo animate the button width?
+const {width} = Dimensions.get('window')
+const button_width = ( width * 0.9 )
 
 const defaultStyles = StyleSheet.create({
     outerWrapMain: { // wraps everything
@@ -22,7 +20,7 @@ const defaultStyles = StyleSheet.create({
     },
     outerWrap: {
         flex: 1,
-        backgroundColor: 'rgba(32,178,170,0.10)',
+        //backgroundColor: 'rgba(32,178,170,0.10)',
     },
 
     headerWrap: {
@@ -66,9 +64,11 @@ const defaultStyles = StyleSheet.create({
         paddingVertical: 10, // @todo animate this
         paddingHorizontal: 15,
         borderRadius: 5,
-        borderColor: variables.brandThirdLite,
-        borderWidth: 3,
-        //width: button_width
+        //borderColor: variables.brandThirdLite,
+        //borderColor: 'rgba(0,0,0,0.1)',
+        //borderColor: '#BBB',
+        //borderWidth: 1,
+        width: button_width
     },
     questionText: {
         fontWeight: 'bold',
@@ -84,9 +84,9 @@ const defaultStyles = StyleSheet.create({
         paddingVertical: 10, // @todo animate this
         paddingHorizontal: 15,
         borderRadius: 5,
-        borderColor: variables.brandThirdLite,
-        borderWidth: 1,
-        //width: button_width
+        //borderColor: variables.brandThirdLite,
+        //borderWidth: 1,
+        width: button_width
     },
     answerCorrect: {
         backgroundColor: variables.brandSecond,
