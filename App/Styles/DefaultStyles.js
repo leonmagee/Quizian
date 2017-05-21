@@ -23,6 +23,16 @@ const defaultStyles = StyleSheet.create({
         //backgroundColor: 'rgba(32,178,170,0.10)',
     },
 
+    topBar: {
+        height: 70,
+        justifyContent: 'center',
+    },
+    topBarText: {
+        color: '#FFF',
+        fontFamily: 'Lalezar',
+        backgroundColor: 'transparent',
+    },
+
     headerWrap: {
         height: 125,
         paddingHorizontal: 5,
@@ -66,6 +76,8 @@ const defaultStyles = StyleSheet.create({
         paddingVertical: 10, // @todo animate this
         paddingHorizontal: 15,
         borderRadius: 5,
+        minHeight: 150,
+        justifyContent: 'center',
         //borderColor: variables.brandThirdLite,
         //borderColor: 'rgba(0,0,0,0.1)',
         //borderColor: '#BBB',
@@ -74,10 +86,11 @@ const defaultStyles = StyleSheet.create({
     },
     questionText: {
         fontWeight: 'bold',
-        fontSize: 19,
+        fontSize: 22,
         //color: variables.brandThird,
         color: '#000',
         textAlign: 'center',
+        fontFamily: 'Lalezar',
     },
 
     answerWrap: {
@@ -101,10 +114,11 @@ const defaultStyles = StyleSheet.create({
     },
     answerText: {
         fontWeight: 'bold',
-        fontSize: 17,
+        fontSize: 18,
         //color: variables.brandThird,
         color: '#222',
         textAlign: 'center',
+        fontFamily: 'Lalezar',
     },
     answerCorrectText: {
         color: 'white',
@@ -142,7 +156,8 @@ const defaultStyles = StyleSheet.create({
     quizResultsHeaderText: {
         fontSize: 25,
         fontWeight: 'bold',
-        color: variables.brandPrimary,
+        color: '#FFF',
+        backgroundColor: 'transparent',
     },
     quizResultsTextWrap: {
         paddingBottom: 13,
@@ -151,8 +166,9 @@ const defaultStyles = StyleSheet.create({
         textAlign: 'center',
         padding: 3,
         fontWeight: 'bold',
-        color: '#333',
+        color: '#FFF',
         fontSize: 15,
+        backgroundColor: 'transparent',
     },
     pieChartWrap: {
         paddingVertical: 30,
@@ -161,6 +177,16 @@ const defaultStyles = StyleSheet.create({
     activityIndicator: {
         flex: 1,
         justifyContent: 'center',
+    },
+
+    menuBar: {
+        height: 50,
+        paddingTop: 10,
+        paddingBottom: 5,
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        flexDirection: 'row',
     },
 
 });

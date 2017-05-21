@@ -16,6 +16,9 @@ import {
 } from 'react-native';
 
 const styles = StyleSheet.create({
+    homeWrapOuter: {
+        flex: 1,
+    },
     homeWrap: {
         flex: 1,
         padding: 1,
@@ -47,8 +50,15 @@ const styles = StyleSheet.create({
     questionText: {
         fontSize: 70,
         fontWeight: 'bold',
-        //color: 'white',
+        color: '#FFF',
         opacity: 0,
+    },
+    menuText: {
+        fontSize: 27,
+        fontFamily: 'Lalezar',
+        fontWeight: 'bold',
+        color: '#FFF',
+        backgroundColor: 'transparent',
     },
     menuBar: {
         height: 50,
@@ -58,13 +68,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    menuText: {
-        fontSize: 27,
-        fontFamily: 'Lalezar',
-        fontWeight: 'bold',
-        color: 'white',
-        backgroundColor: 'transparent',
-    }
 });
 
 class Homepage extends Component {
@@ -85,7 +88,7 @@ class Homepage extends Component {
 
         var grid_styles_array = [];
         for (i = 0; i < total_grid_items; i++) {
-            grid_styles_array.push({opacity: 0, color: '#FFF'});
+            grid_styles_array.push({opacity: 0});
         }
 
         this.state = {
@@ -107,7 +110,7 @@ class Homepage extends Component {
         })
     }
 
-    changeColorRecursive(array, length, i, old_i = null, shuffled) {
+    questionOpacityRecursive(array, length, i, old_i = null, shuffled) {
 
         if (i < ( length )) {
 
@@ -135,37 +138,25 @@ class Homepage extends Component {
                 })
                 let oldster = i;
                 i++;
-                this.changeColorRecursive(array, length, i, oldster, shuffled);
+                this.questionOpacityRecursive(array, length, i, oldster, shuffled);
             }, 600)
 
 
         } else {
-            //console.log('finalize');
-            //array[i].color = 'blue';
-            console.log(i);
-            let index = i - 1;
-            console.log(array);
-            console.log(array[index]);
-            //array[shuffled[index]].color = '#155799';
-            array[shuffled[index]].color = variables.brandPrimary;
-            array[shuffled[index]].opacity = 1;
-            console.log(array[index]);
-            this.setState({
-                background_array: array,
-            })
-            /**
-             * Do something here to change the color of the final question mark?
-             */
-        }
+            Animated.timing(this.animatedValue[old_i], {
+                toValue: 0.5,
+                duration: 400,
+            }).start();
 
+            array[shuffled[old_i]].opacity = this.animatedValue[old_i];
+        }
     }
 
     componentDidMount() {
         let new_styles_array = this.state.grid_styles_array;
 
         let i = 0;
-        this.changeColorRecursive(new_styles_array, new_styles_array.length, i, null, this.state.shuffled_grid_array);
-
+        this.questionOpacityRecursive(new_styles_array, new_styles_array.length, i, null, this.state.shuffled_grid_array);
     }
 
     startQuiz() {
@@ -184,7 +175,6 @@ class Homepage extends Component {
 
             const stylesText = {
                 opacity: this.state.grid_styles_array[key].opacity,
-                color: this.state.grid_styles_array[key].color,
             }
 
             return (
@@ -198,24 +188,31 @@ class Homepage extends Component {
             )
         })
 
+        /**
+         * Toggle MainComponent based on 'started' state
+         * not using Redux for this component
+         */
         if (this.state.started) {
             var MainComponent = <QuizWrap/>
         } else {
-            var MainComponent = <View style={styles.homeWrap}>
-                <View style={[styles.homeTextWrap, {width: width, height: height}]}>
-                    <Text style={styles.homeText}>Quizian</Text>
+            var MainComponent = (
+                <View style={styles.homeWrapOuter}>
+                    <View style={styles.homeWrap}>
+                        <View style={[styles.homeTextWrap, {width: width, height: height}]}>
+                            <Text style={styles.homeText}>Quizian</Text>
+                        </View>
+                        {grid}
+                    </View>
+                    <View style={styles.menuBar}>
+                        <StartQuizButton handleClick={() => this.startQuiz()} buttonText="NEW GAME"/>
+                    </View>
                 </View>
-                {grid}
-            </View>;
+            );
         }
 
         return (
-            <LinearGradient colors={['#159957','#155799']} style={{flex: 1}}>
-                    {MainComponent}
-                    <View style={styles.menuBar}>
-                        <StartQuizButton startQuiz={() => this.startQuiz()} buttonText="NEW GAME"
-                                         navigator={this.props.navigator}/>
-                    </View>
+            <LinearGradient colors={variables.gradient} style={{flex: 1}}>
+                {MainComponent}
             </LinearGradient>
         )
     }

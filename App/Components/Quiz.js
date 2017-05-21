@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 var api = require('../Utils/api')
 import styles from '../Styles/DefaultStyles'
 import {Questions} from './Questions'
+import QuizButton from './QuizButton';
 import {connect} from 'react-redux'
 import variables from '../Styles/Variables'
 import {shuffleArray} from '../Utils/helper';
@@ -79,14 +80,11 @@ class _Quiz extends Component {
     render() {
 
         if (this.props.answerSubmitted) {
-            var nextQuestionButton = <TouchableHighlight
-                underlayColor={variables.brandThirdLite}
-                onPress={() => this.nextQuestion(1)}
-                style={styles.nextButton}>
-                <Text style={styles.nextButtonText}>NEXT QUESTION</Text>
-            </TouchableHighlight>
+            var nextQuestionButton =
+                <QuizButton handleClick={() => this.nextQuestion(1)} buttonText="NEXT QUESTION"/>
         } else {
-            var nextQuestionButton = <Text></Text>
+            var nextQuestionButton =
+                <QuizButton disabled={true} buttonText="NEXT QUESTION"/>
         }
 
         if (this.props.getQuestions) {
@@ -99,13 +97,16 @@ class _Quiz extends Component {
         } else {
             var currentQuiz = <ActivityIndicator
                 animating={true}
-                color="#333"
+                color="#FFF"
                 size="large"></ActivityIndicator>;
         }
 
         return (
-            <LinearGradient colors={['#642B73','#C6426E']} style={styles.outerWrap}>
+            <LinearGradient colors={variables.gradient} style={styles.outerWrap}>
 
+                <View style={styles.topBar}>
+                    <Text style={styles.topBarText}>Top bar info</Text>
+                </View>
                 <View style={styles.headerWrap}>
                     <Text style={styles.headerText}>
                         Question {this.props.currentQuestion + 1} of {this.props.numberQuestions}
@@ -123,9 +124,13 @@ class _Quiz extends Component {
                 </Animated.View>
 
                 <View style={styles.footerWrap}>
-                    {nextQuestionButton}
+                    {/*{nextQuestionButton}*/}
                 </View>
 
+                <View style={[styles.menuBar, styles.menuBarQuiz]}>
+                    <QuizButton handleClick={() => this.nextQuestion(1)} buttonText="RESET"/>
+                    {nextQuestionButton}
+                </View>
             </LinearGradient>
         )
     }
