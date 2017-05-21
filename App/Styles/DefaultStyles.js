@@ -24,32 +24,50 @@ const defaultStyles = StyleSheet.create({
     },
 
     topBar: {
-        height: 70,
-        justifyContent: 'center',
+        //height: 80,
+        flexDirection: 'row',
+        //alignItems: 'flex-end',
+        justifyContent: 'space-around',
     },
-    topBarText: {
+
+    topBarTimer: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingHorizontal: 25,
+        height: 80,
+        width: 120,
+        flexDirection: 'row',
+    },
+    topBarTimerText: {
+        fontSize: 46,
+        fontWeight: 'bold',
         color: '#FFF',
-        fontFamily: 'Lalezar',
         backgroundColor: 'transparent',
     },
 
-    headerWrap: {
-        height: 125,
-        paddingHorizontal: 5,
-        paddingTop: 45,
-        justifyContent: 'center',
+    topBarDetails: {
+        height: 80,
+        justifyContent: 'flex-end',
+        paddingLeft: 15,
     },
-    headerText: {
-        textAlign: 'center',
-        padding: 3,
+    topBarDetailsText: {
+        fontSize: 17,
+        lineHeight: 23,
         fontWeight: 'bold',
-        color: '#EEE',
+        color: '#FFF',
+        fontFamily: 'Lalezar',
         backgroundColor: 'transparent',
     },
     correctIncorrectWrap: {
         height: 40,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#FFF',
+        borderRadius: 5,
+        borderWidth: 3,
+        borderColor: '#222',
+        position: 'absolute',
+        top: 150,
     },
     correctIncorrectText: {
         fontWeight: 'bold',
@@ -62,6 +80,7 @@ const defaultStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 15,
+        //backgroundColor: 'blue',
     },
 
     // questionComponentOuter: {
@@ -125,12 +144,6 @@ const defaultStyles = StyleSheet.create({
     },
     answerIncorrectText: {
         color: 'white',
-    },
-
-    footerWrap: {
-        height: 100,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 
     nextButton: {

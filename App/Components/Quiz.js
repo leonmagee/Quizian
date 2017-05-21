@@ -11,7 +11,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import {
     Text,
     View,
-    TouchableHighlight,
     ActivityIndicator,
     Animated,
 } from 'react-native'
@@ -20,9 +19,37 @@ let animatedOpacity = new Animated.Value(0);
 
 class _Quiz extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            timer: 15,
+        }
+
+    }
+
     componentDidMount() {
         this.props.getRemoteData(this.props.numberQuestions);
         this.fadeInQuiz();
+        this.startTimer();
+    }
+
+    countTime() {
+        let currentTime = this.state.timer;
+        this.setState({
+            timer: ( currentTime - 1 )
+        });
+        if (this.state.timer > 0) {
+            this.startTimer();
+        }
+        /**
+         * @todo How to stop this once a question is answered?
+         */
+    }
+
+    startTimer() {
+        setTimeout(() => this.countTime(), 1000);
+        //setTimeout(this.countTime(), 1000);
     }
 
     fadeInQuiz() {
@@ -105,17 +132,16 @@ class _Quiz extends Component {
             <LinearGradient colors={variables.gradient} style={styles.outerWrap}>
 
                 <View style={styles.topBar}>
-                    <Text style={styles.topBarText}>Top bar info</Text>
-                </View>
-                <View style={styles.headerWrap}>
-                    <Text style={styles.headerText}>
-                        Question {this.props.currentQuestion + 1} of {this.props.numberQuestions}
-                    </Text>
-                    <Text style={styles.headerText}>
-                        Correct: {this.props.correctAnswer} - Incorrect: {this.props.falseAnswer}
-                    </Text>
-                    <View style={styles.correctIncorrectWrap}>
-                        {this.props.answerResultString}
+                    <View style={styles.topBarDetails}>
+                        <Text style={styles.topBarDetailsText}>
+                            Question {this.props.currentQuestion + 1} of {this.props.numberQuestions}
+                        </Text>
+                        <Text style={styles.topBarDetailsText}>
+                            Correct: {this.props.correctAnswer} - Incorrect: {this.props.falseAnswer}
+                        </Text>
+                    </View>
+                    <View style={styles.topBarTimer}>
+                        <Text style={styles.topBarTimerText}>{this.state.timer}</Text>
                     </View>
                 </View>
 
@@ -123,13 +149,13 @@ class _Quiz extends Component {
                     {currentQuiz}
                 </Animated.View>
 
-                <View style={styles.footerWrap}>
-                    {/*{nextQuestionButton}*/}
-                </View>
-
                 <View style={[styles.menuBar, styles.menuBarQuiz]}>
                     <QuizButton handleClick={() => this.nextQuestion(1)} buttonText="RESET"/>
                     {nextQuestionButton}
+                </View>
+
+                <View style={styles.correctIncorrectWrap}>
+                    {this.props.answerResultString}
                 </View>
             </LinearGradient>
         )
