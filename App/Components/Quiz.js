@@ -25,13 +25,30 @@ class _Quiz extends Component {
         this.state = {
             timer: 15,
             nextText: 'NEXT QUESTION',
+            timerRunning: true,
         }
 
-        if ( this.props.resetQuiz ) {
-            this.props.getRemoteData(this.props.numberQuestions);
-            this.fadeInQuiz();
-            this.startTimer();
-        }
+        console.log('timerzzz')
+        console.log(this.state.timerRunning)
+
+        setTimeout(() => {
+            this.setState({
+                timerRunning: false,
+            })
+            console.log('timerzzz2')
+            console.log(this.state.timerRunning)
+        }, 8000)
+
+        // console.log('in constructor');
+        // console.log(this.props.resetQuiz);
+        //
+        // if (this.props.resetQuiz) {
+        //     console.log('in constructor');
+        //     console.log(this.props.resetQuiz);
+        //     this.props.getRemoteData(this.props.numberQuestions);
+        //     this.fadeInQuiz();
+        //     this.startTimer();
+        // }
 
     }
 
@@ -46,8 +63,10 @@ class _Quiz extends Component {
         this.setState({
             timer: ( currentTime - 1 )
         });
-        if (this.state.timer > 0) {
-            this.startTimer();
+        if ( this.state.timerRunning ) {
+            if (this.state.timer > 0) {
+                this.startTimer();
+            }
         }
         /**
          * @todo How to stop this once a question is answered?
@@ -76,16 +95,27 @@ class _Quiz extends Component {
 
     nextQuestion(question_number) {
         this.fadeOutQuiz()
-        setTimeout(() => this.goToNextQuestion(question_number), 1000)
+        setTimeout(() => this.goToNextQuestion(question_number), 600)
     }
 
     goToNextQuestion(question_number) {
+        if (( this.props.currentQuestion + 2 ) === this.props.numberQuestions) {
+            this.setState({nextText: 'RESULTS'})
+        }
         if (( this.props.currentQuestion + 1 ) === this.props.numberQuestions) {
+            //this.setState({nextText: 'RESULTS'})
             this.props.goToResults();
         } else {
             this.props.goToNextQuestion(question_number);
             this.fadeInQuiz()
         }
+    }
+
+    resetQuiz() {
+        this.props.getRemoteData(this.props.numberQuestions);
+        this.fadeInQuiz();
+        this.startTimer();
+        this.props.resetQuizClicked();
     }
 
     answerChosen(correct, key) {
@@ -96,7 +126,7 @@ class _Quiz extends Component {
         this.props.answerButtonClicked();
 
         /**
-         * Get Answer Key
+         * Set Chosen Answer Key
          */
         this.props.answerButtonKey(key);
 
@@ -159,7 +189,7 @@ class _Quiz extends Component {
                 </Animated.View>
 
                 <View style={styles.menuBar}>
-                    <QuizButton handleClick={() => this.props.resetQuiz()} buttonText="RESET"/>
+                    <QuizButton handleClick={() => this.resetQuiz()} buttonText="RESET"/>
                     {nextQuestionButton}
                 </View>
 
@@ -201,11 +231,12 @@ const mapActionsToProps = (dispatch) => ({
     },
     questionDisplayed() {
         dispatch({type: 'QUESTION_DISPLAYED'})
-        console.log('question displayed?')
+        //console.log('question displayed?')
     },
-    resetQuiz() {
-        dispatch({type: 'RESET_QUIZ'})
-        console.log('reset quiz')
+    resetQuizClicked() {
+        //dispatch({type: 'RESET_QUIZ'})
+        dispatch({type: 'START_NEW_QUIZ'})
+        console.log('reset quiz clicked')
     },
     // fadeInQuiz() {
     //     dispatch({type: 'FADE_IN_QUIZ'})

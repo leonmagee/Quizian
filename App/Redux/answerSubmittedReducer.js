@@ -4,6 +4,7 @@ import {
     NEXT_QUESTION,
     START_NEW_QUIZ,
     ANSWER_SUBMITTED,
+    RESET_QUIZ,
 } from './actions';
 
 export const answerSubmittedReducer = (state = false, action) => {
@@ -15,6 +16,9 @@ export const answerSubmittedReducer = (state = false, action) => {
             return false;
             break;
         case START_NEW_QUIZ:
+            return false;
+            break;
+        case RESET_QUIZ:
             return false;
             break;
         default:
