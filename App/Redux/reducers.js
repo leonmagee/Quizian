@@ -13,6 +13,7 @@ import {answerSubmittedReducer} from './answerSubmittedReducer';
 import {answerKeyReducer} from './answerKeyReducer';
 import {quizResultsReducer} from './quizResultsReducer';
 import {getQuestionsReducer} from './getQuestionsReducer';
+import {resetQuizReducer} from './resetQuizReducer';
 //import {fadeQuizReducer} from './fadeQuizReducer';
 
 

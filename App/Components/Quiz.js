@@ -24,6 +24,13 @@ class _Quiz extends Component {
 
         this.state = {
             timer: 15,
+            nextText: 'NEXT QUESTION',
+        }
+
+        if ( this.props.resetQuiz ) {
+            this.props.getRemoteData(this.props.numberQuestions);
+            this.fadeInQuiz();
+            this.startTimer();
         }
 
     }
@@ -53,7 +60,6 @@ class _Quiz extends Component {
     }
 
     fadeInQuiz() {
-        console.log('quiz faded in');
         Animated.timing(animatedOpacity, {
             toValue: 1,
             duration: 300,
@@ -108,10 +114,10 @@ class _Quiz extends Component {
 
         if (this.props.answerSubmitted) {
             var nextQuestionButton =
-                <QuizButton handleClick={() => this.nextQuestion(1)} buttonText="NEXT QUESTION"/>
+                <QuizButton handleClick={() => this.nextQuestion(1)} buttonText={this.state.nextText}/>
         } else {
             var nextQuestionButton =
-                <QuizButton disabled={true} buttonText="NEXT QUESTION"/>
+                <QuizButton disabled={true} buttonText={this.state.nextText}/>
         }
 
         if (this.props.getQuestions) {
@@ -147,16 +153,16 @@ class _Quiz extends Component {
 
                 <Animated.View style={[styles.quizWrap, {opacity: animatedOpacity}]}>
                     {currentQuiz}
+                    <View style={styles.correctIncorrectWrap}>
+                        {this.props.answerResultString}
+                    </View>
                 </Animated.View>
 
-                <View style={[styles.menuBar, styles.menuBarQuiz]}>
-                    <QuizButton handleClick={() => this.nextQuestion(1)} buttonText="RESET"/>
+                <View style={styles.menuBar}>
+                    <QuizButton handleClick={() => this.props.resetQuiz()} buttonText="RESET"/>
                     {nextQuestionButton}
                 </View>
 
-                <View style={styles.correctIncorrectWrap}>
-                    {this.props.answerResultString}
-                </View>
             </LinearGradient>
         )
     }
@@ -171,6 +177,7 @@ const mapStateToProps = (state) => ({
     answerSubmitted: state.answerSubmitted,
     answerResultString: state.answerResultString,
     getQuestions: state.getQuestions,
+    resetQuiz: state.resetQuiz,
 })
 
 const mapActionsToProps = (dispatch) => ({
@@ -192,12 +199,20 @@ const mapActionsToProps = (dispatch) => ({
     goToResults() {
         dispatch({type: 'QUIZ_RESULTS'})
     },
-    fadeInQuiz() {
-        dispatch({type: 'FADE_IN_QUIZ'})
+    questionDisplayed() {
+        dispatch({type: 'QUESTION_DISPLAYED'})
+        console.log('question displayed?')
     },
-    fadeOutQuiz() {
-        dispatch({type: 'FADE_OUT_QUIZ'})
+    resetQuiz() {
+        dispatch({type: 'RESET_QUIZ'})
+        console.log('reset quiz')
     },
+    // fadeInQuiz() {
+    //     dispatch({type: 'FADE_IN_QUIZ'})
+    // },
+    // fadeOutQuiz() {
+    //     dispatch({type: 'FADE_OUT_QUIZ'})
+    // },
     getRemoteData(num) {
         dispatch({type: 'START_DATA'})
 

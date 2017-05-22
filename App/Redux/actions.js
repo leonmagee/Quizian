@@ -7,5 +7,7 @@ export const CORRECT_ANSWER = 'CORRECT_ANSWER';
 export const INCORRECT_ANSWER = 'INCORRECT_ANSWER';
 export const START_DATA = 'START_DATA'; // begin api data retrieval -> activity indicator
 export const DATA_AVAILABLE = 'DATA_AVAILABLE'; // data retrieved
+export const QUESTION_DISPLAYED = 'QUESTION_DISPLAYED';
+export const RESET_QUIZ = 'RESET_QUIZ';
 // export const FADE_IN_QUIZ = 'FADE_IN_QUIZ'; // @todo not being used?
 // export const FADE_OUT_QUIZ = 'FADE_OUT_QUIZ'; // @todo not being used?
