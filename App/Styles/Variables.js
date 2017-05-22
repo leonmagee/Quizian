@@ -6,7 +6,8 @@ let variables = {
     brandSecondLite: 'rgba(6,214,160,0.8)',
     brandThird: 'rgba(69,105,144,1)', // gray blue
     brandThirdLite: 'rgba(69,105,144,0.8)',
-    gradient: ['#159957','#155799'],
+    //gradient: ['#159957','#155799'],
+    gradient: ['#36D1DC','#5B86E5'],
     //gradient_old: ['rgba(69,105,144,0.5)','rgba(69,105,144,1)','rgba(69,105,144,0.8)'],
 };
 

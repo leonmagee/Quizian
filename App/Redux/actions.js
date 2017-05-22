@@ -8,4 +8,5 @@ export const INCORRECT_ANSWER = 'INCORRECT_ANSWER';
 export const START_DATA = 'START_DATA'; // begin api data retrieval -> activity indicator
 export const DATA_AVAILABLE = 'DATA_AVAILABLE'; // data retrieved
 export const TIMER_TICK = 'TIMER_TICK';
+export const TIMER_EXPIRES = 'TIMER_EXPIRES';
 //export const QUESTION_DISPLAYED = 'QUESTION_DISPLAYED';

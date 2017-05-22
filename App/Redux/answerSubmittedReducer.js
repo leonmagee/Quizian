@@ -10,7 +10,6 @@ import {
  * answerSubmittedReducer
  * Returns true right after and answer has been submitted
  * Rest to false when the quiz is reset or next question is begun
- * @todo this should stop the timer
  */
 export const answerSubmittedReducer = (state = false, action) => {
     switch (action.type) {

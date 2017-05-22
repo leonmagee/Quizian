@@ -13,8 +13,7 @@ import {answerSubmittedReducer} from './answerSubmittedReducer';
 import {answerKeyReducer} from './answerKeyReducer';
 import {quizResultsReducer} from './quizResultsReducer';
 import {getQuestionsReducer} from './getQuestionsReducer';
-import {timerValueReducer} from './timerValueReducer'
-
+import {timerValueReducer} from './timerValueReducer';
 /**
  * Combine Reducers
  */

@@ -23,32 +23,8 @@ class _Quiz extends Component {
         super(props);
 
         this.state = {
-            timer: 15, // @todo make a reducer for this
-            nextText: 'NEXT QUESTION', // @todo make a reducer for this
-            //timerRunning: true, // @todo make a reducer for this?
+            nextText: 'NEXT QUESTION', // @todo make a reducer for this - then remove constructor
         }
-
-        console.log('timerzzz')
-        console.log(this.state.timerRunning)
-
-        // setTimeout(() => {
-        //     this.setState({
-        //         timerRunning: false,
-        //     })
-        //     console.log('timerzzz2')
-        //     console.log(this.state.timerRunning)
-        // }, 8000)
-
-        // console.log('in constructor');
-        // console.log(this.props.resetQuiz);
-        //
-        // if (this.props.resetQuiz) {
-        //     console.log('in constructor');
-        //     console.log(this.props.resetQuiz);
-        //     this.props.getRemoteData(this.props.numberQuestions);
-        //     this.fadeInQuiz();
-        //     this.startTimer();
-        // }
     }
 
     componentDidMount() {
@@ -59,25 +35,21 @@ class _Quiz extends Component {
 
     countTime() {
 
-        // @todo handle this from the reducer?
-        if ( ! this.props.answerSubmitted ) {
+        if (!this.props.answerSubmitted) {
 
-            let currentTime = this.state.timer;
-            this.setState({
-                timer: ( currentTime - 1 )
-            });
-            if (this.state.timer > 0) {
+            this.props.incrementTimer();
+
+            if (this.props.timerValue > 0) {
                 this.startTimer();
+            } else {
+                this.props.timerExpires()
+                console.log( 'timerz expired!')
             }
         }
-        /**
-         * @todo How to stop this once a question is answered?
-         */
     }
 
     startTimer() {
         setTimeout(() => this.countTime(), 1000);
-        //setTimeout(this.countTime(), 1000);
     }
 
     fadeInQuiz() {
@@ -109,6 +81,7 @@ class _Quiz extends Component {
         } else {
             this.props.goToNextQuestion(question_number);
             this.fadeInQuiz()
+            this.startTimer()
         }
     }
 
@@ -117,7 +90,7 @@ class _Quiz extends Component {
         this.fadeInQuiz();
         this.startTimer();
         this.props.resetQuizClicked();
-        this.setState({nextText: 'NEXT QUESTION'})
+        this.setState({nextText: 'NEXT QUESTION'}) //@todo handle with Redux reducer
     }
 
     answerChosen(correct, key) {
@@ -179,7 +152,7 @@ class _Quiz extends Component {
                         </Text>
                     </View>
                     <View style={styles.topBarTimer}>
-                        <Text style={styles.topBarTimerText}>{this.state.timer}</Text>
+                        <Text style={styles.topBarTimerText}>{this.props.timerValue}</Text>
                     </View>
                 </View>
 
@@ -210,6 +183,7 @@ const mapStateToProps = (state) => ({
     answerResultString: state.answerResultString,
     getQuestions: state.getQuestions,
     resetQuiz: state.resetQuiz,
+    timerValue: state.timerValue,
 })
 
 const mapActionsToProps = (dispatch) => ({
@@ -236,6 +210,12 @@ const mapActionsToProps = (dispatch) => ({
     },
     resetQuizClicked() {
         dispatch({type: 'START_NEW_QUIZ'})
+    },
+    incrementTimer() {
+        dispatch({type: 'TIMER_TICK'})
+    },
+    timerExpires() {
+        dispatch({type: 'TIMER_EXPIRES'})
     },
     getRemoteData(num) {
         dispatch({type: 'START_DATA'})
