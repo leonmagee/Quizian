@@ -3,7 +3,6 @@ import React from 'react';
 import {
     START_NEW_QUIZ,
     CORRECT_ANSWER,
-    RESET_QUIZ,
 } from './actions';
 
 /**
@@ -17,9 +16,6 @@ export const correctAnswerReducer = (state = 0, action) => {
             return state + 1;
             break;
         case START_NEW_QUIZ:
-            return 0;
-            break;
-        case RESET_QUIZ:
             return 0;
             break;
         default:

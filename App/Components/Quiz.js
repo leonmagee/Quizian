@@ -23,21 +23,21 @@ class _Quiz extends Component {
         super(props);
 
         this.state = {
-            timer: 15,
-            nextText: 'NEXT QUESTION',
-            timerRunning: true,
+            timer: 15, // @todo make a reducer for this
+            nextText: 'NEXT QUESTION', // @todo make a reducer for this
+            //timerRunning: true, // @todo make a reducer for this?
         }
 
         console.log('timerzzz')
         console.log(this.state.timerRunning)
 
-        setTimeout(() => {
-            this.setState({
-                timerRunning: false,
-            })
-            console.log('timerzzz2')
-            console.log(this.state.timerRunning)
-        }, 8000)
+        // setTimeout(() => {
+        //     this.setState({
+        //         timerRunning: false,
+        //     })
+        //     console.log('timerzzz2')
+        //     console.log(this.state.timerRunning)
+        // }, 8000)
 
         // console.log('in constructor');
         // console.log(this.props.resetQuiz);
@@ -49,7 +49,6 @@ class _Quiz extends Component {
         //     this.fadeInQuiz();
         //     this.startTimer();
         // }
-
     }
 
     componentDidMount() {
@@ -59,11 +58,14 @@ class _Quiz extends Component {
     }
 
     countTime() {
-        let currentTime = this.state.timer;
-        this.setState({
-            timer: ( currentTime - 1 )
-        });
-        if ( this.state.timerRunning ) {
+
+        // @todo handle this from the reducer?
+        if ( ! this.props.answerSubmitted ) {
+
+            let currentTime = this.state.timer;
+            this.setState({
+                timer: ( currentTime - 1 )
+            });
             if (this.state.timer > 0) {
                 this.startTimer();
             }
@@ -86,7 +88,6 @@ class _Quiz extends Component {
     }
 
     fadeOutQuiz() {
-        console.log('quiz faded in');
         Animated.timing(animatedOpacity, {
             toValue: 0,
             duration: 300,
@@ -116,6 +117,7 @@ class _Quiz extends Component {
         this.fadeInQuiz();
         this.startTimer();
         this.props.resetQuizClicked();
+        this.setState({nextText: 'NEXT QUESTION'})
     }
 
     answerChosen(correct, key) {
@@ -231,19 +233,10 @@ const mapActionsToProps = (dispatch) => ({
     },
     questionDisplayed() {
         dispatch({type: 'QUESTION_DISPLAYED'})
-        //console.log('question displayed?')
     },
     resetQuizClicked() {
-        //dispatch({type: 'RESET_QUIZ'})
         dispatch({type: 'START_NEW_QUIZ'})
-        console.log('reset quiz clicked')
     },
-    // fadeInQuiz() {
-    //     dispatch({type: 'FADE_IN_QUIZ'})
-    // },
-    // fadeOutQuiz() {
-    //     dispatch({type: 'FADE_OUT_QUIZ'})
-    // },
     getRemoteData(num) {
         dispatch({type: 'START_DATA'})
 

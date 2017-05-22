@@ -3,14 +3,13 @@ import React from 'react';
 import {
     NEXT_QUESTION,
     START_NEW_QUIZ,
-    RESET_QUIZ,
 } from './actions';
 
 /**
- * Return current question index
- * @param state
- * @param action
- * @returns {*}
+ * currentQuestionReducer
+ * Returns the current question index
+ * Increments the index when 'Next Question' is selected
+ * Resets value to 0 when quiz is restarted
  */
 export const currentQuestionReducer = (state = 0, action) => {
 
@@ -19,9 +18,6 @@ export const currentQuestionReducer = (state = 0, action) => {
             return state + 1;
             break;
         case START_NEW_QUIZ:
-            return 0
-            break;
-        case RESET_QUIZ:
             return 0
             break;
         default:

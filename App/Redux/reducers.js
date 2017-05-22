@@ -13,9 +13,7 @@ import {answerSubmittedReducer} from './answerSubmittedReducer';
 import {answerKeyReducer} from './answerKeyReducer';
 import {quizResultsReducer} from './quizResultsReducer';
 import {getQuestionsReducer} from './getQuestionsReducer';
-//import {resetQuizReducer} from './resetQuizReducer';
-//import {fadeQuizReducer} from './fadeQuizReducer';
-
+import {timerValueReducer} from './timerValueReducer'
 
 /**
  * Combine Reducers
@@ -30,6 +28,5 @@ export const reducer = combineReducers({
     answerKey: answerKeyReducer,
     quizResults: quizResultsReducer,
     getQuestions: getQuestionsReducer,
-    //resetQuiz: resetQuizReducer,
-    //fadeQuiz: fadeQuizReducer,
+    timerValue: timerValueReducer,
 });

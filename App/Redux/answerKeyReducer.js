@@ -4,7 +4,6 @@ import {
     NEXT_QUESTION,
     START_NEW_QUIZ,
     ANSWER_KEY,
-    RESET_QUIZ,
 } from './actions';
 
 /**
@@ -22,9 +21,6 @@ export const answerKeyReducer = (state = null, action) => {
             return null;
             break;
         case START_NEW_QUIZ:
-            return null;
-            break;
-        case RESET_QUIZ:
             return null;
             break;
         default:
