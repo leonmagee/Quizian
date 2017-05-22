@@ -5,6 +5,10 @@ import {
     START_NEW_QUIZ,
 } from './actions';
 
+/**
+ * quizResultsReducer
+ * Returns the ???
+ */
 export const quizResultsReducer = (state = false, action) => {
     switch (action.type) {
         case QUIZ_RESULTS:

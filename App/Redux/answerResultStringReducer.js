@@ -8,6 +8,13 @@ import {
     INCORRECT_ANSWER,
 } from './actions';
 
+/**
+ * answerResultStringReducer
+ * Returns the text string for correct or incorrect answers
+ * @todo should this be a reducer?
+ * @todo I need to watch some more flux / redux tutorials so I can figure out what should be made
+ * @todo into an action or reducer?
+ */
 export const answerResultStringReducer = (state = '', action) => {
     const s = styles.correctIncorrectText;
     switch (action.type) {

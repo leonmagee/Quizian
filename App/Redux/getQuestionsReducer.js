@@ -4,12 +4,10 @@ import {
     DATA_AVAILABLE
 } from './actions';
 
-
 /**
- * Actions to govern data retrieval
- * @param state
- * @param action
- * @returns {boolean}
+ * getQuestionsReducer
+ * Returns data queried from API?
+ * This is called when?
  */
 export const getQuestionsReducer = (state = false, action) => {
 

@@ -6,6 +6,11 @@ import {
     RESET_QUIZ,
 } from './actions';
 
+/**
+ * falseAnswerReducer
+ * Returns the number of incorrect chosen answers
+ * Set to 0 when quiz is reset or a new quiz is started
+ */
 export const falseAnswerReducer = (state = 0, action) => {
     switch (action.type) {
         case INCORRECT_ANSWER:
