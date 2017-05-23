@@ -9,4 +9,5 @@ export const START_DATA = 'START_DATA'; // begin api data retrieval -> activity 
 export const DATA_AVAILABLE = 'DATA_AVAILABLE'; // data retrieved
 export const TIMER_TICK = 'TIMER_TICK';
 export const TIMER_EXPIRES = 'TIMER_EXPIRES';
+export const FINAL_QUESTION = 'FINAL_QUESTION';
 //export const QUESTION_DISPLAYED = 'QUESTION_DISPLAYED';

@@ -4,6 +4,7 @@ import {
     NEXT_QUESTION,
     START_NEW_QUIZ,
     ANSWER_SUBMITTED,
+    TIMER_EXPIRES,
 } from './actions';
 
 /**
@@ -14,6 +15,9 @@ import {
 export const answerSubmittedReducer = (state = false, action) => {
     switch (action.type) {
         case ANSWER_SUBMITTED:
+            return true;
+            break;
+        case TIMER_EXPIRES:
             return true;
             break;
         case NEXT_QUESTION:

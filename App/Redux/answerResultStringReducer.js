@@ -6,14 +6,12 @@ import variables from '../Styles/Variables'
 import {
     CORRECT_ANSWER,
     INCORRECT_ANSWER,
+    TIMER_EXPIRES,
 } from './actions';
 
 /**
  * answerResultStringReducer
  * Returns the text string for correct or incorrect answers
- * @todo should this be a reducer?
- * @todo I need to watch some more flux / redux tutorials so I can figure out what should be made
- * @todo into an action or reducer?
  */
 export const answerResultStringReducer = (state = '', action) => {
     const s = styles.correctIncorrectText;
@@ -23,6 +21,9 @@ export const answerResultStringReducer = (state = '', action) => {
             break;
         case INCORRECT_ANSWER:
             return <Text style={[s, {color: variables.brandPrimary}]}>INCORRECT</Text>
+            break;
+        case TIMER_EXPIRES:
+            return <Text style={[s, {color: variables.brandPrimary}]}>TIMES UP!</Text>
             break;
         default:
             return <Text></Text>

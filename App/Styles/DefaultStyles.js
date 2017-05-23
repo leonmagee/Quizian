@@ -72,16 +72,12 @@ const defaultStyles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     correctIncorrectWrap: {
-        height: 40,
         alignItems: 'center',
         justifyContent: 'center',
-        //backgroundColor: '#FFF',
-        //borderRadius: 5,
-        //borderWidth: 3,
-        //borderColor: '#222',
         position: 'absolute',
-        //width: 150,
-        top: 85,
+        flex: 1,
+        top: 0,
+        bottom: 0,
         right: 0,
         left: 0,
     },
@@ -110,8 +106,8 @@ const defaultStyles = StyleSheet.create({
 
     questionWrap: {
         backgroundColor: '#FCFCFC',
-        marginTop: 15,
-        marginBottom: 15,
+        marginTop: 19,
+        marginBottom: 11,
         paddingVertical: 10, // @todo animate this
         paddingHorizontal: 15,
         borderRadius: 5,
@@ -134,7 +130,7 @@ const defaultStyles = StyleSheet.create({
 
     answerWrap: {
         backgroundColor: '#FCFCFC',
-        marginVertical: 15,
+        marginVertical: 11,
         //marginHorizontal: 85,
         paddingVertical: 10, // @todo animate this
         paddingHorizontal: 15,

@@ -42,6 +42,9 @@ export const Questions = (props) => (
     <View>
         <View style={styles.questionWrap}>
             <Text style={styles.questionText}>{removeBackSlashes(props.arrayData.question)}</Text>
+            <View style={styles.correctIncorrectWrap}>
+                {props.correctIncorrectString}
+            </View>
         </View>
         {props.arrayData.answers.map((answer, i) => (
             <TouchableHighlight

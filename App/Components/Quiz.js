@@ -19,14 +19,6 @@ let animatedOpacity = new Animated.Value(0);
 
 class _Quiz extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.state = {
-    //         nextText: 'NEXT QUESTION', // @todo make a reducer for this - then remove constructor
-    //     }
-    // }
-
     componentDidMount() {
         this.props.getRemoteData(this.props.numberQuestions);
         this.fadeInQuiz();
@@ -43,7 +35,7 @@ class _Quiz extends Component {
                 this.startTimer();
             } else {
                 this.props.timerExpires()
-                console.log( 'timerz expired!')
+                console.log('timerz expired!')
             }
         }
     }
@@ -73,7 +65,8 @@ class _Quiz extends Component {
 
     goToNextQuestion(question_number) {
         if (( this.props.currentQuestion + 2 ) === this.props.numberQuestions) {
-            this.setState({nextText: 'RESULTS'})
+            //this.setState({nextText: 'RESULTS'})
+            this.props.finalQuestion()
         }
         if (( this.props.currentQuestion + 1 ) === this.props.numberQuestions) {
             //this.setState({nextText: 'RESULTS'})
@@ -88,9 +81,9 @@ class _Quiz extends Component {
     resetQuiz() {
         this.props.getRemoteData(this.props.numberQuestions);
         this.fadeInQuiz();
-        this.startTimer();
+        this.startTimer(); // this is broken since the timer is already running when you click this button, so it makes 2 timers...
         this.props.resetQuizClicked();
-        this.setState({nextText: 'NEXT QUESTION'}) //@todo handle with Redux reducer
+        //this.setState({nextText: 'NEXT QUESTION'}) //@todo handle with Redux reducer
     }
 
     answerChosen(correct, key) {
@@ -130,6 +123,7 @@ class _Quiz extends Component {
                 arrayData={this.props.getQuestions[this.props.currentQuestion]}
                 answerChosen={(correct, key) => this.answerChosen(correct, key)}
                 answerSubmitted={this.props.answerSubmitted}
+                correctIncorrectString={this.props.answerResultString}
                 answerKey={this.props.answerKey}
             ></Questions>;
         } else {
@@ -158,9 +152,6 @@ class _Quiz extends Component {
 
                 <Animated.View style={[styles.quizWrap, {opacity: animatedOpacity}]}>
                     {currentQuiz}
-                    <View style={styles.correctIncorrectWrap}>
-                        {this.props.answerResultString}
-                    </View>
                 </Animated.View>
 
                 <View style={styles.menuBar}>
@@ -202,6 +193,9 @@ const mapActionsToProps = (dispatch) => ({
     },
     incorrectAnswerClicked() {
         dispatch({type: 'INCORRECT_ANSWER'})
+    },
+    finalQuestion() {
+        dispatch({type: 'FINAL_QUESTION'})
     },
     goToResults() {
         dispatch({type: 'QUIZ_RESULTS'})
