@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import styles from '../Styles/DefaultStyles'
 import {connect} from 'react-redux'
+import QuizButton from './QuizButton'
 import variables from '../Styles/Variables'
 
 import {
@@ -18,10 +19,10 @@ const circunference = Math.PI * (70 * 2);
 class _QuizResults extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
 
         function round(value, decimals) {
-            return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+            return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals)
         }
 
         const correct = props.correctAnswer;
@@ -86,15 +87,12 @@ if ( this.state.correct ) {
                             {this.state.incorrect_percent}% Incorrect
                         </Text>
                     </View>
-                    <TouchableHighlight
-                        underlayColor={variables.brandThirdLite}
-                        onPress={() => this.startNewQuiz()}
-                        style={styles.nextButton}>
-                        <Text style={styles.nextButtonText}>START NEW QUIZ</Text>
-                    </TouchableHighlight>
+
                 </View>
 
-
+                <View style={styles.menuBar}>
+                    <QuizButton handleClick={() => this.startNewQuiz()} buttonText="START NEW QUIZ"/>
+                </View>
             </View>
         )
     }

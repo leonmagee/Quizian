@@ -157,9 +157,15 @@ const defaultStyles = StyleSheet.create({
     },
     answerCorrectText: {
         color: 'white',
+        textShadowColor: 'rgba(0,0,0,0.1)',
+        textShadowOffset: {width: 1, height: 1},
+        textShadowRadius: 3,
     },
     answerIncorrectText: {
         color: 'white',
+        textShadowColor: 'rgba(0,0,0,0.1)',
+        textShadowOffset: {width: 1, height: 1},
+        textShadowRadius: 3,
     },
 
     nextButton: {
@@ -213,7 +219,7 @@ const defaultStyles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 5,
         //backgroundColor: 'rgba(255,255,255,0.2)',
-        backgroundColor: 'rgba(0,0,0,0.2)',
+        backgroundColor: 'rgba(0,0,0,0.1)',
         justifyContent: 'space-around',
         alignItems: 'center',
         flexDirection: 'row',
