@@ -3,6 +3,7 @@ import React from 'react';
 import {
     NEXT_QUESTION,
     TIMER_TICK,
+    START_NEW_QUIZ,
 } from './actions';
 
 /**
@@ -16,7 +17,10 @@ export const timerValueReducer = (state = 15, action) => {
             return 15;
             break;
         case TIMER_TICK:
-            return state -1;
+            return state - 1;
+            break;
+        case START_NEW_QUIZ:
+            return 15;
             break;
         default:
             return state;

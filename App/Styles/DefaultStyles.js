@@ -11,8 +11,21 @@ import {
     StyleSheet,
 } from 'react-native';
 
-const {width} = Dimensions.get('window')
+const {width, height} = Dimensions.get('window')
 const button_width = ( width * 0.9 )
+
+// console.log(width);
+// console.log(height);
+
+if ( width < 321 ) {
+    var question_font_size = 16;
+    var question_height = 110;
+} else {
+    var question_font_size = 22;
+    var question_height = 150;
+}
+
+
 
 const defaultStyles = StyleSheet.create({
     outerWrapMain: { // wraps everything
@@ -102,7 +115,7 @@ const defaultStyles = StyleSheet.create({
         paddingVertical: 10, // @todo animate this
         paddingHorizontal: 15,
         borderRadius: 5,
-        minHeight: 150,
+        minHeight: question_height,
         justifyContent: 'center',
         //borderColor: variables.brandThirdLite,
         //borderColor: 'rgba(0,0,0,0.1)',
@@ -112,7 +125,7 @@ const defaultStyles = StyleSheet.create({
     },
     questionText: {
         fontWeight: 'bold',
-        fontSize: 22,
+        fontSize: question_font_size,
         //color: variables.brandThird,
         color: '#000',
         textAlign: 'center',
@@ -203,7 +216,8 @@ const defaultStyles = StyleSheet.create({
         height: 50,
         paddingTop: 10,
         paddingBottom: 5,
-        backgroundColor: 'rgba(255,255,255,0.2)',
+        //backgroundColor: 'rgba(255,255,255,0.2)',
+        backgroundColor: 'rgba(0,0,0,0.2)',
         justifyContent: 'space-around',
         alignItems: 'center',
         flexDirection: 'row',

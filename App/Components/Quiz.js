@@ -19,13 +19,13 @@ let animatedOpacity = new Animated.Value(0);
 
 class _Quiz extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            nextText: 'NEXT QUESTION', // @todo make a reducer for this - then remove constructor
-        }
-    }
+    // constructor(props) {
+    //     super(props);
+    //
+    //     this.state = {
+    //         nextText: 'NEXT QUESTION', // @todo make a reducer for this - then remove constructor
+    //     }
+    // }
 
     componentDidMount() {
         this.props.getRemoteData(this.props.numberQuestions);
@@ -119,10 +119,10 @@ class _Quiz extends Component {
 
         if (this.props.answerSubmitted) {
             var nextQuestionButton =
-                <QuizButton handleClick={() => this.nextQuestion(1)} buttonText={this.state.nextText}/>
+                <QuizButton handleClick={() => this.nextQuestion(1)} buttonText={this.props.nextText}/>
         } else {
             var nextQuestionButton =
-                <QuizButton disabled={true} buttonText={this.state.nextText}/>
+                <QuizButton disabled={true} buttonText={this.props.nextText}/>
         }
 
         if (this.props.getQuestions) {
@@ -184,6 +184,7 @@ const mapStateToProps = (state) => ({
     getQuestions: state.getQuestions,
     resetQuiz: state.resetQuiz,
     timerValue: state.timerValue,
+    nextText: state.nextText,
 })
 
 const mapActionsToProps = (dispatch) => ({
