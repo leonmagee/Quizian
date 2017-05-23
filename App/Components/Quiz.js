@@ -2,11 +2,11 @@ import React, {Component} from 'react'
 var api = require('../Utils/api')
 import styles from '../Styles/DefaultStyles'
 import {Questions} from './Questions'
-import QuizButton from './QuizButton';
+import QuizButton from './QuizButton'
 import {connect} from 'react-redux'
 import variables from '../Styles/Variables'
-import {shuffleArray} from '../Utils/helper';
-import LinearGradient from 'react-native-linear-gradient';
+import {shuffleArray} from '../Utils/helper'
+import LinearGradient from 'react-native-linear-gradient'
 
 import {
     Text,
@@ -15,14 +15,14 @@ import {
     Animated,
 } from 'react-native'
 
-let animatedOpacity = new Animated.Value(0);
+let animatedOpacity = new Animated.Value(0)
 
 class _Quiz extends Component {
 
     componentDidMount() {
-        this.props.getRemoteData(this.props.numberQuestions);
-        this.fadeInQuiz();
-        this.startTimer();
+        this.props.getRemoteData(this.props.numberQuestions)
+        this.fadeInQuiz()
+        this.startTimerInit()
     }
 
     countTime() {
@@ -35,27 +35,37 @@ class _Quiz extends Component {
                 this.startTimer();
             } else {
                 this.props.timerExpires()
-                console.log('timerz expired!')
             }
         }
     }
 
+    startTimerInit() {
+        global_timeout_wrap = setTimeout(() => {
+            this.startTimer();
+        }, 400)
+    }
+
     startTimer() {
-        setTimeout(() => this.countTime(), 1000);
+        global_timeout = setTimeout(() => this.countTime(), 1000)
+    }
+
+    clearTheTimer() {
+        clearTimeout(global_timeout)
+        clearTimeout(global_timeout_wrap)
     }
 
     fadeInQuiz() {
         Animated.timing(animatedOpacity, {
             toValue: 1,
             duration: 300,
-        }).start();
+        }).start()
     }
 
     fadeOutQuiz() {
         Animated.timing(animatedOpacity, {
             toValue: 0,
             duration: 300,
-        }).start();
+        }).start()
     }
 
     nextQuestion(question_number) {
@@ -64,25 +74,30 @@ class _Quiz extends Component {
     }
 
     goToNextQuestion(question_number) {
+        this.clearTheTimer();
         if (( this.props.currentQuestion + 2 ) === this.props.numberQuestions) {
             //this.setState({nextText: 'RESULTS'})
             this.props.finalQuestion()
         }
         if (( this.props.currentQuestion + 1 ) === this.props.numberQuestions) {
             //this.setState({nextText: 'RESULTS'})
-            this.props.goToResults();
+            this.props.goToResults()
         } else {
             this.props.goToNextQuestion(question_number);
             this.fadeInQuiz()
-            this.startTimer()
+            this.startTimerInit()
         }
     }
 
     resetQuiz() {
-        this.props.getRemoteData(this.props.numberQuestions);
-        this.fadeInQuiz();
-        this.startTimer(); // this is broken since the timer is already running when you click this button, so it makes 2 timers...
-        this.props.resetQuizClicked();
+        this.props.getRemoteData(this.props.numberQuestions)
+        this.props.resetQuizClicked()
+        this.fadeInQuiz()
+        this.clearTheTimer()
+        global_timeout_wrap = setTimeout(() => {
+            this.startTimer();
+        }, 800)
+        //this.startTimer(); // this is broken since the timer is already running when you click this button, so it makes 2 timers...
         //this.setState({nextText: 'NEXT QUESTION'}) //@todo handle with Redux reducer
     }
 
@@ -91,20 +106,20 @@ class _Quiz extends Component {
         /**
          * A choice was made
          */
-        this.props.answerButtonClicked();
+        this.props.answerButtonClicked()
 
         /**
          * Set Chosen Answer Key
          */
-        this.props.answerButtonKey(key);
+        this.props.answerButtonKey(key)
 
         /**
          * Was it correct?
          */
         if (correct) {
-            this.props.correctAnswerClicked();
+            this.props.correctAnswerClicked()
         } else {
-            this.props.incorrectAnswerClicked();
+            this.props.incorrectAnswerClicked()
         }
     }
 
@@ -125,12 +140,12 @@ class _Quiz extends Component {
                 answerSubmitted={this.props.answerSubmitted}
                 correctIncorrectString={this.props.answerResultString}
                 answerKey={this.props.answerKey}
-            ></Questions>;
+            ></Questions>
         } else {
             var currentQuiz = <ActivityIndicator
                 animating={true}
                 color="#FFF"
-                size="large"></ActivityIndicator>;
+                size="large"></ActivityIndicator>
         }
 
         return (
@@ -234,4 +249,4 @@ const mapActionsToProps = (dispatch) => ({
     }
 })
 
-export const Quiz = connect(mapStateToProps, mapActionsToProps)(_Quiz);
+export const Quiz = connect(mapStateToProps, mapActionsToProps)(_Quiz)
