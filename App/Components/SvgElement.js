@@ -19,17 +19,20 @@ import Svg, {
 } from 'react-native-svg';
 
 const defaultProps = {
-    svg_size: 30,
-    svg_scale: 0.04,
+    svg_height: 70,
+    svg_width: 100,
+    //svg_scale: 0.04,
+    svg_scale: 0.14,
 };
 
-class SvgElement extends Component {
+export default class SvgElement extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             svg_data: props.svg_data,
-            svg_size: props.svg_size,
+            svg_height: props.svg_height,
+            svg_width: props.svg_width,
             svg_scale: props.svg_scale,
         }
     }
@@ -37,14 +40,14 @@ class SvgElement extends Component {
     render() {
         var svg_paths = this.state.svg_data.map((item, index) => {
             return (
-                <Path key={index} x="3" y="3" fill="#555" scale={this.state.svg_scale} height="100" width="100" d={item} />
+                <Path key={index} x="3" y="3" fill="#FFF" scale={this.state.svg_scale} d={item} />
             )
         });
         return (
             <Svg
-                height={this.state.svg_size}
-                width={this.state.svg_size}
-                style={defaultStyles.detailSvg}
+                height={this.state.svg_height}
+                width={this.state.svg_width}
+                style={[defaultStyles.detailSvg, {backgroundColor: 'red'}]}
             >
                 {svg_paths}
             </Svg>
@@ -54,4 +57,4 @@ class SvgElement extends Component {
 
 SvgElement.defaultProps = defaultProps;
 
-module.exports = SvgElement;
+//module.exports = SvgElement;
