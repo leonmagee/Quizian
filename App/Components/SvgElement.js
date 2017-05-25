@@ -20,9 +20,9 @@ import Svg, {
 
 const defaultProps = {
     svg_height: 70,
-    svg_width: 100,
+    svg_width: 70,
     //svg_scale: 0.04,
-    svg_scale: 0.14,
+    svg_scale: 0.6,
 };
 
 export default class SvgElement extends Component {
@@ -40,15 +40,11 @@ export default class SvgElement extends Component {
     render() {
         var svg_paths = this.state.svg_data.map((item, index) => {
             return (
-                <Path key={index} x="3" y="3" fill="#FFF" scale={this.state.svg_scale} d={item} />
+                <Path key={index} x="0" y="0" fill="#FFF" scale={this.state.svg_scale} d={item}/>
             )
         });
         return (
-            <Svg
-                height={this.state.svg_height}
-                width={this.state.svg_width}
-                style={[defaultStyles.detailSvg, {backgroundColor: 'red'}]}
-            >
+            <Svg height={this.state.svg_height} width={this.state.svg_width}>
                 {svg_paths}
             </Svg>
         )

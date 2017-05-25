@@ -4,6 +4,11 @@ import variables from '../Styles/Variables'
 import LinearGradient from 'react-native-linear-gradient';
 import SvgElement from './SvgElement';
 import television from '../SVG/television';
+import history from '../SVG/history';
+import music from '../SVG/music';
+import sports from '../SVG/sports';
+import geography from '../SVG/geography';
+
 import {
     View,
     Text,
@@ -93,57 +98,52 @@ class Categories extends Component {
         return (
             <LinearGradient colors={variables.gradient} style={{flex: 1}}>
                 <View style={styles.categoriesWrap}>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
+                    <View style={[styles.categoriesBox, {
+                        width: item_width,
+                        height: item_height
+                    }, this.state.tv_movie_styles]}>
+                        <SvgElement svg_data={sports} svg_scale={0.375}/>
                         <Text style={styles.categoriesText}>Sports</Text>
                     </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
+                    <View style={[styles.categoriesBox, {
+                        width: item_width,
+                        height: item_height
+                    }, this.state.tv_movie_styles]}>
+                        <SvgElement svg_data={music} svg_scale={1.4}/>
                         <Text style={styles.categoriesText}>Music</Text>
                     </View>
                     <View style={[styles.categoriesBox, {
                         width: item_width,
                         height: item_height
                     }, this.state.tv_movie_styles]}>
-                        <Text style={styles.categoriesText}>
-                            <SvgElement svg_data={television}/>
-                            TV & Movies
-                        </Text>
+                        <SvgElement svg_data={television} svg_scale={0.15}/>
+                        <Text style={styles.categoriesText}>TV & Movies</Text>
                     </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
+                    <View style={[styles.categoriesBox, {
+                        width: item_width,
+                        height: item_height
+                    }, this.state.tv_movie_styles]}>
+                        <SvgElement svg_data={history} svg_scale={0.7}/>
                         <Text style={styles.categoriesText}>History</Text>
                     </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
+                    <View style={[styles.categoriesBox, {
+                        width: item_width,
+                        height: item_height
+                    }, this.state.tv_movie_styles]}>
+                        <SvgElement svg_data={geography} svg_scale={1.38}/>
                         <Text style={styles.categoriesText}>Geography</Text>
+                        <View style={styles.catColorOverlay}></View>
                     </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
-                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <Text style={styles.categoriesText}></Text>
-                    </View>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
+                    <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
                 </View>
             </LinearGradient>
         )

@@ -212,15 +212,26 @@ const defaultStyles = StyleSheet.create({
     },
     categoriesBox: {
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         borderWidth: 1,
         borderColor: 'rgba(255,255,255,0.3)',
+        paddingTop: 15,
+        paddingBottom: 10,
     },
     categoriesText: {
         color: '#FFF',
-        fontSize: 17,
+        fontSize: 16,
         backgroundColor: 'transparent',
     },
+    catColorOverlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: variables.brandSecond,
+        opacity: 0.5,
+    }
 
 });
 
