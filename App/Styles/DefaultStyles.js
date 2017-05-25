@@ -1,8 +1,3 @@
-/**
- * @todo use more descriptive terminology here
- * @todo it should be obvious what each style applies to
- */
-
 import React from 'react'
 import variables from './Variables'
 import {Dimensions} from 'react-native'
@@ -11,11 +6,8 @@ import {
     StyleSheet,
 } from 'react-native';
 
-const {width, height} = Dimensions.get('window')
+const {width} = Dimensions.get('window')
 const button_width = ( width * 0.9 )
-
-// console.log(width);
-// console.log(height);
 
 if ( width < 321 ) {
     var question_font_size = 16;
@@ -25,21 +17,16 @@ if ( width < 321 ) {
     var question_height = 150;
 }
 
-
-
 const defaultStyles = StyleSheet.create({
     outerWrapMain: { // wraps everything
         flex: 1,
     },
     outerWrap: {
         flex: 1,
-        //backgroundColor: 'rgba(32,178,170,0.10)',
     },
 
     topBar: {
-        //height: 80,
         flexDirection: 'row',
-        //alignItems: 'flex-end',
         justifyContent: 'space-around',
     },
 
@@ -96,13 +83,7 @@ const defaultStyles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: 15,
         paddingBottom: 15,
-        //backgroundColor: 'blue',
     },
-
-    // questionComponentOuter: {
-    //     backgroundColor: 'red',
-    //     justifyContent: 'flex-end',
-    // },
 
     questionWrap: {
         backgroundColor: '#FCFCFC',
@@ -113,16 +94,15 @@ const defaultStyles = StyleSheet.create({
         borderRadius: 5,
         minHeight: question_height,
         justifyContent: 'center',
-        //borderColor: variables.brandThirdLite,
-        //borderColor: 'rgba(0,0,0,0.1)',
-        //borderColor: '#BBB',
-        //borderWidth: 1,
-        width: button_width
+        width: button_width,
+        shadowColor: '#CCC',
+        shadowOffset: {width: 3, height: 3},
+        shadowOpacity: 1,
+        shadowRadius: 0,
     },
     questionText: {
         fontWeight: 'bold',
         fontSize: question_font_size,
-        //color: variables.brandThird,
         color: '#000',
         textAlign: 'center',
         fontFamily: 'Lalezar',
@@ -131,13 +111,14 @@ const defaultStyles = StyleSheet.create({
     answerWrap: {
         backgroundColor: '#FCFCFC',
         marginVertical: 11,
-        //marginHorizontal: 85,
-        paddingVertical: 10, // @todo animate this
+        paddingVertical: 10,
         paddingHorizontal: 15,
         borderRadius: 5,
-        //borderColor: variables.brandThirdLite,
-        //borderWidth: 1,
-        width: button_width
+        width: button_width,
+        shadowColor: '#CCC',
+        shadowOffset: {width: 3, height: 3},
+        shadowOpacity: 1,
+        shadowRadius: 0,
     },
     answerCorrect: {
         backgroundColor: variables.brandSecond,
@@ -150,7 +131,6 @@ const defaultStyles = StyleSheet.create({
     answerText: {
         fontWeight: 'bold',
         fontSize: 18,
-        //color: variables.brandThird,
         color: '#222',
         textAlign: 'center',
         fontFamily: 'Lalezar',
@@ -218,7 +198,6 @@ const defaultStyles = StyleSheet.create({
         height: 50,
         paddingTop: 10,
         paddingBottom: 5,
-        //backgroundColor: 'rgba(255,255,255,0.2)',
         backgroundColor: 'rgba(0,0,0,0.1)',
         justifyContent: 'space-around',
         alignItems: 'center',
