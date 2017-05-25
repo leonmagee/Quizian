@@ -204,6 +204,24 @@ const defaultStyles = StyleSheet.create({
         flexDirection: 'row',
     },
 
+    categoriesWrap: {
+        flex: 1,
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    categoriesBox: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.3)',
+    },
+    categoriesText: {
+        color: '#FFF',
+        fontSize: 17,
+        backgroundColor: 'transparent',
+    },
+
 });
 
 module.exports = defaultStyles;

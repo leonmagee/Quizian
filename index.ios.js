@@ -2,7 +2,8 @@
  * IOS Index file
  */
 import React, {Component} from 'react';
-import Homepage from './App/Components/Homepage';
+//import Homepage from './App/Components/Homepage';
+import Homepage from './App/Components/Categories';
 import {Provider} from 'react-redux';
 import store from './App/Redux/store';
 //import {QuizWrap} from './App/Components/QuizWrap';
