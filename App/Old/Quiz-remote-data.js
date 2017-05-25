@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 var api = require('../Utils/api')
 import styles from '../Styles/DefaultStyles'
-import quizData from '../Data/quizData'
 import {Questions} from './Questions'
 import QuizButton from './QuizButton'
 import {connect} from 'react-redux'
@@ -231,20 +230,22 @@ const mapActionsToProps = (dispatch) => ({
     getRemoteData(num) {
         dispatch({type: 'START_DATA'})
 
-        const questions = [];
+        api.getQuestions(num).then((res) => {
 
-        quizData.history.map((trivia_question) => {
-            const answers = [];
-            answers.push({answer: trivia_question.c, correct: true});
-            trivia_question.i.map((incorrect_answer) => {
-                answers.push({answer: incorrect_answer, correct: false});
-            })
-            questions.push({
-                question: trivia_question.q,
-                answers: shuffleArray(answers),
+            const questions = [];
+            res.map((trivia_question) => {
+                const answers = [];
+                answers.push({answer: trivia_question.c, correct: true});
+                trivia_question.i.map((incorrect_answer) => {
+                    answers.push({answer: incorrect_answer, correct: false});
+                })
+                questions.push({
+                    question: trivia_question.q,
+                    answers: shuffleArray(answers),
+                });
             });
+            dispatch({type: 'DATA_AVAILABLE', payload: questions})
         });
-        dispatch({type: 'DATA_AVAILABLE', payload: questions})
     }
 })
 

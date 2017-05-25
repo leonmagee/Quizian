@@ -230,7 +230,7 @@ const defaultStyles = StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: variables.brandSecond,
-        opacity: 0.5,
+        opacity: 0,
     }
 
 });
