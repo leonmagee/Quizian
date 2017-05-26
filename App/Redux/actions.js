@@ -10,4 +10,5 @@ export const DATA_AVAILABLE = 'DATA_AVAILABLE'; // data retrieved
 export const TIMER_TICK = 'TIMER_TICK';
 export const TIMER_EXPIRES = 'TIMER_EXPIRES';
 export const FINAL_QUESTION = 'FINAL_QUESTION';
+export const HISTORY_QUESTION = 'HISTORY_QUESTION';
 //export const QUESTION_DISPLAYED = 'QUESTION_DISPLAYED';

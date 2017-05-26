@@ -15,6 +15,29 @@ import {
     Animated,
 } from 'react-native';
 
+
+/**
+ * Test Data
+ */
+
+import quizData from '../Data/quizData'
+
+var history_length = quizData[0].history.length
+console.log(history_length)
+console.log(quizData[0].history)
+var history_key_array = []
+for ( var i = 0; i < history_length; ++i ) {
+    history_key_array.push(i)
+}
+console.log(history_key_array)
+history_keys = shuffleArray(history_key_array)
+console.log(history_keys)
+
+
+
+
+
+
 const styles = StyleSheet.create({
     homeWrapOuter: {
         flex: 1,

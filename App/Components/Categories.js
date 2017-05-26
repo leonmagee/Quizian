@@ -38,17 +38,10 @@ class Categories extends Component {
     componentDidMount() {
         //this.flickerColor();
 
-        const base_array = [0,1,2,3,4]
-        const shuffled = shuffleArray(base_array)
-        const shuffled2 = shuffleArray(base_array)
-        //const shuffled3 = shuffleArray(base_array)
-        const combo = shuffled.concat(shuffled2);
-        //const combo2 = combo.concat(shuffled3);
-        const final_shuffle = shuffleArray(combo)
+        const base_array = [0,1,2,3,4,0,1,2,3,4]
+        const shuffle = shuffleArray(base_array)
 
-        console.log(final_shuffle)
-
-        this.colorOpacity(0, final_shuffle)
+        this.colorOpacity(0, shuffle)
     }
 
     colorOpacity(index,shuffle) {
