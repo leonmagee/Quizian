@@ -8,6 +8,7 @@ import history from '../SVG/history';
 import music from '../SVG/music';
 import sports from '../SVG/sports';
 import geography from '../SVG/geography';
+import {shuffleArray} from '../Utils/helper';
 
 import {
     View,
@@ -30,70 +31,85 @@ class Categories extends Component {
                 new Animated.Value(0), //history
                 new Animated.Value(0), //geography
             ],
-            numberAnimations: 0,
+            //numberAnimations: 0,
         }
     }
 
     componentDidMount() {
         //this.flickerColor();
-        this.colorOpacity(this.state.numberAnimations)
+
+        const base_array = [0,1,2,3,4]
+        const shuffled = shuffleArray(base_array)
+        const shuffled2 = shuffleArray(base_array)
+        //const shuffled3 = shuffleArray(base_array)
+        const combo = shuffled.concat(shuffled2);
+        //const combo2 = combo.concat(shuffled3);
+        const final_shuffle = shuffleArray(combo)
+
+        console.log(final_shuffle)
+
+        this.colorOpacity(0, final_shuffle)
     }
 
-    colorOpacity(index) {
+    colorOpacity(index,shuffle) {
+        Animated.timing(this.state.animatedOpacity[shuffle[index]], {
+            toValue: 0.5,
+            duration: 150,
+        }).start(() => this.fadeOpacity(index, shuffle));
+    }
+
+    colorOpacityFinal(index, count) {
         Animated.timing(this.state.animatedOpacity[index], {
             toValue: 0.5,
-            duration: 400,
-        }).start(() => this.fadeOpacity(index));
+            duration: 150,
+        }).start(() => this.fadeOpacityFinal(index, count));
     }
 
-    fadeOpacity(index) {
-        Animated.timing(this.state.animatedOpacity[index], {
+    fadeOpacity(index, shuffle) {
+        Animated.timing(this.state.animatedOpacity[shuffle[index]], {
             toValue: 0,
-            duration: 400,
+            duration: 150,
         }).start(
             () => {
-                if ( index < 4 ) {
+                if ( index < 8 ) {
                     index = index + 1;
-                    this.colorOpacity(index)
+                    setTimeout(() => {
+                        this.colorOpacity(index, shuffle)
+                    }, 50)
+                } else {
+                    // this is where you make it blink several times quickly...
+                    setTimeout(() => {
+                        this.colorOpacityFinal(shuffle[index], 0)
+                    }, 50)
                 }
             }
         );
     }
 
-    // changeColor() {
-    //     const new_color = {backgroundColor: variables.brandSecond}
-    //
-    //     this.setState({
-    //         tv_movie_styles: new_color,
-    //     })
-    //
-    //     setTimeout(
-    //         () => this.transparentColor(),
-    //         300
-    //     )
-    // }
-
-    // transparentColor() {
-    //     const new_color = {backgroundColor: 'transparent'}
-    //
-    //     this.setState({
-    //         tv_movie_styles: new_color,
-    //     })
-    //
-    //     setTimeout(
-    //         () => this.changeColor(),
-    //         300
-    //     )
-    // }
-
-    // flickerColor() {
-    //     //const color_change = setTimeout(this.changeColor(), 500)
-    //     // setTimeout(
-    //     //     () => this.changeColor(),
-    //     //     1500
-    //     // )
-    //     //this.changeColor();
-    // }
+    fadeOpacityFinal(index, count) {
+        Animated.timing(this.state.animatedOpacity[index], {
+            toValue: 0,
+            duration: 150,
+        }).start(
+            () => {
+                if ( count < 2 ) {
+                    count = count + 1;
+                    setTimeout(() => {
+                        this.colorOpacityFinal(index, count)
+                    }, 50)
+                } else {
+                    // this is where you set the final color
+                    Animated.timing(this.state.animatedOpacity[index], {
+                        toValue: 0.5,
+                        duration: 150,
+                    }).start();
+                    /**
+                     * You can also take this index and dispatch it as the chosen category...
+                     */
+                }
+            }
+        );
+    }
 
     render() {
 

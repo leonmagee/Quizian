@@ -233,7 +233,7 @@ const mapActionsToProps = (dispatch) => ({
 
         const questions = [];
 
-        quizData.history.map((trivia_question) => {
+        quizData[0].history.map((trivia_question) => {
             const answers = [];
             answers.push({answer: trivia_question.c, correct: true});
             trivia_question.i.map((incorrect_answer) => {
