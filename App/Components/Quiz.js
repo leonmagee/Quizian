@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-var api = require('../Utils/api')
 import styles from '../Styles/DefaultStyles'
 import quizData from '../Data/quizData'
 import {Questions} from './Questions'
@@ -21,9 +20,12 @@ let animatedOpacity = new Animated.Value(0)
 class _Quiz extends Component {
 
     componentDidMount() {
-        this.props.getRemoteData(this.props.numberQuestions)
+        this.props.getData(this.props.numberQuestions)
         this.fadeInQuiz()
         this.startTimerInit()
+
+        console.log('working???');
+        console.log(this.props.historyIndex)
     }
 
     countTime() {
@@ -75,6 +77,32 @@ class _Quiz extends Component {
     }
 
     goToNextQuestion(question_number) {
+
+        /**
+         * question_number will be tracked just to get to the max number of questions
+         * vary this based on category - I could still use a consistent index but it would need to vary based on the
+         * the following needs to be a function that takes in the cat and does the same thing for each cat
+         */
+        let history_array = this.props.historyIndex
+        history_array.shift()
+        if ( history_array ) {
+            this.props.answerHistoryQuestion(history_array)
+        } else {
+            /**
+             * create new history array
+             * this isn't working yet, test it with shorter array
+             * @todo get some test data that will be easier to work with?
+             */
+            const cat_length = quizData[0].history.length
+            let cat_key_array = []
+            for ( let i = 0; i < cat_length; ++i ) {
+                cat_key_array.push(i)
+            }
+            const cat_keys = shuffleArray(cat_key_array)
+            this.props.answerHistoryQuestion(cat_keys)
+        }
+
+
         this.clearTheTimer();
         if (( this.props.currentQuestion + 2 ) === this.props.numberQuestions) {
             //this.setState({nextText: 'RESULTS'})
@@ -91,7 +119,7 @@ class _Quiz extends Component {
     }
 
     resetQuiz() {
-        this.props.getRemoteData(this.props.numberQuestions)
+        this.props.getData(this.props.numberQuestions)
         this.props.resetQuizClicked()
         this.fadeInQuiz()
         this.clearTheTimer()
@@ -135,8 +163,26 @@ class _Quiz extends Component {
         }
 
         if (this.props.getQuestions) {
+            /**
+             * This doesn't work since the timer ticking causes everything to re-render...
+             * so I need to pull this data in from somewhere else
+             */
+            let history_array = this.props.historyIndex
+            //const current_index = history_array.shift()
+
+            /**
+             * Here I can dispense with the 'current questions' state/prop since I don't want to
+             * track in a straight line when I'm alternating between categories...
+             * @type {XML}
+             */
+
+            //this.props.answerHistoryQuestion()
+
+            // console.log('in get question')
+            // console.log(history_array)
+
             var currentQuiz = <Questions
-                arrayData={this.props.getQuestions[this.props.currentQuestion]}
+                arrayData={this.props.getQuestions[history_array[0]]}
                 answerChosen={(correct, key) => this.answerChosen(correct, key)}
                 answerSubmitted={this.props.answerSubmitted}
                 correctIncorrectString={this.props.answerResultString}
@@ -192,6 +238,7 @@ const mapStateToProps = (state) => ({
     resetQuiz: state.resetQuiz,
     timerValue: state.timerValue,
     nextText: state.nextText,
+    historyIndex: state.historyIndex,
 })
 
 const mapActionsToProps = (dispatch) => ({
@@ -228,7 +275,10 @@ const mapActionsToProps = (dispatch) => ({
     timerExpires() {
         dispatch({type: 'TIMER_EXPIRES'})
     },
-    getRemoteData(num) {
+    answerHistoryQuestion(array) {
+        dispatch({type: 'HISTORY_QUESTION', payload: array})
+    },
+    getData(num) {
         dispatch({type: 'START_DATA'})
 
         const questions = [];

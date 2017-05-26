@@ -15,6 +15,12 @@ import {quizResultsReducer} from './quizResultsReducer';
 import {getQuestionsReducer} from './getQuestionsReducer';
 import {timerValueReducer} from './timerValueReducer';
 import {nextTextReducer} from './nextTextReducer';
+import {historyIndexReducer} from './historyIndexReducer';
+import {sportsIndexReducer} from './sportsIndexReducer';
+import {geographyIndexReducer} from './geographyIndexReducer';
+import {musicIndexReducer} from './musicIndexReducer';
+import {entertainmentIndexReducer} from './entertainmentIndexReducer';
+import {currentCatReducer} from './currentCatReducer';
 /**
  * Combine Reducers
  */
@@ -30,4 +36,10 @@ export const reducer = combineReducers({
     getQuestions: getQuestionsReducer,
     timerValue: timerValueReducer,
     nextText: nextTextReducer,
+    historyIndex: historyIndexReducer,
+    sportsIndex: sportsIndexReducer,
+    geographyIndex: geographyIndexReducer,
+    musicIndex: musicIndexReducer,
+    entertainmentIndex: entertainmentIndexReducer,
+    currentCat: currentCatReducer,
 });

@@ -73,7 +73,8 @@ const defaultStyles = StyleSheet.create({
         fontFamily: 'Lalezar',
         fontSize: 50,
         backgroundColor: 'transparent',
-        textShadowColor: '#CCC',
+        //textShadowColor: '#CCC',
+        textShadowColor: '#F7F7F7',
         textShadowOffset: {width: 3, height: 3},
     },
 
@@ -87,6 +88,7 @@ const defaultStyles = StyleSheet.create({
 
     questionWrap: {
         backgroundColor: '#FCFCFC',
+        backgroundColor: '#999',
         marginTop: 19,
         marginBottom: 11,
         paddingVertical: 10, // @todo animate this
@@ -110,6 +112,7 @@ const defaultStyles = StyleSheet.create({
 
     answerWrap: {
         backgroundColor: '#FCFCFC',
+        backgroundColor: '#999',
         marginVertical: 11,
         paddingVertical: 10,
         paddingHorizontal: 15,
