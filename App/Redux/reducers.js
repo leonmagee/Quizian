@@ -21,6 +21,7 @@ import {geographyIndexReducer} from './geographyIndexReducer';
 import {musicIndexReducer} from './musicIndexReducer';
 import {entertainmentIndexReducer} from './entertainmentIndexReducer';
 import {currentCatReducer} from './currentCatReducer';
+import {chooseCatReducer} from './chooseCatReducer';
 /**
  * Combine Reducers
  */
@@ -42,4 +43,5 @@ export const reducer = combineReducers({
     musicIndex: musicIndexReducer,
     entertainmentIndex: entertainmentIndexReducer,
     currentCat: currentCatReducer,
+    chooseCat: chooseCatReducer,
 });
