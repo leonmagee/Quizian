@@ -7,7 +7,6 @@ import {
 /**
  * catIndexReducer
  * returns the index array of the currently chosen category
- * @todo NOT WORKING NOW???
  * @todo does this need to be set to false?
  * @todo test this with smaller array of data? - create some test data where it's just two questions of each, so you
  * @todo will know that it takes things in the correct order...

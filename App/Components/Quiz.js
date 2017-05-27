@@ -20,13 +20,13 @@ let animatedOpacity = new Animated.Value(0)
 class _Quiz extends Component {
 
     componentDidMount() {
-        this.props.getData(this.props.numberQuestions)
+        this.props.getData(this.props.currentCat, this.props.catIndex[0])
         this.fadeInQuiz()
         this.startTimerInit()
 
-        console.log(quizData)
-        console.log('Current Cat:')
-        console.log(this.props.currentCat)
+        //console.log(quizData)
+        //console.log('Current Cat:')
+        //console.log(this.props.currentCat)
         // console.log('working???')
         // console.log(this.props.historyIndex)
     }
@@ -81,6 +81,8 @@ class _Quiz extends Component {
 
     goToNextQuestion(question_number) {
 
+        this.props.chooseCat()
+
         /**
          * question_number will be tracked just to get to the max number of questions
          * vary this based on category - I could still use a consistent index but it would need to vary based on the
@@ -90,10 +92,26 @@ class _Quiz extends Component {
         let cat_array = this.props.catIndex
         cat_array.shift()
         /**
+         * reset index here for current cat? actually that should happen after questions is chosen???
+         * here I should just start the entire process again, and somewhere I need to see if the index is empty
+         * for a given category?
+         */
+
+
+        //this.props.getData(this.props.currentCat, this.props.catIndex[0])
+
+
+        /**
          * I need a method here that will replace whatever the current index is? or should I have another conditional?
          */
 
+
+        /**
+         * Add conditionals here....
+         */
+        //console.log('before conditional???')
         if (this.props.currentCat === 'history') {
+            //console.log('current cat is history?????')
 
             if (cat_array) {
                 console.log('we got to cat array?')
@@ -129,7 +147,7 @@ class _Quiz extends Component {
     }
 
     resetQuiz() {
-        this.props.getData(this.props.numberQuestions)
+        this.props.getData(this.props.currentCat, this.props.catIndex[0])
         this.props.resetQuizClicked()
         this.fadeInQuiz()
         this.clearTheTimer()
@@ -181,6 +199,8 @@ class _Quiz extends Component {
 
             console.log('TESTER')
             console.log(cat_array)
+            console.log('TESTER 2')
+            console.log(this.props.getQuestions)
             //const current_index = history_array.shift()
 
             /**
@@ -199,7 +219,8 @@ class _Quiz extends Component {
              */
 
             var currentQuiz = <Questions
-                arrayData={this.props.getQuestions[cat_array[0]]}
+                //arrayData={this.props.getQuestions[cat_array[0]]}
+                arrayData={this.props.getQuestions}
                 answerChosen={(correct, key) => this.answerChosen(correct, key)}
                 answerSubmitted={this.props.answerSubmitted}
                 correctIncorrectString={this.props.answerResultString}
@@ -309,10 +330,13 @@ const mapActionsToProps = (dispatch) => ({
     answerGeographyQuestion(array) {
         dispatch({type: 'GEOGRAPHY_QUESTION', payload: array})
     },
-    getData(num) {
+    chooseCat() {
+        dispatch({type: 'NEW_CAT'})
+    },
+    getData(cat, index) {
         dispatch({type: 'START_DATA'})
 
-        const questions = [];
+        const question = [];
 
         /**
          * This needs to get the correct data based on category, so a reducer should probably
@@ -322,23 +346,47 @@ const mapActionsToProps = (dispatch) => ({
          * @todo within the reducer we can have the conditionals...
          */
 
+        let quiz_data = false
+        if (cat === 'history') {
+            quiz_data = quizData[0].history
+        } else if (cat === 'sports') {
+            quiz_data = quizData[0].sports
+        } else if (cat === 'music') {
+            quiz_data = quizData[0].music
+        } else if (cat === 'entertainment') {
+            quiz_data = quizData[0].entertainment
+        } else if (cat === 'geography') {
+            quiz_data = quizData[0].geography
+        }
 
+        console.log('this is the quiz data')
+        console.log(quiz_data)
+        console.log('current index')
+        console.log(index)
+        console.log('current question')
+        console.log(quiz_data[index])
+        /**
+         * I should just grab the question as is without modifying it...
+         * @todo by default this is returning an array of all of the questions in that category
+         * @todo what I want to do is return just one question, the category at it's current index...
+         */
 
-        quizData[0].history.map((trivia_question) => {
-            const answers = [];
-            answers.push({answer: trivia_question.c, correct: true});
-            trivia_question.i.map((incorrect_answer) => {
-                answers.push({answer: incorrect_answer, correct: false});
-            })
-            questions.push({
-                question: trivia_question.q,
-                answers: shuffleArray(answers),
-            });
+        let trivia_question = quiz_data[index]
+        const answers = [];
+        answers.push({answer: trivia_question.c, correct: true});
+        trivia_question.i.map((incorrect_answer) => {
+            answers.push({answer: incorrect_answer, correct: false});
+        })
+        question.push({
+            question: trivia_question.q,
+            answers: shuffleArray(answers),
         });
+
+        //});
         /**
          * @todo working this far
          */
-        dispatch({type: 'DATA_AVAILABLE', payload: questions})
+        dispatch({type: 'DATA_AVAILABLE', payload: question[0]})
     }
 })
 
