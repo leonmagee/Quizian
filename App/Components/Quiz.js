@@ -24,7 +24,8 @@ class _Quiz extends Component {
         this.fadeInQuiz()
         this.startTimerInit()
 
-        console.log('cat???')
+        console.log(quizData)
+        console.log('Current Cat:')
         console.log(this.props.currentCat)
         // console.log('working???')
         // console.log(this.props.historyIndex)
@@ -86,23 +87,29 @@ class _Quiz extends Component {
          * the following needs to be a function that takes in the cat and does the same thing for each cat
          */
 
-        let history_array = this.props.historyIndex
-        history_array.shift()
-        if ( history_array ) {
-            this.props.answerHistoryQuestion(history_array)
-        } else {
-            /**
-             * create new history array
-             * this isn't working yet, test it with shorter array
-             * @todo get some test data that will be easier to work with?
-             */
-            const cat_length = quizData[0].history.length
-            let cat_key_array = []
-            for ( let i = 0; i < cat_length; ++i ) {
-                cat_key_array.push(i)
+        let cat_array = this.props.catIndex
+        cat_array.shift()
+        /**
+         * I need a method here that will replace whatever the current index is? or should I have another conditional?
+         */
+
+        if (this.props.currentCat === 'history') {
+
+            if (cat_array) {
+                console.log('we got to cat array?')
+                this.props.answerHistoryQuestion(cat_array)
+            } else {
+                /**
+                 * create new history array
+                 */
+                const cat_length = quizData[0].history.length
+                let cat_key_array = []
+                for (let i = 0; i < cat_length; ++i) {
+                    cat_key_array.push(i)
+                }
+                const cat_keys = shuffleArray(cat_key_array)
+                this.props.answerHistoryQuestion(cat_keys)
             }
-            const cat_keys = shuffleArray(cat_key_array)
-            this.props.answerHistoryQuestion(cat_keys)
         }
 
 
@@ -170,7 +177,10 @@ class _Quiz extends Component {
              * This doesn't work since the timer ticking causes everything to re-render...
              * so I need to pull this data in from somewhere else
              */
-            let history_array = this.props.historyIndex
+            let cat_array = this.props.catIndex
+
+            console.log('TESTER')
+            console.log(cat_array)
             //const current_index = history_array.shift()
 
             /**
@@ -189,7 +199,7 @@ class _Quiz extends Component {
              */
 
             var currentQuiz = <Questions
-                arrayData={this.props.getQuestions[history_array[0]]}
+                arrayData={this.props.getQuestions[cat_array[0]]}
                 answerChosen={(correct, key) => this.answerChosen(correct, key)}
                 answerSubmitted={this.props.answerSubmitted}
                 correctIncorrectString={this.props.answerResultString}
@@ -245,7 +255,8 @@ const mapStateToProps = (state) => ({
     resetQuiz: state.resetQuiz,
     timerValue: state.timerValue,
     nextText: state.nextText,
-    historyIndex: state.historyIndex,
+    //historyIndex: state.historyIndex, // @todo remove this?
+    catIndex: state.catIndex,
     currentCat: state.currentCat,
 })
 
@@ -286,6 +297,18 @@ const mapActionsToProps = (dispatch) => ({
     answerHistoryQuestion(array) {
         dispatch({type: 'HISTORY_QUESTION', payload: array})
     },
+    answerSportsQuestion(array) {
+        dispatch({type: 'SPORTS_QUESTION', payload: array})
+    },
+    answerEntertainmentQuestion(array) {
+        dispatch({type: 'ENTERTAINMENT_QUESTION', payload: array})
+    },
+    answerMusicQuestion(array) {
+        dispatch({type: 'MUSIC_QUESTION', payload: array})
+    },
+    answerGeographyQuestion(array) {
+        dispatch({type: 'GEOGRAPHY_QUESTION', payload: array})
+    },
     getData(num) {
         dispatch({type: 'START_DATA'})
 
@@ -293,7 +316,7 @@ const mapActionsToProps = (dispatch) => ({
 
         /**
          * This needs to get the correct data based on category, so a reducer should probably
-         * return the correct just one question we need based on all the details
+         * return just the one question we need based on all the details
          * 1) cat
          * 2) current cat index
          * @todo within the reducer we can have the conditionals...
@@ -312,6 +335,9 @@ const mapActionsToProps = (dispatch) => ({
                 answers: shuffleArray(answers),
             });
         });
+        /**
+         * @todo working this far
+         */
         dispatch({type: 'DATA_AVAILABLE', payload: questions})
     }
 })

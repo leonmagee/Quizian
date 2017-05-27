@@ -12,6 +12,7 @@ export const currentCatReducer = (state = 'history', action) => {
     switch (action.type) {
         case CAT_CHOSEN:
             return action.payload;
+            //return 'history';
             break;
         default:
             return state;

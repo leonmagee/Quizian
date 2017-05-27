@@ -98,24 +98,39 @@ class _Categories extends Component {
                         toValue: 0.5,
                         duration: 150,
                     }).start();
+
                     /**
-                     * You can also take this index and dispatch it as the chosen category...
+                     * Set chosen cat, and chosen cat index
                      */
+                    console.log('sportzzz')
+                    //console.log(this.props.sportsIndex)
+
+                    //this.props.setCatIndex(this.props.sportsIndex)
 
                     setTimeout(() => {
                         if (index === 0) {
+                            console.log('index 0')
+                            this.props.setCatIndex(this.props.sportsIndex);
                             this.props.catWasSelected('sports')
                         }
                         if (index === 1) {
+                            console.log('index 1')
+                            this.props.setCatIndex(this.props.musicIndex);
                             this.props.catWasSelected('music')
                         }
                         if (index === 2) {
+                            console.log('index 2')
+                            this.props.setCatIndex(this.props.entertainmentIndex);
                             this.props.catWasSelected('entertainment')
                         }
                         if (index === 3) {
+                            console.log('index 3')
+                            this.props.setCatIndex(this.props.historyIndex);
                             this.props.catWasSelected('history')
                         }
                         if (index === 4) {
+                            console.log('index 4')
+                            this.props.setCatIndex(this.props.geographyIndex);
                             this.props.catWasSelected('geography')
                         }
                     }, 1000)
@@ -194,11 +209,20 @@ class _Categories extends Component {
 
 const mapStateToProps = (state) => ({
     chooseCat: state.chooseCat,
+    catIndex: state.catIndex,
+    historyIndex: state.historyIndex,
+    sportsIndex: state.sportsIndex,
+    entertainmentIndex: state.entertainmentIndex,
+    musicIndex: state.musicIndex,
+    geographyIndex: state.geographyIndex,
 })
 
 const mapActionsToProps = (dispatch) => ({
     catWasSelected(cat) {
         dispatch({type: 'CAT_CHOSEN', payload: cat})
+    },
+    setCatIndex(index_array) {
+        dispatch({type: 'SET_CAT_INDEX', payload: index_array})
     },
 })
 
