@@ -89,8 +89,7 @@ class _Quiz extends Component {
          * the following needs to be a function that takes in the cat and does the same thing for each cat
          */
 
-        let cat_array = this.props.catIndex
-        cat_array.shift()
+
         /**
          * reset index here for current cat? actually that should happen after questions is chosen???
          * here I should just start the entire process again, and somewhere I need to see if the index is empty
@@ -100,35 +99,64 @@ class _Quiz extends Component {
 
         //this.props.getData(this.props.currentCat, this.props.catIndex[0])
 
+        let cat_array = this.props.catIndex
+        cat_array.shift()
+
+        const cat = this.props.currentCat
 
         /**
-         * I need a method here that will replace whatever the current index is? or should I have another conditional?
+         * @todo this can be refactored to move to the same conditional block
+         * @todo you can add ther dispatches without the methods
          */
+        if ( ! cat_array ) {
+            // then pass new cat array to current cat
+            console.log('NO CAT ARRAY111!!!!!')
+            console.log(cat_array)
+        } else {
+            console.log('STILL CAT ARRAY???')
+            console.log(cat_array)
+        }
 
+
+        if (cat === 'history') {
+            this.props.answerHistoryQuestion(cat_array)
+        } else if (cat === 'sports') {
+            this.props.answerSportsQuestion(cat_array)
+        } else if (cat === 'music') {
+            this.props.answerMusicQuestion(cat_array)
+        } else if (cat === 'entertainment') {
+            this.props.answerEntertainmentQuestion(cat_array)
+        } else if (cat === 'geography') {
+            this.props.answerGeographyQuestion(cat_array)
+        }
+
+        /**
+         * @todo here I need to refresh the different arrays when they don't exist...
+         */
 
         /**
          * Add conditionals here....
          */
         //console.log('before conditional???')
-        if (this.props.currentCat === 'history') {
-            //console.log('current cat is history?????')
-
-            if (cat_array) {
-                console.log('we got to cat array?')
-                this.props.answerHistoryQuestion(cat_array)
-            } else {
-                /**
-                 * create new history array
-                 */
-                const cat_length = quizData[0].history.length
-                let cat_key_array = []
-                for (let i = 0; i < cat_length; ++i) {
-                    cat_key_array.push(i)
-                }
-                const cat_keys = shuffleArray(cat_key_array)
-                this.props.answerHistoryQuestion(cat_keys)
-            }
-        }
+        // if (this.props.currentCat === 'history') {
+        //     //console.log('current cat is history?????')
+        //
+        //     if (cat_array) {
+        //         console.log('we got to cat array?')
+        //         this.props.answerHistoryQuestion(cat_array)
+        //     } else {
+        //         /**
+        //          * create new history array
+        //          */
+        //         const cat_length = quizData[0].history.length
+        //         let cat_key_array = []
+        //         for (let i = 0; i < cat_length; ++i) {
+        //             cat_key_array.push(i)
+        //         }
+        //         const cat_keys = shuffleArray(cat_key_array)
+        //         this.props.answerHistoryQuestion(cat_keys)
+        //     }
+        // }
 
 
         this.clearTheTimer();
