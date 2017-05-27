@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Quiz} from './Quiz'
 import {QuizResults} from './QuizResults';
-import Categories from './Categories';
+import {Categories} from './Categories';
 import {connect} from 'react-redux';
 import {View} from 'react-native';
 import styles from '../Styles/DefaultStyles'

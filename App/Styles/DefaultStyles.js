@@ -88,7 +88,7 @@ const defaultStyles = StyleSheet.create({
 
     questionWrap: {
         backgroundColor: '#FCFCFC',
-        backgroundColor: '#999',
+        //backgroundColor: '#999',
         marginTop: 19,
         marginBottom: 11,
         paddingVertical: 10, // @todo animate this
@@ -112,7 +112,7 @@ const defaultStyles = StyleSheet.create({
 
     answerWrap: {
         backgroundColor: '#FCFCFC',
-        backgroundColor: '#999',
+        //backgroundColor: '#999',
         marginVertical: 11,
         paddingVertical: 10,
         paddingHorizontal: 15,
@@ -130,6 +130,9 @@ const defaultStyles = StyleSheet.create({
     answerIncorrect: {
         backgroundColor: variables.brandPrimary,
         borderColor: variables.brandPrimary,
+    },
+    answerQuestionGray: {
+       backgroundColor: '#BBB',
     },
     answerText: {
         fontWeight: 'bold',

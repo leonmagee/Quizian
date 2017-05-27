@@ -6,8 +6,10 @@ import {
 
 /**
  * getQuestionsReducer
- * Returns data queried from API?
- * This is called when?
+ * returns one question object in the correct category
+ * @todo used to return data queried from API - array of objects
+ * @todo do I really need this reducer - the data is automatically available but I can retrieve the data from here
+ * @todo and use a different reducer to choose which data to store here?
  */
 export const getQuestionsReducer = (state = false, action) => {
 

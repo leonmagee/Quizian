@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import styles from '../Styles/DefaultStyles'
 import variables from '../Styles/Variables'
 import LinearGradient from 'react-native-linear-gradient';
@@ -18,7 +19,7 @@ import {
 } from 'react-native';
 let {width, height} = Dimensions.get('window');
 
-class Categories extends Component {
+class _Categories extends Component {
 
     constructor() {
         super();
@@ -38,13 +39,14 @@ class Categories extends Component {
     componentDidMount() {
         //this.flickerColor();
 
-        const base_array = [0,1,2,3,4,0,1,2,3,4]
+        //const base_array = [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
+        const base_array = [0, 1, 2, 3, 4]
         const shuffle = shuffleArray(base_array)
 
         this.colorOpacity(0, shuffle)
     }
 
-    colorOpacity(index,shuffle) {
+    colorOpacity(index, shuffle) {
         Animated.timing(this.state.animatedOpacity[shuffle[index]], {
             toValue: 0.5,
             duration: 150,
@@ -64,7 +66,7 @@ class Categories extends Component {
             duration: 150,
         }).start(
             () => {
-                if ( index < 8 ) {
+                if (index < 3) {
                     index = index + 1;
                     setTimeout(() => {
                         this.colorOpacity(index, shuffle)
@@ -85,7 +87,7 @@ class Categories extends Component {
             duration: 150,
         }).start(
             () => {
-                if ( count < 2 ) {
+                if (count < 1) {
                     count = count + 1;
                     setTimeout(() => {
                         this.colorOpacityFinal(index, count)
@@ -99,12 +101,36 @@ class Categories extends Component {
                     /**
                      * You can also take this index and dispatch it as the chosen category...
                      */
+
+                    setTimeout(() => {
+                        if (index === 0) {
+                            this.props.catWasSelected('sports')
+                        }
+                        if (index === 1) {
+                            this.props.catWasSelected('music')
+                        }
+                        if (index === 2) {
+                            this.props.catWasSelected('entertainment')
+                        }
+                        if (index === 3) {
+                            this.props.catWasSelected('history')
+                        }
+                        if (index === 4) {
+                            this.props.catWasSelected('geography')
+                        }
+                    }, 1000)
                 }
             }
         );
     }
 
     render() {
+
+        // 0 - sports
+        // 1 - music
+        // 2 - entertainment
+        // 3 - history
+        // 4 - geography
 
 
         const num_horizontal = 3; // 6
@@ -166,4 +192,15 @@ class Categories extends Component {
     }
 }
 
-module.exports = Categories;
+const mapStateToProps = (state) => ({
+    chooseCat: state.chooseCat,
+})
+
+const mapActionsToProps = (dispatch) => ({
+    catWasSelected(cat) {
+        dispatch({type: 'CAT_CHOSEN', payload: cat})
+    },
+})
+
+//module.exports = Categories;
+export const Categories = connect(mapStateToProps, mapActionsToProps)(_Categories)

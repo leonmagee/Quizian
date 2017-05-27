@@ -7,7 +7,8 @@ import {
 
 /**
  * quizResultsReducer
- * Returns the ???
+ * toggles displaying the quiz results component
+ * used in QuizWrap.js
  */
 export const quizResultsReducer = (state = false, action) => {
     switch (action.type) {

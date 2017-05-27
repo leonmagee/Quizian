@@ -24,8 +24,10 @@ class _Quiz extends Component {
         this.fadeInQuiz()
         this.startTimerInit()
 
-        console.log('working???');
-        console.log(this.props.historyIndex)
+        console.log('cat???')
+        console.log(this.props.currentCat)
+        // console.log('working???')
+        // console.log(this.props.historyIndex)
     }
 
     countTime() {
@@ -83,6 +85,7 @@ class _Quiz extends Component {
          * vary this based on category - I could still use a consistent index but it would need to vary based on the
          * the following needs to be a function that takes in the cat and does the same thing for each cat
          */
+
         let history_array = this.props.historyIndex
         history_array.shift()
         if ( history_array ) {
@@ -180,6 +183,10 @@ class _Quiz extends Component {
 
             // console.log('in get question')
             // console.log(history_array)
+            /**
+             * @todo change get questions to get question
+             * @type {XML}
+             */
 
             var currentQuiz = <Questions
                 arrayData={this.props.getQuestions[history_array[0]]}
@@ -239,6 +246,7 @@ const mapStateToProps = (state) => ({
     timerValue: state.timerValue,
     nextText: state.nextText,
     historyIndex: state.historyIndex,
+    currentCat: state.currentCat,
 })
 
 const mapActionsToProps = (dispatch) => ({
@@ -282,6 +290,16 @@ const mapActionsToProps = (dispatch) => ({
         dispatch({type: 'START_DATA'})
 
         const questions = [];
+
+        /**
+         * This needs to get the correct data based on category, so a reducer should probably
+         * return the correct just one question we need based on all the details
+         * 1) cat
+         * 2) current cat index
+         * @todo within the reducer we can have the conditionals...
+         */
+
+
 
         quizData[0].history.map((trivia_question) => {
             const answers = [];

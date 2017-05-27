@@ -10,20 +10,28 @@ import {
     //Animated
 } from 'react-native'
 
-const buttonStyles = (correct, answerSubmited, key, answerKey) => {
-    if (answerSubmited) {
+const questionStyle = (answerSubmitted) => {
+    if (answerSubmitted) {
+        return styles.answerQuestionGray
+    }
+}
+
+const buttonStyles = (correct, answerSubmitted, key, answerKey) => {
+    if (answerSubmitted) {
         if (correct) {
             return styles.answerCorrect
         } else {
             if (key === answerKey) {
                 return styles.answerIncorrect
+            } else {
+                return styles.answerQuestionGray
             }
         }
     }
 }
 
-const buttonTextStyles = (correct, answerSubmited, key, answerKey) => {
-    if (answerSubmited) {
+const buttonTextStyles = (correct, answerSubmitted, key, answerKey) => {
+    if (answerSubmitted) {
         if (correct) {
             return styles.answerCorrectText
         } else {
@@ -40,7 +48,7 @@ const removeBackSlashes = (input) => {
 
 export const Questions = (props) => (
     <View>
-        <View style={styles.questionWrap}>
+        <View style={[styles.questionWrap, questionStyle(props.answerSubmitted)]}>
             <Text style={styles.questionText}>{removeBackSlashes(props.arrayData.question)}</Text>
             <View style={styles.correctIncorrectWrap}>
                 {props.correctIncorrectString}
