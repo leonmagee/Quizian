@@ -16,3 +16,12 @@ export const shuffleArray = (array) => {
     }
     return array;
 }
+
+export const intermediateArray = (length) => {
+    //const cat_length = quizData[0].history.length
+    let cat_key_array = []
+    for (let i = 0; i < length; ++i) {
+        cat_key_array.push(i)
+    }
+    return shuffleArray(cat_key_array)
+}

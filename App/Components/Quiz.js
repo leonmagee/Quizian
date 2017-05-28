@@ -5,7 +5,7 @@ import {Questions} from './Questions'
 import QuizButton from './QuizButton'
 import {connect} from 'react-redux'
 import variables from '../Styles/Variables'
-import {shuffleArray} from '../Utils/helper'
+import {shuffleArray, intermediateArray} from '../Utils/helper'
 import LinearGradient from 'react-native-linear-gradient'
 
 import {
@@ -81,34 +81,12 @@ class _Quiz extends Component {
 
     goToNextQuestion(question_number) {
 
-        this.props.chooseCat()
-
-        /**
-         * question_number will be tracked just to get to the max number of questions
-         * vary this based on category - I could still use a consistent index but it would need to vary based on the
-         * the following needs to be a function that takes in the cat and does the same thing for each cat
-         */
-
-
-        /**
-         * reset index here for current cat? actually that should happen after questions is chosen???
-         * here I should just start the entire process again, and somewhere I need to see if the index is empty
-         * for a given category?
-         */
-
-
-        //this.props.getData(this.props.currentCat, this.props.catIndex[0])
-
         let cat_array = this.props.catIndex
         cat_array.shift()
 
         const cat = this.props.currentCat
 
-        /**
-         * @todo this can be refactored to move to the same conditional block
-         * @todo you can add ther dispatches without the methods
-         */
-        if ( ! cat_array ) {
+        if (!cat_array[0]) {
             // then pass new cat array to current cat
             console.log('NO CAT ARRAY111!!!!!')
             console.log(cat_array)
@@ -117,18 +95,43 @@ class _Quiz extends Component {
             console.log(cat_array)
         }
 
-
         if (cat === 'history') {
-            this.props.answerHistoryQuestion(cat_array)
+            if (cat_array[0]) {
+                this.props.answerHistoryQuestion(cat_array)
+            } else {
+                const cat_keys = intermediateArray(quizData[0].history.length)
+                this.props.answerHistoryQuestion(cat_keys)
+            }
         } else if (cat === 'sports') {
-            this.props.answerSportsQuestion(cat_array)
+            if (cat_array[0]) {
+                this.props.answerSportsQuestion(cat_array)
+            } else {
+                const cat_keys = intermediateArray(quizData[0].sports.length)
+                this.props.answerSportsQuestion(cat_keys)
+            }
         } else if (cat === 'music') {
-            this.props.answerMusicQuestion(cat_array)
+            if (cat_array[0]) {
+                this.props.answerMusicQuestion(cat_array)
+            } else {
+                const cat_keys = intermediateArray(quizData[0].music.length)
+                this.props.answerMusicQuestion(cat_keys)
+            }
         } else if (cat === 'entertainment') {
-            this.props.answerEntertainmentQuestion(cat_array)
+            if (cat_array[0]) {
+                this.props.answerEntertainmentQuestion(cat_array)
+            } else {
+                const cat_keys = intermediateArray(quizData[0].entertainment.length)
+                this.props.answerEntertainmentQuestion(cat_keys)
+            }
         } else if (cat === 'geography') {
-            this.props.answerGeographyQuestion(cat_array)
+            if (cat_array[0]) {
+                this.props.answerGeographyQuestion(cat_array)
+            } else {
+                const cat_keys = intermediateArray(quizData[0].geography.length)
+                this.props.answerGeographyQuestion(cat_keys)
+            }
         }
+
 
         /**
          * @todo here I need to refresh the different arrays when they don't exist...
@@ -168,10 +171,14 @@ class _Quiz extends Component {
             //this.setState({nextText: 'RESULTS'})
             this.props.goToResults()
         } else {
+            this.props.chooseCat()
+            // @todo do I still need the following???
             this.props.goToNextQuestion(question_number);
             this.fadeInQuiz()
             this.startTimerInit()
         }
+
+
     }
 
     resetQuiz() {
