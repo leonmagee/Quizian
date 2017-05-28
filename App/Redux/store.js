@@ -11,6 +11,6 @@ const middleware = applyMiddleware(createLogger());
 /**
  * Create store - set default number of questions
  */
-const store = createStore(reducer, {numberQuestions: 2}, middleware);
+const store = createStore(reducer, {numberQuestions: 10}, middleware);
 
 module.exports = store;

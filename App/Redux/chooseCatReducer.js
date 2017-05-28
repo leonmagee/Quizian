@@ -3,6 +3,7 @@ import React from 'react';
 import {
     CAT_CHOSEN,
     NEW_CAT,
+    START_NEW_QUIZ,
 } from './actions';
 
 /**
@@ -15,6 +16,9 @@ export const chooseCatReducer = (state = true, action) => {
             return false;
             break;
         case NEW_CAT:
+            return true;
+            break;
+        case START_NEW_QUIZ:
             return true;
             break;
         default:
