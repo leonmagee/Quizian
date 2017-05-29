@@ -99,37 +99,24 @@ class _Categories extends Component {
                         duration: 150,
                     }).start();
 
-                    /**
-                     * Set chosen cat, and chosen cat index
-                     */
-                    console.log('sportzzz')
-                    //console.log(this.props.sportsIndex)
-
-                    //this.props.setCatIndex(this.props.sportsIndex)
-
                     setTimeout(() => {
                         if (index === 0) {
-                            console.log('index 0')
                             this.props.setCatIndex(this.props.sportsIndex);
                             this.props.catWasSelected('sports')
                         }
                         if (index === 1) {
-                            console.log('index 1')
                             this.props.setCatIndex(this.props.musicIndex);
                             this.props.catWasSelected('music')
                         }
                         if (index === 2) {
-                            console.log('index 2')
                             this.props.setCatIndex(this.props.entertainmentIndex);
                             this.props.catWasSelected('entertainment')
                         }
                         if (index === 3) {
-                            console.log('index 3')
                             this.props.setCatIndex(this.props.historyIndex);
                             this.props.catWasSelected('history')
                         }
                         if (index === 4) {
-                            console.log('index 4')
                             this.props.setCatIndex(this.props.geographyIndex);
                             this.props.catWasSelected('geography')
                         }
@@ -146,7 +133,6 @@ class _Categories extends Component {
         // 2 - entertainment
         // 3 - history
         // 4 - geography
-
 
         const num_horizontal = 3; // 6
         const num_vertical = 5; // 10

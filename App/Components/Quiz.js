@@ -287,7 +287,7 @@ class _Quiz extends Component {
 
                 <Animated.View style={[styles.quizWrap, {opacity: animatedOpacity}]}>
                     <View style={styles.catHeaderWrap}>
-                        <Text style={styles.catHeaderText}>SPORTS</Text>
+                        <Text style={styles.catHeaderText}>{this.props.catText}</Text>
                     </View>
                     {currentQuiz}
                 </Animated.View>
@@ -314,9 +314,9 @@ const mapStateToProps = (state) => ({
     resetQuiz: state.resetQuiz,
     timerValue: state.timerValue,
     nextText: state.nextText,
-    //historyIndex: state.historyIndex, // @todo remove this?
     catIndex: state.catIndex,
     currentCat: state.currentCat,
+    catText: state.catText,
 })
 
 const mapActionsToProps = (dispatch) => ({

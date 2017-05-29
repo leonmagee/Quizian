@@ -1,11 +1,7 @@
 import React from 'react';
 
 import {
-    HISTORY_QUESTION,
-    SPORTS_QUESTION,
-    ENTERTAINMENT_QUESTION,
-    MUSIC_QUESTION,
-    GEOGRAPHY_QUESTION
+    CAT_CHOSEN,
 } from './actions';
 
 /**
@@ -13,23 +9,18 @@ import {
  * Returns the text for the Next Question button
  */
 export const catTextReducer = (state = '', action) => {
-    switch (action.type) {
-        case HISTORY_QUESTION:
-            return 'HISTORY';
-            break;
-        case SPORTS_QUESTION:
-            return 'SPORTS';
-            break;
-        case ENTERTAINMENT_QUESTION:
-            return 'TV & MOVIES';
-            break;
-        case MUSIC_QUESTION:
-            return 'MUSIC';
-            break;
-        case GEOGRAPHY_QUESTION:
-            return 'GEOGRAPHY';
-            break;
-        default:
-            return state;
+    if ( action.type === CAT_CHOSEN ) {
+        if ( action.payload === 'sports' ) {
+            state = 'SPORTS'
+        } else if ( action.payload === 'entertainment' ) {
+            state = 'TV & MOVIES'
+        } else if ( action.payload === 'music') {
+            state = 'MUSIC'
+        } else if ( action.payload === 'geography' ) {
+            state = 'GEOGRAPHY'
+        } else if ( action.payload === 'history') {
+            state = 'HISTORY'
+        }
     }
+    return state
 }

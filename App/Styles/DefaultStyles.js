@@ -91,7 +91,8 @@ const defaultStyles = StyleSheet.create({
     questionWrap: {
         backgroundColor: '#FCFCFC',
         //backgroundColor: '#999',
-        marginTop: 19,
+        //marginTop: 19,
+        marginTop: 5,
         marginBottom: 11,
         paddingVertical: 10, // @todo animate this
         paddingHorizontal: 15,
