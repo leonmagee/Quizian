@@ -23,12 +23,6 @@ class _Quiz extends Component {
         this.props.getData(this.props.currentCat, this.props.catIndex[0])
         this.fadeInQuiz()
         this.startTimerInit()
-
-        //console.log(quizData)
-        //console.log('Current Cat:')
-        //console.log(this.props.currentCat)
-        // console.log('working???')
-        // console.log(this.props.historyIndex)
     }
 
     countTime() {
@@ -46,6 +40,7 @@ class _Quiz extends Component {
     }
 
     startTimerInit() {
+        this.clearTheTimer()
         global_timeout_wrap = setTimeout(() => {
             this.startTimer();
         }, 400)
@@ -55,9 +50,16 @@ class _Quiz extends Component {
         global_timeout = setTimeout(() => this.countTime(), 1000)
     }
 
+    /**
+     * @todo timer is not resetting with reset button?
+     */
     clearTheTimer() {
-        clearTimeout(global_timeout)
-        clearTimeout(global_timeout_wrap)
+        if ( typeof global_timeout !== 'undefined') {
+            clearTimeout(global_timeout)
+        }
+        if ( typeof global_timeout_wrap !== 'undefined') {
+            clearTimeout(global_timeout_wrap)
+        }
     }
 
     fadeInQuiz() {
@@ -85,15 +87,6 @@ class _Quiz extends Component {
         cat_array.shift()
 
         const cat = this.props.currentCat
-
-        if (!cat_array[0]) {
-            // then pass new cat array to current cat
-            console.log('NO CAT ARRAY111!!!!!')
-            console.log(cat_array)
-        } else {
-            console.log('STILL CAT ARRAY???')
-            console.log(cat_array)
-        }
 
         if (cat === 'history') {
             if (cat_array[0]) {
@@ -132,43 +125,11 @@ class _Quiz extends Component {
             }
         }
 
-
-        /**
-         * @todo here I need to refresh the different arrays when they don't exist...
-         */
-
-        /**
-         * Add conditionals here....
-         */
-        //console.log('before conditional???')
-        // if (this.props.currentCat === 'history') {
-        //     //console.log('current cat is history?????')
-        //
-        //     if (cat_array) {
-        //         console.log('we got to cat array?')
-        //         this.props.answerHistoryQuestion(cat_array)
-        //     } else {
-        //         /**
-        //          * create new history array
-        //          */
-        //         const cat_length = quizData[0].history.length
-        //         let cat_key_array = []
-        //         for (let i = 0; i < cat_length; ++i) {
-        //             cat_key_array.push(i)
-        //         }
-        //         const cat_keys = shuffleArray(cat_key_array)
-        //         this.props.answerHistoryQuestion(cat_keys)
-        //     }
-        // }
-
-
         this.clearTheTimer();
         if (( this.props.currentQuestion + 2 ) === this.props.numberQuestions) {
-            //this.setState({nextText: 'RESULTS'})
             this.props.finalQuestion()
         }
         if (( this.props.currentQuestion + 1 ) === this.props.numberQuestions) {
-            //this.setState({nextText: 'RESULTS'})
             this.props.goToResults()
         } else {
             this.props.chooseCat()
@@ -177,8 +138,6 @@ class _Quiz extends Component {
             this.fadeInQuiz()
             this.startTimerInit()
         }
-
-
     }
 
     resetQuiz() {
@@ -189,22 +148,17 @@ class _Quiz extends Component {
         global_timeout_wrap = setTimeout(() => {
             this.startTimer();
         }, 800)
-        //this.startTimer(); // this is broken since the timer is already running when you click this button, so it makes 2 timers...
-        //this.setState({nextText: 'NEXT QUESTION'}) //@todo handle with Redux reducer
     }
 
     answerChosen(correct, key) {
-
         /**
          * A choice was made
          */
         this.props.answerButtonClicked()
-
         /**
          * Set Chosen Answer Key
          */
         this.props.answerButtonKey(key)
-
         /**
          * Was it correct?
          */
@@ -226,35 +180,8 @@ class _Quiz extends Component {
         }
 
         if (this.props.getQuestions) {
-            /**
-             * This doesn't work since the timer ticking causes everything to re-render...
-             * so I need to pull this data in from somewhere else
-             */
-            let cat_array = this.props.catIndex
-
-            console.log('TESTER')
-            console.log(cat_array)
-            console.log('TESTER 2')
-            console.log(this.props.getQuestions)
-            //const current_index = history_array.shift()
-
-            /**
-             * Here I can dispense with the 'current questions' state/prop since I don't want to
-             * track in a straight line when I'm alternating between categories...
-             * @type {XML}
-             */
-
-            //this.props.answerHistoryQuestion()
-
-            // console.log('in get question')
-            // console.log(history_array)
-            /**
-             * @todo change get questions to get question
-             * @type {XML}
-             */
 
             var currentQuiz = <Questions
-                //arrayData={this.props.getQuestions[cat_array[0]]}
                 arrayData={this.props.getQuestions}
                 answerChosen={(correct, key) => this.answerChosen(correct, key)}
                 answerSubmitted={this.props.answerSubmitted}
@@ -376,14 +303,6 @@ const mapActionsToProps = (dispatch) => ({
 
         const question = [];
 
-        /**
-         * This needs to get the correct data based on category, so a reducer should probably
-         * return just the one question we need based on all the details
-         * 1) cat
-         * 2) current cat index
-         * @todo within the reducer we can have the conditionals...
-         */
-
         let quiz_data = false
         if (cat === 'history') {
             quiz_data = quizData[0].history
@@ -397,18 +316,6 @@ const mapActionsToProps = (dispatch) => ({
             quiz_data = quizData[0].geography
         }
 
-        console.log('this is the quiz data')
-        console.log(quiz_data)
-        console.log('current index')
-        console.log(index)
-        console.log('current question')
-        console.log(quiz_data[index])
-        /**
-         * I should just grab the question as is without modifying it...
-         * @todo by default this is returning an array of all of the questions in that category
-         * @todo what I want to do is return just one question, the category at it's current index...
-         */
-
         let trivia_question = quiz_data[index]
         const answers = [];
         answers.push({answer: trivia_question.c, correct: true});
@@ -420,10 +327,6 @@ const mapActionsToProps = (dispatch) => ({
             answers: shuffleArray(answers),
         });
 
-        //});
-        /**
-         * @todo working this far
-         */
         dispatch({type: 'DATA_AVAILABLE', payload: question[0]})
     }
 })

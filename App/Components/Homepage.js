@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     homeWrap: {
         flex: 1,
         padding: 1,
+        //padding: 7,
         flexDirection: 'row',
         flexWrap: 'wrap',
         //backgroundColor: 'rgba(32,178,170,0.85)', // background color behind squares
@@ -93,7 +94,7 @@ class Homepage extends Component {
         var grid_styles_array = [];
         for (i = 0; i < total_grid_items; i++) {
 
-            const fontSizeArray = [30, 40, 50, 60, 70, 80]
+            const fontSizeArray = [50, 60, 70, 80, 90, 100]
             const fontSizeItem = fontSizeArray[Math.floor(Math.random() * fontSizeArray.length)]
             const flexPosArray = ['flex-start', 'flex-end', 'center']
             const verticalPos = flexPosArray[Math.floor(Math.random() * flexPosArray.length)]

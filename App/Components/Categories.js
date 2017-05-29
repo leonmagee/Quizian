@@ -37,33 +37,31 @@ class _Categories extends Component {
     }
 
     componentDidMount() {
-        //this.flickerColor();
-
-        //const base_array = [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
         const base_array = [0, 1, 2, 3, 4]
         const shuffle = shuffleArray(base_array)
-
-        this.colorOpacity(0, shuffle)
+        setTimeout( () => {
+            this.colorOpacity(0, shuffle)
+        }, 300 )
     }
 
     colorOpacity(index, shuffle) {
         Animated.timing(this.state.animatedOpacity[shuffle[index]], {
             toValue: 0.3,
-            duration: 150,
+            duration: 300,
         }).start(() => this.fadeOpacity(index, shuffle));
     }
 
     colorOpacityFinal(index, count) {
         Animated.timing(this.state.animatedOpacity[index], {
             toValue: 0.3,
-            duration: 150,
+            duration: 300,
         }).start(() => this.fadeOpacityFinal(index, count));
     }
 
     fadeOpacity(index, shuffle) {
         Animated.timing(this.state.animatedOpacity[shuffle[index]], {
             toValue: 0,
-            duration: 150,
+            duration: 300,
         }).start(
             () => {
                 if (index < 3) {
@@ -72,7 +70,7 @@ class _Categories extends Component {
                         this.colorOpacity(index, shuffle)
                     }, 50)
                 } else {
-                    // this is where you make it blink several times quickly...
+                    // this is where you make it blink several times quickly
                     setTimeout(() => {
                         this.colorOpacityFinal(shuffle[index], 0)
                     }, 50)
@@ -84,7 +82,7 @@ class _Categories extends Component {
     fadeOpacityFinal(index, count) {
         Animated.timing(this.state.animatedOpacity[index], {
             toValue: 0,
-            duration: 150,
+            duration: 300,
         }).start(
             () => {
                 if (count < 1) {
@@ -95,8 +93,8 @@ class _Categories extends Component {
                 } else {
                     // this is where you set the final color
                     Animated.timing(this.state.animatedOpacity[index], {
-                        toValue: 0.5,
-                        duration: 150,
+                        toValue: 0.3,
+                        duration: 300,
                     }).start();
 
                     setTimeout(() => {
@@ -128,11 +126,7 @@ class _Categories extends Component {
 
     render() {
 
-        // 0 - sports
-        // 1 - music
-        // 2 - entertainment
-        // 3 - history
-        // 4 - geography
+        // 0 - sports / 1 - music / 2 - entertainment / 3 - history / 4 - geography
 
         const num_horizontal = 3; // 6
         const num_vertical = 5; // 10
@@ -212,5 +206,4 @@ const mapActionsToProps = (dispatch) => ({
     },
 })
 
-//module.exports = Categories;
 export const Categories = connect(mapStateToProps, mapActionsToProps)(_Categories)
