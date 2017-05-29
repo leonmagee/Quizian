@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
     gridItem: {
         justifyContent: 'center',
         alignItems: 'center',
+        // alignItems: 'flex-start',
+        // justifyContent: 'flex-start',
         margin: 1,
     },
     questionText: {
@@ -52,6 +54,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#FFF',
         opacity: 0,
+        //opacity: 1, // @todo remove
     },
     menuText: {
         fontSize: 27,
@@ -89,7 +92,19 @@ class Homepage extends Component {
 
         var grid_styles_array = [];
         for (i = 0; i < total_grid_items; i++) {
-            grid_styles_array.push({opacity: 0});
+
+            const fontSizeArray = [30, 40, 50, 60, 70, 80]
+            const fontSizeItem = fontSizeArray[Math.floor(Math.random() * fontSizeArray.length)]
+            const flexPosArray = ['flex-start', 'flex-end', 'center']
+            const verticalPos = flexPosArray[Math.floor(Math.random() * flexPosArray.length)]
+            const horizontalPos = flexPosArray[Math.floor(Math.random() * flexPosArray.length)]
+
+            grid_styles_array.push({
+                opacity: 0,
+                fontSize: fontSizeItem,
+                justifyContent: verticalPos,
+                alignItems: horizontalPos
+            });
         }
 
         this.state = {
@@ -171,12 +186,21 @@ class Homepage extends Component {
         const grid = this.state.grid_array.map((item, key) => {
 
             const stylesView = {
-                backgroundColor: this.state.grid_styles_array[key].bg
+                justifyContent: this.state.grid_styles_array[key].justifyContent,
+                alignItems: this.state.grid_styles_array[key].alignItems
             }
 
             const stylesText = {
                 opacity: this.state.grid_styles_array[key].opacity,
+                fontSize: this.state.grid_styles_array[key].fontSize,
             }
+
+            // let fontSizeItemArray = []
+            // //const fontSize = () => {
+            // const fontSizeArray = [30, 70]
+            // fontSizeItemArray[key] = fontSizeArray[Math.floor(Math.random() * fontSizeArray.length)]
+            // //return fontSizeItemArray
+            // //}
 
             return (
                 <Animated.View style={[styles.gridItem, {
