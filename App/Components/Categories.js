@@ -48,14 +48,14 @@ class _Categories extends Component {
 
     colorOpacity(index, shuffle) {
         Animated.timing(this.state.animatedOpacity[shuffle[index]], {
-            toValue: 0.5,
+            toValue: 0.3,
             duration: 150,
         }).start(() => this.fadeOpacity(index, shuffle));
     }
 
     colorOpacityFinal(index, count) {
         Animated.timing(this.state.animatedOpacity[index], {
-            toValue: 0.5,
+            toValue: 0.3,
             duration: 150,
         }).start(() => this.fadeOpacityFinal(index, count));
     }

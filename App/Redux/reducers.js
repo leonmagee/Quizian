@@ -23,6 +23,7 @@ import {entertainmentIndexReducer} from './entertainmentIndexReducer';
 import {currentCatReducer} from './currentCatReducer';
 import {chooseCatReducer} from './chooseCatReducer';
 import {catIndexReducer} from './catIndexReducer';
+import {catTextReducer} from './catTextReducer';
 
 /**
  * Combine Reducers
@@ -47,4 +48,5 @@ export const reducer = combineReducers({
     currentCat: currentCatReducer,
     chooseCat: chooseCatReducer,
     catIndex: catIndexReducer,
+    catText: catTextReducer,
 });

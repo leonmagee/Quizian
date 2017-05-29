@@ -28,6 +28,8 @@ const defaultStyles = StyleSheet.create({
     topBar: {
         flexDirection: 'row',
         justifyContent: 'space-around',
+        backgroundColor: 'rgba(0,0,0,0.1)',
+        paddingBottom: 5,
     },
 
     topBarTimer: {
@@ -132,7 +134,7 @@ const defaultStyles = StyleSheet.create({
         borderColor: variables.brandPrimary,
     },
     answerQuestionGray: {
-       backgroundColor: '#BBB',
+       backgroundColor: '#DDD',
     },
     answerText: {
         fontWeight: 'bold',
@@ -235,9 +237,21 @@ const defaultStyles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: variables.brandSecond,
+        //backgroundColor: variables.brandSecond,
+        backgroundColor: '#FFF',
         opacity: 0,
-    }
+    },
+
+    catHeaderWrap: {
+       //backgroundColor: 'blue',
+        backgroundColor: 'transparent',
+    },
+    catHeaderText: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#FFF',
+        fontFamily: 'Lalezar',
+    },
 
 });
 

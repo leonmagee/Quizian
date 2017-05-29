@@ -286,6 +286,9 @@ class _Quiz extends Component {
                 </View>
 
                 <Animated.View style={[styles.quizWrap, {opacity: animatedOpacity}]}>
+                    <View style={styles.catHeaderWrap}>
+                        <Text style={styles.catHeaderText}>SPORTS</Text>
+                    </View>
                     {currentQuiz}
                 </Animated.View>
 

@@ -1,8 +1,12 @@
 let variables = {
     //brandPrimary: '#EE7674',
-    brandPrimary: 'rgba(238,118,116,1)', // orange red
-    brandPrimaryLite: 'rgba(238,118,116,0.8)',
-    brandSecond: 'rgba(6,214,160,1)', // blue green
+    //brandPrimary: 'rgba(238,118,116,1)', // orange red
+    brandPrimary: '#FC5130', // new orange red
+    brandPrimaryLite: 'rgba(238,118,116,0.8)', // no longer the same as brand primary?
+    //brandSecond: 'rgba(6,214,160,1)', // blue green
+    //brandSecond: '#20BF55', // new custom green - bright but a little basic
+    //brandSecond: '#009B72', // new custom green - decent
+    brandSecond: '#04E762', // new custom green - bright green
     brandSecondLite: 'rgba(6,214,160,0.8)',
     brandThird: 'rgba(69,105,144,1)', // gray blue // #456990
     brandThirdLite: 'rgba(69,105,144,0.8)',
