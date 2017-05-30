@@ -75,7 +75,6 @@ const defaultStyles = StyleSheet.create({
         fontFamily: 'Lalezar',
         fontSize: 50,
         backgroundColor: 'transparent',
-        //textShadowColor: '#CCC',
         textShadowColor: '#F7F7F7',
         textShadowOffset: {width: 3, height: 3},
     },
@@ -90,11 +89,9 @@ const defaultStyles = StyleSheet.create({
 
     questionWrap: {
         backgroundColor: '#FCFCFC',
-        //backgroundColor: '#999',
-        //marginTop: 19,
         marginTop: 5,
         marginBottom: 11,
-        paddingVertical: 10, // @todo animate this
+        paddingVertical: 10,
         paddingHorizontal: 15,
         borderRadius: 5,
         minHeight: question_height,
@@ -115,7 +112,6 @@ const defaultStyles = StyleSheet.create({
 
     answerWrap: {
         backgroundColor: '#FCFCFC',
-        //backgroundColor: '#999',
         marginVertical: 11,
         paddingVertical: 10,
         paddingHorizontal: 15,
@@ -145,13 +141,13 @@ const defaultStyles = StyleSheet.create({
         fontFamily: 'Lalezar',
     },
     answerCorrectText: {
-        color: 'white',
+        color: '#FFF',
         textShadowColor: 'rgba(0,0,0,0.1)',
         textShadowOffset: {width: 1, height: 1},
         textShadowRadius: 3,
     },
     answerIncorrectText: {
-        color: 'white',
+        color: '#FFF',
         textShadowColor: 'rgba(0,0,0,0.1)',
         textShadowOffset: {width: 1, height: 1},
         textShadowRadius: 3,
@@ -169,7 +165,7 @@ const defaultStyles = StyleSheet.create({
     nextButtonText: {
         fontWeight: 'bold',
         fontSize: 15,
-        color: 'white',
+        color: '#FFF',
     },
 
     quizResultsWrap: {
@@ -238,13 +234,11 @@ const defaultStyles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        //backgroundColor: variables.brandSecond,
         backgroundColor: '#FFF',
         opacity: 0,
     },
 
     catHeaderWrap: {
-       //backgroundColor: 'blue',
         backgroundColor: 'transparent',
     },
     catHeaderText: {

@@ -7,7 +7,6 @@ import {
     Text,
     View,
     TouchableHighlight,
-    //Animated
 } from 'react-native'
 
 const questionStyle = (answerSubmitted) => {

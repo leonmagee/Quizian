@@ -7,7 +7,6 @@ import variables from '../Styles/Variables'
 import {
     Text,
     View,
-    TouchableHighlight,
 } from 'react-native'
 
 import Svg, {
@@ -27,8 +26,6 @@ class _QuizResults extends Component {
 
         const correct = props.correctAnswer;
         const incorrect = props.falseAnswer;
-        // const correct = 0;
-        // const incorrect = 5;
 
         const correct_percent = ( correct / props.numberQuestions );
         const incorrect_percent = ( incorrect / props.numberQuestions );
@@ -70,7 +67,6 @@ if ( this.state.correct ) {
                     <View style={styles.pieChartWrap}>
                         <Svg
                             height="280"
-                            //width={width * 0.4}
                             width="280"
                             viewbox="0 0 280 280"
                         >
@@ -111,6 +107,3 @@ const mapActionsToProps = (dispatch) => ({
 })
 
 export const QuizResults = connect(mapStateToProps, mapActionsToProps)(_QuizResults);
-
-
-

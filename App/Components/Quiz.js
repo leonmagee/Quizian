@@ -31,15 +31,12 @@ class _Quiz extends Component {
         this.props.getData(this.props.currentCat, this.props.catIndex[0])
         this.fadeInQuiz()
         this.startTimerInit()
-        console.log('ticks?', this.state.tickerz)
     }
 
     countTime() {
 
         if (!this.props.answerSubmitted) {
-
             this.incrementTimer();
-
             if (this.state.timerValue > 0) {
                 this.startTimer();
             } else {
@@ -52,7 +49,6 @@ class _Quiz extends Component {
         this.setState({
             timerValue: ( this.state.timerValue - 1 )
         })
-        //dispatch({type: 'TIMER_TICK'})
     }
 
     startTimerInit() {
@@ -161,9 +157,6 @@ class _Quiz extends Component {
         this.props.getData(this.props.currentCat, this.props.catIndex[0])
         this.props.resetQuizClicked()
         this.fadeInQuiz()
-        // global_timeout_wrap = setTimeout(() => {
-        //     this.startTimer();
-        // }, 800)
     }
 
     answerChosen(correct, key) {
@@ -255,7 +248,6 @@ const mapStateToProps = (state) => ({
     answerResultString: state.answerResultString,
     getQuestions: state.getQuestions,
     resetQuiz: state.resetQuiz,
-    //timerValue: state.timerValue,
     nextText: state.nextText,
     catIndex: state.catIndex,
     currentCat: state.currentCat,
@@ -290,9 +282,6 @@ const mapActionsToProps = (dispatch) => ({
     resetQuizClicked() {
         dispatch({type: 'START_NEW_QUIZ'})
     },
-    // incrementTimer() {
-    //     dispatch({type: 'TIMER_TICK'})
-    // },
     timerExpires() {
         dispatch({type: 'TIMER_EXPIRES'})
     },

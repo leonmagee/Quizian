@@ -1,5 +1,5 @@
 /**
- * Button Component - could be stateless?
+ * Button Component
  */
 import React, {Component} from 'react';
 
