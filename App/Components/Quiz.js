@@ -19,24 +19,40 @@ let animatedOpacity = new Animated.Value(0)
 
 class _Quiz extends Component {
 
+    constructor() {
+        super()
+
+        this.state = {
+            timerValue: 15,
+        }
+    }
+
     componentDidMount() {
         this.props.getData(this.props.currentCat, this.props.catIndex[0])
         this.fadeInQuiz()
         this.startTimerInit()
+        console.log('ticks?', this.state.tickerz)
     }
 
     countTime() {
 
         if (!this.props.answerSubmitted) {
 
-            this.props.incrementTimer();
+            this.incrementTimer();
 
-            if (this.props.timerValue > 0) {
+            if (this.state.timerValue > 0) {
                 this.startTimer();
             } else {
                 this.props.timerExpires()
             }
         }
+    }
+
+    incrementTimer() {
+        this.setState({
+            timerValue: ( this.state.timerValue - 1 )
+        })
+        //dispatch({type: 'TIMER_TICK'})
     }
 
     startTimerInit() {
@@ -54,10 +70,10 @@ class _Quiz extends Component {
      * @todo timer is not resetting with reset button?
      */
     clearTheTimer() {
-        if ( typeof global_timeout !== 'undefined') {
+        if (typeof global_timeout !== 'undefined') {
             clearTimeout(global_timeout)
         }
-        if ( typeof global_timeout_wrap !== 'undefined') {
+        if (typeof global_timeout_wrap !== 'undefined') {
             clearTimeout(global_timeout_wrap)
         }
     }
@@ -141,13 +157,13 @@ class _Quiz extends Component {
     }
 
     resetQuiz() {
+        this.clearTheTimer()
         this.props.getData(this.props.currentCat, this.props.catIndex[0])
         this.props.resetQuizClicked()
         this.fadeInQuiz()
-        this.clearTheTimer()
-        global_timeout_wrap = setTimeout(() => {
-            this.startTimer();
-        }, 800)
+        // global_timeout_wrap = setTimeout(() => {
+        //     this.startTimer();
+        // }, 800)
     }
 
     answerChosen(correct, key) {
@@ -208,7 +224,7 @@ class _Quiz extends Component {
                         </Text>
                     </View>
                     <View style={styles.topBarTimer}>
-                        <Text style={styles.topBarTimerText}>{this.props.timerValue}</Text>
+                        <Text style={styles.topBarTimerText}>{this.state.timerValue}</Text>
                     </View>
                 </View>
 
@@ -239,7 +255,7 @@ const mapStateToProps = (state) => ({
     answerResultString: state.answerResultString,
     getQuestions: state.getQuestions,
     resetQuiz: state.resetQuiz,
-    timerValue: state.timerValue,
+    //timerValue: state.timerValue,
     nextText: state.nextText,
     catIndex: state.catIndex,
     currentCat: state.currentCat,
@@ -274,9 +290,9 @@ const mapActionsToProps = (dispatch) => ({
     resetQuizClicked() {
         dispatch({type: 'START_NEW_QUIZ'})
     },
-    incrementTimer() {
-        dispatch({type: 'TIMER_TICK'})
-    },
+    // incrementTimer() {
+    //     dispatch({type: 'TIMER_TICK'})
+    // },
     timerExpires() {
         dispatch({type: 'TIMER_EXPIRES'})
     },

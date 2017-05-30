@@ -13,7 +13,7 @@ import {answerSubmittedReducer} from './answerSubmittedReducer';
 import {answerKeyReducer} from './answerKeyReducer';
 import {quizResultsReducer} from './quizResultsReducer';
 import {getQuestionsReducer} from './getQuestionsReducer';
-import {timerValueReducer} from './timerValueReducer';
+//import {timerValueReducer} from './timerValueReducer';
 import {nextTextReducer} from './nextTextReducer';
 import {historyIndexReducer} from './historyIndexReducer';
 import {sportsIndexReducer} from './sportsIndexReducer';
@@ -38,7 +38,7 @@ export const reducer = combineReducers({
     answerKey: answerKeyReducer,
     quizResults: quizResultsReducer,
     getQuestions: getQuestionsReducer,
-    timerValue: timerValueReducer,
+    //timerValue: timerValueReducer,
     nextText: nextTextReducer,
     historyIndex: historyIndexReducer,
     sportsIndex: sportsIndexReducer,

@@ -9,15 +9,7 @@ import {
 /**
  * Get initial data
  */
-// const cat_length = quizData[0].entertainment.length
-// let cat_key_array = []
-// for ( let i = 0; i < cat_length; ++i ) {
-//     cat_key_array.push(i)
-// }
-// const cat_keys = shuffleArray(cat_key_array)
-
 const cat_keys = intermediateArray(quizData[0].entertainment.length)
-
 
 /**
  * entertainmentIndexReducer
