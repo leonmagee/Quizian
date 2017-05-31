@@ -17,3 +17,4 @@ export const ENTERTAINMENT_QUESTION = 'ENTERTAINMENT_QUESTION';
 export const CAT_CHOSEN = 'CAT_CHOSEN';
 export const SET_CAT_INDEX = 'SET_CAT_INDEX';
 export const NEW_CAT = 'NEW_CAT';
+export const QUIZ_RESET = 'QUIZ_RESET';

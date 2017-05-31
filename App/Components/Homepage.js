@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import {QuizWrap} from './QuizWrap';
 import StartQuizButton from './StartQuizButton';
 import {shuffleArray} from '../Utils/helper';
@@ -231,4 +232,17 @@ class Homepage extends Component {
     }
 }
 
-module.exports = Homepage;
+mapStateToProps = (state) => ({
+    quizStarted: state.quizStarted,
+})
+
+mapActionsToProps = () => ({
+    startQuiz() {
+        dispatch({type: 'START_QUIZ'})
+    }
+})
+
+
+//module.exports = Homepage;
+
+module.exports = connect(mapStateToProps, mapActionsToProps)(Homepage)
