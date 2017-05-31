@@ -11,7 +11,6 @@ import LinearGradient from 'react-native-linear-gradient'
 import {
     Text,
     View,
-    ActivityIndicator,
     Animated,
 } from 'react-native'
 
@@ -197,11 +196,6 @@ class _Quiz extends Component {
                 correctIncorrectString={this.props.answerResultString}
                 answerKey={this.props.answerKey}
             ></Questions>
-        } else {
-            var currentQuiz = <ActivityIndicator
-                animating={true}
-                color="#FFF"
-                size="large"></ActivityIndicator>
         }
 
         return (

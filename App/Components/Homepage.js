@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     },
     homeWrap: {
         flex: 1,
-        padding: 1,
+        padding: 9,
         flexDirection: 'row',
         flexWrap: 'wrap',
         backgroundColor: 'transparent',
@@ -82,8 +82,8 @@ class Homepage extends Component {
             grid_array.push(i);
         }
         const shuffled_grid_array = shuffleArray(grid_array);
-        const item_width = ( ( ( width - 2 ) / num_horizontal ) - 2);
-        const item_height = ( ( ( height - 2 ) / num_vertical ) - 2 );
+        const item_width = ( ( ( width - 2 ) / num_horizontal ) - 8 );
+        const item_height = ( ( ( height - 2 ) / num_vertical ) - 8 );
 
         var grid_styles_array = [];
         for (i = 0; i < total_grid_items; i++) {
