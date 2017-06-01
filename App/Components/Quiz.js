@@ -274,7 +274,7 @@ const mapActionsToProps = (dispatch) => ({
         dispatch({type: 'QUESTION_DISPLAYED'})
     },
     resetQuizClicked() {
-        dispatch({type: 'START_NEW_QUIZ'})
+        dispatch({type: 'QUIZ_RESET'})
     },
     timerExpires() {
         dispatch({type: 'TIMER_EXPIRES'})

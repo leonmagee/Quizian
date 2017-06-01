@@ -4,6 +4,7 @@ import {
     CAT_CHOSEN,
     NEW_CAT,
     START_NEW_QUIZ,
+    START_QUIZ,
 } from './actions';
 
 /**
@@ -19,6 +20,9 @@ export const chooseCatReducer = (state = true, action) => {
             return true;
             break;
         case START_NEW_QUIZ:
+            return true;
+            break;
+        case START_QUIZ:
             return true;
             break;
         default:

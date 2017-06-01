@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
     NEXT_QUESTION,
+    START_QUIZ,
     START_NEW_QUIZ,
 } from './actions';
 
@@ -16,6 +17,9 @@ export const currentQuestionReducer = (state = 0, action) => {
     switch (action.type) {
         case NEXT_QUESTION:
             return state + 1;
+            break;
+        case START_QUIZ:
+            return 0
             break;
         case START_NEW_QUIZ:
             return 0

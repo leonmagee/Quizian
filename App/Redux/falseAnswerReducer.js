@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+    START_QUIZ,
     START_NEW_QUIZ,
     INCORRECT_ANSWER,
     TIMER_EXPIRES,
@@ -18,6 +19,9 @@ export const falseAnswerReducer = (state = 0, action) => {
             break;
         case TIMER_EXPIRES:
             return state + 1;
+            break;
+        case START_QUIZ:
+            return 0;
             break;
         case START_NEW_QUIZ:
             return 0;

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+    START_QUIZ,
     QUIZ_RESET,
 } from './actions';
 
@@ -10,8 +11,11 @@ import {
  */
 export const quizStartedReducer = (state = false, action) => {
     switch (action.type) {
-        case QUIZ_RESET:
+        case START_QUIZ:
             return true;
+            break;
+        case QUIZ_RESET:
+            return false;
             break;
         default:
             return state;

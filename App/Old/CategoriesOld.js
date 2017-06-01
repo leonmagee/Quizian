@@ -66,6 +66,7 @@ class _Categories extends Component {
 
                     // this is where you make it blink several times quickly
                     setTimeout(() => {
+                        //this.colorOpacityFinal(shuffle[index], 0)
                         this.catAnimationFinal(shuffle[index])
                     }, 50)
 
@@ -74,7 +75,9 @@ class _Categories extends Component {
         );
     }
 
+
     catAnimationFinal(index) {
+        // this is where you set the final color
         Animated.timing(this.state.animatedOpacity[index], {
             toValue: 0.3,
             duration: 300,
@@ -104,7 +107,56 @@ class _Categories extends Component {
         }, 1000)
     }
 
+
+    colorOpacityFinal(index, count) {
+        Animated.timing(this.state.animatedOpacity[index], {
+            toValue: 0.3,
+            duration: 300,
+        }).start(() => this.fadeOpacityFinal(index, count));
+    }
+
+
+    fadeOpacityFinal(index, count) {
+        Animated.timing(this.state.animatedOpacity[index], {
+            toValue: 0,
+            duration: 300,
+        }).start(
+            () => {
+                    // this is where you set the final color
+                    Animated.timing(this.state.animatedOpacity[index], {
+                        toValue: 0.3,
+                        duration: 300,
+                    }).start();
+
+                    setTimeout(() => {
+                        if (index === 0) {
+                            this.props.setCatIndex(this.props.sportsIndex);
+                            this.props.catWasSelected('sports')
+                        }
+                        if (index === 1) {
+                            this.props.setCatIndex(this.props.musicIndex);
+                            this.props.catWasSelected('music')
+                        }
+                        if (index === 2) {
+                            this.props.setCatIndex(this.props.entertainmentIndex);
+                            this.props.catWasSelected('entertainment')
+                        }
+                        if (index === 3) {
+                            this.props.setCatIndex(this.props.historyIndex);
+                            this.props.catWasSelected('history')
+                        }
+                        if (index === 4) {
+                            this.props.setCatIndex(this.props.geographyIndex);
+                            this.props.catWasSelected('geography')
+                        }
+                    }, 1000)
+
+            }
+        );
+    }
+
     render() {
+
         // 0 - sports / 1 - music / 2 - entertainment / 3 - history / 4 - geography
 
         const num_horizontal = 3; // 6

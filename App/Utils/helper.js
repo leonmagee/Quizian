@@ -1,3 +1,6 @@
+import React from 'react'
+import {AsyncStorage} from 'react-native'
+
 /**
  * Helper Functions
  */
@@ -24,3 +27,18 @@ export const intermediateArray = (length) => {
     }
     return shuffleArray(cat_key_array)
 }
+
+// export const getAsyncIndex = (key, init_val) => {
+//
+//     AsyncStorage.getItem('@QuestionIndex:' + key).then((value) => {
+//         if ( value ) {
+//             return JSON.parse(value)
+//         } else {
+//             const data = JSON.stringify(init_val)
+//             console.log('no data like that exists yet...')
+//             AsyncStorage.setItem('@QuestionIndex:' + key, data)
+//         }
+//
+//     }).done()
+//
+// }

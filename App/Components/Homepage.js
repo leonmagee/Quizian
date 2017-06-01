@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {QuizWrap} from './QuizWrap';
-import StartQuizButton from './StartQuizButton';
-import {shuffleArray} from '../Utils/helper';
-import LinearGradient from 'react-native-linear-gradient';
+import {QuizWrap} from './QuizWrap'
+import StartQuizButton from './StartQuizButton'
+import {shuffleArray} from '../Utils/helper'
+import LinearGradient from 'react-native-linear-gradient'
 import variables from '../Styles/Variables'
-let {width, height} = Dimensions.get('window');
+let {width, height} = Dimensions.get('window')
+import {dataStore} from '../Storage/dataStore';
 height = height - 50; // make space for bottom menu bar
 
 import {
@@ -104,7 +105,7 @@ class Homepage extends Component {
         }
 
         this.state = {
-            started: false,
+            //started: false,
             grid_array: grid_array,
             shuffled_grid_array: shuffled_grid_array,
             grid_styles_array: grid_styles_array,
@@ -171,11 +172,11 @@ class Homepage extends Component {
         this.questionOpacityRecursive(new_styles_array, new_styles_array.length, i, null, this.state.shuffled_grid_array);
     }
 
-    startQuiz() {
-        this.setState({
-            started: true,
-        })
-    }
+    // startQuiz() {
+    //     this.setState({
+    //         started: true,
+    //     })
+    // }
 
     render() {
 
@@ -206,7 +207,7 @@ class Homepage extends Component {
          * Toggle MainComponent based on 'started' state
          * not using Redux for this component
          */
-        if (this.state.started) {
+        if (this.props.quizStarted) {
             var MainComponent = <QuizWrap/>
         } else {
             var MainComponent = (
@@ -218,7 +219,7 @@ class Homepage extends Component {
                         {grid}
                     </View>
                     <View style={styles.menuBar}>
-                        <StartQuizButton handleClick={() => this.startQuiz()} buttonText="NEW GAME"/>
+                        <StartQuizButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
                     </View>
                 </View>
             );
@@ -236,13 +237,10 @@ mapStateToProps = (state) => ({
     quizStarted: state.quizStarted,
 })
 
-mapActionsToProps = () => ({
+mapActionsToProps = (dispatch) => ({
     startQuiz() {
         dispatch({type: 'START_QUIZ'})
     }
 })
-
-
-//module.exports = Homepage;
 
 module.exports = connect(mapStateToProps, mapActionsToProps)(Homepage)

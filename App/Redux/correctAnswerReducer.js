@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+    START_QUIZ,
     START_NEW_QUIZ,
     CORRECT_ANSWER,
 } from './actions';
@@ -16,6 +17,9 @@ export const correctAnswerReducer = (state = 0, action) => {
             return state + 1;
             break;
         case START_NEW_QUIZ:
+            return 0;
+            break;
+        case START_QUIZ:
             return 0;
             break;
         default:

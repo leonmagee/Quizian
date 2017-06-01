@@ -5,6 +5,8 @@ import {
     START_NEW_QUIZ,
     ANSWER_SUBMITTED,
     TIMER_EXPIRES,
+    START_QUIZ,
+    QUIZ_RESET,
 } from './actions';
 
 /**
@@ -24,6 +26,12 @@ export const answerSubmittedReducer = (state = false, action) => {
             return false;
             break;
         case START_NEW_QUIZ:
+            return false;
+            break;
+        case START_QUIZ:
+            return false;
+            break;
+        case QUIZ_RESET:
             return false;
             break;
         default:
