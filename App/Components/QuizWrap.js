@@ -12,9 +12,6 @@ class _QuizWrap extends Component {
 
     constructor(props) {
         super(props)
-
-        const key = 'sports'
-
         const dataInitArray = [
             {
                 data_key: 'sports',
@@ -44,13 +41,10 @@ class _QuizWrap extends Component {
         ]
 
         dataInitArray.map((item) => {
-            //console.log(item.key, item.length)
-
             AsyncStorage.getItem('@QuestionIndex:' + item.data_key).then((value) => {
-                if (! value) {
+                if (value) {
                     const parsedData = JSON.parse(value)
                     item.redux_action(parsedData)
-
                 } else {
                     const cat_keys = intermediateArray(item.array_length)
                     const data = JSON.stringify(cat_keys)
@@ -58,9 +52,7 @@ class _QuizWrap extends Component {
                     item.redux_action(cat_keys)
                 }
             }).done()
-
         })
-
     }
 
     render() {

@@ -100,35 +100,37 @@ class _Quiz extends Component {
         const cat = this.props.currentCat
 
         if (cat === 'history') {
-            if (cat_array[0]) {
+            if (cat_array.length > 0) {
                 this.props.answerHistoryQuestion(cat_array)
+                console.log('HISTORY QUESTIONS STILL')
             } else {
                 const cat_keys = intermediateArray(quizData[0].history.length)
                 this.props.answerHistoryQuestion(cat_keys)
+                console.log('I RAN OUT OF HISTORY QUESTIONS!!!!')
             }
         } else if (cat === 'sports') {
-            if (cat_array[0]) {
+            if (cat_array.length > 0) {
                 this.props.answerSportsQuestion(cat_array)
             } else {
                 const cat_keys = intermediateArray(quizData[0].sports.length)
                 this.props.answerSportsQuestion(cat_keys)
             }
         } else if (cat === 'music') {
-            if (cat_array[0]) {
+            if (cat_array.length > 0) { //@todo not working right???
                 this.props.answerMusicQuestion(cat_array)
             } else {
                 const cat_keys = intermediateArray(quizData[0].music.length)
                 this.props.answerMusicQuestion(cat_keys)
             }
         } else if (cat === 'entertainment') {
-            if (cat_array[0]) {
+            if (cat_array.length > 0) {
                 this.props.answerEntertainmentQuestion(cat_array)
             } else {
                 const cat_keys = intermediateArray(quizData[0].entertainment.length)
                 this.props.answerEntertainmentQuestion(cat_keys)
             }
         } else if (cat === 'geography') {
-            if (cat_array[0]) {
+            if (cat_array.length > 0) {
                 this.props.answerGeographyQuestion(cat_array)
             } else {
                 const cat_keys = intermediateArray(quizData[0].geography.length)
