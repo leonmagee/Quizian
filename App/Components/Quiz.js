@@ -5,7 +5,7 @@ import {Questions} from './Questions'
 import QuizButton from './QuizButton'
 import {connect} from 'react-redux'
 import variables from '../Styles/Variables'
-import {shuffleArray, intermediateArray} from '../Utils/helper'
+import {shuffleArray, intermediateArray, setAsyncIndex} from '../Utils/helper'
 import LinearGradient from 'react-native-linear-gradient'
 
 import {
@@ -280,18 +280,28 @@ const mapActionsToProps = (dispatch) => ({
         dispatch({type: 'TIMER_EXPIRES'})
     },
     answerHistoryQuestion(array) {
+        const key = 'history'
+        setAsyncIndex(key, array)
         dispatch({type: 'HISTORY_QUESTION', payload: array})
     },
     answerSportsQuestion(array) {
+        const key = 'sports'
+        setAsyncIndex(key, array)
         dispatch({type: 'SPORTS_QUESTION', payload: array})
     },
     answerEntertainmentQuestion(array) {
+        const key = 'entertainment'
+        setAsyncIndex(key, array)
         dispatch({type: 'ENTERTAINMENT_QUESTION', payload: array})
     },
     answerMusicQuestion(array) {
+        const key = 'music'
+        setAsyncIndex(key, array)
         dispatch({type: 'MUSIC_QUESTION', payload: array})
     },
     answerGeographyQuestion(array) {
+        const key = 'geography'
+        setAsyncIndex(key, array)
         dispatch({type: 'GEOGRAPHY_QUESTION', payload: array})
     },
     chooseCat() {

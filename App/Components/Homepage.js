@@ -6,7 +6,6 @@ import {shuffleArray} from '../Utils/helper'
 import LinearGradient from 'react-native-linear-gradient'
 import variables from '../Styles/Variables'
 let {width, height} = Dimensions.get('window')
-import {dataStore} from '../Storage/dataStore';
 height = height - 50; // make space for bottom menu bar
 
 import {

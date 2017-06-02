@@ -1,12 +1,32 @@
-//import React from 'react'
-
-import {
-    AsyncStorage,
-} from 'react-native'
-
-/**
- * Set default state values from memory
- */
+// import React, {Component} from 'react'
+// import {connect} from 'react-redux'
+//
+// import {
+//     AsyncStorage,
+// } from 'react-native'
+//
+// /**
+//  * Set default state values from memory
+//  */
+//
+//
+// class _setDefaults extends Component {
+//
+//     constructor() {
+//         super()
+//         console.log( 'set defaults is working? - in constructor?')
+//     }
+// }
+//
+// const mapStateToProps = (state) => ({})
+//
+// const mapActionsToProps = (dispatch) => ({
+//     initSportsIndex(array) {
+//         dispatch({type: 'SPORTS_QUESTION', payload: array})
+//     },
+// })
+//
+// export const setDefaults = connect(mapStateToProps, mapActionsToProps)(_setDefaults)
 
 
 
