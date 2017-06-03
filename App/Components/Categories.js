@@ -81,30 +81,28 @@ class _Categories extends Component {
         }).start();
 
         setTimeout(() => {
+                // this.props.setCatIndex(this.props.historyIndex);
+                // this.props.catWasSelected('history')
             if (index === 0) {
                 this.props.setCatIndex(this.props.sportsIndex);
                 this.props.catWasSelected('sports')
-                console.log('index set?', index)
             }
             if (index === 1) {
                 this.props.setCatIndex(this.props.musicIndex);
                 this.props.catWasSelected('music')
-                console.log('index set?', index)
             }
             if (index === 2) {
                 this.props.setCatIndex(this.props.entertainmentIndex);
                 this.props.catWasSelected('entertainment')
-                console.log('index set?', index)
             }
             if (index === 3) {
                 this.props.setCatIndex(this.props.historyIndex);
                 this.props.catWasSelected('history')
-                console.log('index set?', index)
+                //console.log('HISTORY INDEX IS', this.props.historyIndex)
             }
             if (index === 4) {
                 this.props.setCatIndex(this.props.geographyIndex);
                 this.props.catWasSelected('geography')
-                console.log('index set?', index)
             }
         }, 1000)
     }

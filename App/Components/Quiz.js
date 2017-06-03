@@ -12,6 +12,7 @@ import {
     Text,
     View,
     Animated,
+    AsyncStorage,
 } from 'react-native'
 
 let animatedOpacity = new Animated.Value(0)
@@ -24,6 +25,21 @@ class _Quiz extends Component {
         this.state = {
             timerValue: 15,
         }
+
+        /**
+         * test data retrieval
+         */
+
+
+
+        // let storageKey = 'sports_true'
+        // AsyncStorage.getItem('@QuestionAnswers:' + storageKey).then((value) => {
+        //     console.log('I have this many correct sports answers!!!!', value)
+        // }).done()
+        // storageKey = 'geography_false'
+        // AsyncStorage.getItem('@QuestionAnswers:' + storageKey).then((value) => {
+        //     console.log('I have this many incorrect geography answers!!!!', value)
+        // }).done()
     }
 
     componentDidMount() {
@@ -39,6 +55,8 @@ class _Quiz extends Component {
             if (this.state.timerValue > 0) {
                 this.startTimer();
             } else {
+                this.saveIndexData()
+                this.saveAnswerData(false)
                 this.props.timerExpires()
             }
         }
@@ -94,19 +112,48 @@ class _Quiz extends Component {
 
     goToNextQuestion(question_number) {
 
+        this.clearTheTimer();
+        if (( this.props.currentQuestion + 2 ) === this.props.numberQuestions) {
+            this.props.finalQuestion()
+        }
+        if (( this.props.currentQuestion + 1 ) === this.props.numberQuestions) {
+            this.props.goToResults()
+        } else {
+            this.props.chooseCat()
+            // @todo do I still need the following???
+            this.props.goToNextQuestion(question_number);
+            this.fadeInQuiz()
+            this.startTimerInit()
+        }
+    }
+
+    resetQuiz() {
+        this.clearTheTimer()
+        this.props.getData(this.props.currentCat, this.props.catIndex[0])
+        this.props.resetQuizClicked()
+        this.fadeInQuiz()
+    }
+
+    saveIndexData() {
+        /**
+         * Handle stored index data
+         */
         let cat_array = this.props.catIndex
+        //console.log('CAT ARRAY START', cat_array)
         cat_array.shift()
 
         const cat = this.props.currentCat
 
         if (cat === 'history') {
+
+            //console.log('CAT ARRAY END', cat_array)
             if (cat_array.length > 0) {
                 this.props.answerHistoryQuestion(cat_array)
-                console.log('HISTORY QUESTIONS STILL')
+                //console.log('HISTORY QUESTIONS STILL')
             } else {
                 const cat_keys = intermediateArray(quizData[0].history.length)
                 this.props.answerHistoryQuestion(cat_keys)
-                console.log('I RAN OUT OF HISTORY QUESTIONS!!!!')
+                //console.log('I RAN OUT OF HISTORY QUESTIONS!!!!')
             }
         } else if (cat === 'sports') {
             if (cat_array.length > 0) {
@@ -137,30 +184,42 @@ class _Quiz extends Component {
                 this.props.answerGeographyQuestion(cat_keys)
             }
         }
-
-        this.clearTheTimer();
-        if (( this.props.currentQuestion + 2 ) === this.props.numberQuestions) {
-            this.props.finalQuestion()
-        }
-        if (( this.props.currentQuestion + 1 ) === this.props.numberQuestions) {
-            this.props.goToResults()
-        } else {
-            this.props.chooseCat()
-            // @todo do I still need the following???
-            this.props.goToNextQuestion(question_number);
-            this.fadeInQuiz()
-            this.startTimerInit()
-        }
     }
 
-    resetQuiz() {
-        this.clearTheTimer()
-        this.props.getData(this.props.currentCat, this.props.catIndex[0])
-        this.props.resetQuizClicked()
-        this.fadeInQuiz()
+    saveAnswerData(correct) {
+        const cat = this.props.currentCat
+        if (correct) {
+            var storageKey = cat + '_true'
+        } else {
+            var storageKey = cat + '_false'
+        }
+
+        /**
+         * @todo this concatenates, so 1 + 1 = 11, I need to convert from numbers to strings,
+         * @todo and back... or maybe use arrays and strinify?
+         */
+        AsyncStorage.getItem('@QuestionAnswers:' + storageKey).then((value) => {
+            if (value) {
+                const valueNew = Number(value) + 1
+                const valueNewString = valueNew.toString()
+                AsyncStorage.setItem('@QuestionAnswers:' + storageKey, valueNewString)
+                console.log('updated value...')
+            } else {
+                AsyncStorage.setItem('@QuestionAnswers:' + storageKey, "1")
+                console.log('saved first time')
+            }
+        }).done()
+
+        // console.log('current cat?', cat)
+        // console.log('was correct?', correct)
     }
 
     answerChosen(correct, key) {
+
+        this.saveIndexData()
+
+        this.saveAnswerData(correct)
+
         /**
          * A choice was made
          */
@@ -285,6 +344,7 @@ const mapActionsToProps = (dispatch) => ({
         const key = 'history'
         setAsyncIndex(key, array)
         dispatch({type: 'HISTORY_QUESTION', payload: array})
+        //console.log('HISTORY QUESTION PAYLOAD DISPATCHED IN QUIZ.JS')
     },
     answerSportsQuestion(array) {
         const key = 'sports'

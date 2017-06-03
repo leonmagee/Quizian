@@ -12,44 +12,50 @@ class _QuizWrap extends Component {
 
     constructor(props) {
         super(props)
+    }
+
+    componentDidMount() {
         const dataInitArray = [
             {
                 data_key: 'sports',
                 array_length: quizData[0].sports.length,
-                redux_action: props.sportsIndexInit,
+                redux_action: this.props.sportsIndexInit,
             },
             {
                 data_key: 'history',
                 array_length: quizData[0].history.length,
-                redux_action: props.historyIndexInit
+                redux_action: this.props.historyIndexInit
             },
             {
                 data_key: 'entertainment',
                 array_length: quizData[0].entertainment.length,
-                redux_action: props.entertainmentIndexInit
+                redux_action: this.props.entertainmentIndexInit
             },
             {
                 data_key: 'music',
                 array_length: quizData[0].music.length,
-                redux_action: props.musicIndexInit
+                redux_action: this.props.musicIndexInit
             },
             {
                 data_key: 'geography',
                 array_length: quizData[0].geography.length,
-                redux_action: props.geographyIndexInit
+                redux_action: this.props.geographyIndexInit
             }
         ]
 
         dataInitArray.map((item) => {
             AsyncStorage.getItem('@QuestionIndex:' + item.data_key).then((value) => {
+                //console.log('ASYNC STORAGE IN QUIZ WRAP')
                 if (value) {
                     const parsedData = JSON.parse(value)
                     item.redux_action(parsedData)
+                    //console.log('VALUE IS TRUE')
                 } else {
                     const cat_keys = intermediateArray(item.array_length)
                     const data = JSON.stringify(cat_keys)
                     AsyncStorage.setItem('@QuestionIndex:' + item.data_key, data)
                     item.redux_action(cat_keys)
+                    //console.log('VALUE IS FALSE')
                 }
             }).done()
         })
