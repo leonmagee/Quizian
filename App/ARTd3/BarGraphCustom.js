@@ -40,12 +40,19 @@ const colors = {
 
 // create the barchart (http://bl.ocks.org/mbostock/3885304)
 const data = [
+    {frequency: 1, letter: 'GEOGRAPHY'},
+    {frequency: 1, letter: 'SPORTS'},
+    {frequency: 1, letter: 'HISTORY'},
+    {frequency: 1, letter: 'MUSIC'},
+    {frequency: 1, letter: 'TV/MOVIES'},
+]
+
+const dataResults = [
     {frequency: 100, letter: 'GEOGRAPHY'},
     {frequency: 77.234234, letter: 'SPORTS'},
     {frequency: 40, letter: 'HISTORY'},
     {frequency: 10, letter: 'MUSIC'},
     {frequency: 23, letter: 'TV/MOVIES'},
-    //{frequency: 3, letter: 'f'},
 ]
 
 class App extends Component {
