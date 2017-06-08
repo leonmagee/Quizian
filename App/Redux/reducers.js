@@ -24,6 +24,7 @@ import {chooseCatReducer} from './chooseCatReducer';
 import {catIndexReducer} from './catIndexReducer';
 import {catTextReducer} from './catTextReducer';
 import {quizStartedReducer} from './quizStartedReducer';
+import {statsPageReducer} from './statsPageReducer';
 
 /**
  * Combine Reducers
@@ -49,4 +50,5 @@ export const reducer = combineReducers({
     catIndex: catIndexReducer,
     catText: catTextReducer,
     quizStarted: quizStartedReducer,
+    statsPage: statsPageReducer,
 });

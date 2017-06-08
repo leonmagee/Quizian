@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Quiz} from './Quiz'
 import {QuizResults} from './QuizResults';
+import Stats from './Stats'
 import {Categories} from './Categories';
 import {connect} from 'react-redux';
 import {View, AsyncStorage} from 'react-native';
@@ -63,6 +64,9 @@ class _QuizWrap extends Component {
 
     render() {
 
+        if (this.props.statsPage) {
+            var mainComponent = <Stats />;
+        }
         if (this.props.quizResults) {
             var mainComponent = <QuizResults />;
         } else if (this.props.chooseCat) {
@@ -80,6 +84,7 @@ class _QuizWrap extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    statsPage: state.statsPage,
     quizResults: state.quizResults,
     chooseCat: state.chooseCat,
 })

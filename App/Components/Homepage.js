@@ -68,8 +68,9 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 5,
         backgroundColor: 'rgba(0,0,0,0.1)',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
+        flexDirection: 'row',
     },
 });
 
@@ -222,6 +223,7 @@ class Homepage extends Component {
                     </View>
                     <View style={styles.menuBar}>
                         <StartQuizButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
+                        <StartQuizButton handleClick={() => this.props.goToStats()} buttonText="STATS"/>
                     </View>
                 </View>
             );
@@ -242,6 +244,9 @@ mapStateToProps = (state) => ({
 mapActionsToProps = (dispatch) => ({
     startQuiz() {
         dispatch({type: 'START_QUIZ'})
+    },
+    goToStats() {
+        dispatch({type: 'STATS_PAGE'})
     }
 })
 
