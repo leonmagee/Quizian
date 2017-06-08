@@ -1,9 +1,40 @@
 import React, {Component} from 'react'
+import LinearGradient from 'react-native-linear-gradient'
+
 import {
     View,
     Text,
     AsyncStorage,
+    StyleSheet,
+    Animated,
 } from 'react-native'
+
+const LinearAnimate = Animated.createAnimatedComponent(LinearGradient)
+
+
+const styles = new StyleSheet.create({
+    graphWrap: {
+        height: 400,
+        width: 300,
+        backgroundColor: '#F7F7F7',
+        margin: 10,
+        padding: 10,
+        borderColor: '#222',
+        borderWidth: 2,
+        alignItems: 'flex-end',
+        flexDirection: 'row',
+    },
+    barGraph: {
+        width: 70,
+        //height: 0,
+        backgroundColor: 'blue',
+        marginRight: 10,
+    },
+    barGradient: {
+        width: 70,
+        marginRight: 10,
+    }
+})
 
 
 class Stats extends Component {
@@ -19,6 +50,9 @@ class Stats extends Component {
         //     {"number": 42, "name": 'Rent'},
         //     {"number":  4, "name": 'Misc'},
         // ];
+
+        // const barHeight = new Animated.Value(100)
+        // //const barHeight = 150
 
 
         this.state = {
@@ -37,6 +71,7 @@ class Stats extends Component {
             musicPercent: 0,
             entertainmentPercent: 0,
             geographyPercent: 0,
+            barHeight: new Animated.Value(100),
         }
     }
 
@@ -74,6 +109,10 @@ class Stats extends Component {
 
     componentDidMount() {
 
+        Animated.timing(this.state.barHeight, {
+            toValue: 300,
+            duration: 400,
+        }).start();
 
         const asyncKeysInit = [
             'sports_true',
@@ -95,7 +134,6 @@ class Stats extends Component {
         })
         console.log(asyncKeys)
 
-
         AsyncStorage.multiGet(asyncKeys, (err, stores) => {
             console.log('all the stores!', stores)
 
@@ -112,116 +150,25 @@ class Stats extends Component {
                 geography_false: Number(stores[9][1]),
             })
 
-            // stores.map((result, i, store) => {
-            //     // get at each store's key/value so you can work with it
-            //     let key = store[i][0];
-            //     let value = store[i][1];
-            // });
         }).then(() => {
             this.setDataFromStorage()
         })
-
-
-        /**
-         * @todo switch out these 10 calls to getItem with one call to multiGet
-         */
-        // AsyncStorage.getItem('@QuestionAnswers:history_true').then((value) => {
-        //     if (value) {
-        //         this.setState({
-        //             history_true: Number(value)
-        //         })
-        //     }
-        // }).done(() => {
-        //     AsyncStorage.getItem('@QuestionAnswers:history_false').then((value) => {
-        //         if (value) {
-        //             this.setState({
-        //                 history_false: Number(value)
-        //             })
-        //         }
-        //     }).done(() => {
-        //         AsyncStorage.getItem('@QuestionAnswers:sports_true').then((value) => {
-        //             if (value) {
-        //                 this.setState({
-        //                     sports_true: Number(value)
-        //                 })
-        //             }
-        //         }).done(() => {
-        //             AsyncStorage.getItem('@QuestionAnswers:sports_false').then((value) => {
-        //                 if (value) {
-        //                     this.setState({
-        //                         sports_false: Number(value)
-        //                     })
-        //                 }
-        //             }).done(() => {
-        //                 AsyncStorage.getItem('@QuestionAnswers:music_true').then((value) => {
-        //                     if (value) {
-        //                         this.setState({
-        //                             music_true: Number(value)
-        //                         })
-        //                     }
-        //                 }).done(() => {
-        //                     AsyncStorage.getItem('@QuestionAnswers:music_false').then((value) => {
-        //                         if (value) {
-        //                             this.setState({
-        //                                 music_false: Number(value)
-        //                             })
-        //                         }
-        //                     }).done(() => {
-        //                         AsyncStorage.getItem('@QuestionAnswers:geography_true').then((value) => {
-        //                             if (value) {
-        //                                 this.setState({
-        //                                     geography_true: Number(value)
-        //                                 })
-        //                             }
-        //                         }).done(() => {
-        //                             AsyncStorage.getItem('@QuestionAnswers:geography_false').then((value) => {
-        //                                 if (value) {
-        //                                     this.setState({
-        //                                         geography_false: Number(value)
-        //                                     })
-        //                                 }
-        //                             }).done(() => {
-        //                                 AsyncStorage.getItem('@QuestionAnswers:entertainment_true').then((value) => {
-        //                                     if (value) {
-        //                                         this.setState({
-        //                                             entertainment_true: Number(value)
-        //                                         })
-        //                                     }
-        //                                 }).done(() => {
-        //                                     AsyncStorage.getItem('@QuestionAnswers:entertainment_false').then((value) => {
-        //                                         if (value) {
-        //                                             this.setState({
-        //                                                 entertainment_false: Number(value)
-        //                                             })
-        //                                         }
-        //                                         console.log('made it all the way!')
-        //                                     }).done(() => {
-        //                                         /**
-        //                                          * Add data retrieved!
-        //                                          */
-        //                                         this.setDataFromStorage()
-        //                                     })
-        //                                 })
-        //                             })
-        //                         })
-        //                     })
-        //                 })
-        //             })
-        //         })
-        //     })
-        // })
-        //
-
-
     }
 
-
     render() {
+
+
 
         return (
             <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, backgroundColor: '#F7F7F7'}}>
                 <Text style={{fontSize: 20}}>History Questions - {this.state.historyPercent}% Correct</Text>
                 <Text style={{fontSize: 20}}>Sports Questions - {this.state.sportsPercent}% Correct</Text>
+                <View style={styles.graphWrap}>
+                    <Animated.View style={[styles.barGraph, {height: this.state.barHeight}]}/>
+                    <Animated.View style={[styles.barGraph, {height: this.state.barHeight}]} />
+                    <LinearAnimate colors={['blue', 'red']} style={[styles.barGradient, {height: this.state.barHeight}]} >
+                    </LinearAnimate>
+                </View>
             </View>
         )
     }
