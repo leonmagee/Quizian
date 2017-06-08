@@ -5,8 +5,6 @@ import StartQuizButton from './StartQuizButton'
 import {shuffleArray} from '../Utils/helper'
 import LinearGradient from 'react-native-linear-gradient'
 import variables from '../Styles/Variables'
-let {width, height} = Dimensions.get('window')
-height = height - 50; // make space for bottom menu bar
 
 import {
     StyleSheet,
@@ -15,6 +13,11 @@ import {
     Dimensions,
     Animated,
 } from 'react-native';
+
+let {width, height} = Dimensions.get('window')
+height = height - 50; // make space for bottom menu bar
+
+
 
 const styles = StyleSheet.create({
     homeWrapOuter: {

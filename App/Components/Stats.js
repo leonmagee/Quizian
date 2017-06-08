@@ -7,34 +7,91 @@ import {
     AsyncStorage,
     StyleSheet,
     Animated,
+    Dimensions,
 } from 'react-native'
+
+let {width} = Dimensions.get('window')
+let wrapWidth = width * 0.8
+let wrapMargin = width * 0.1
+let mainBackground = '#FAFAFA'
 
 const LinearAnimate = Animated.createAnimatedComponent(LinearGradient)
 
 
 const styles = new StyleSheet.create({
-    graphWrap: {
-        height: 400,
-        width: 300,
-        backgroundColor: '#F7F7F7',
-        margin: 10,
-        padding: 10,
-        borderColor: '#222',
-        borderWidth: 2,
-        alignItems: 'flex-end',
-        flexDirection: 'row',
+    outerWrap: {
+        flex: 1,
+        justifyContent: 'center',
     },
-    barGraph: {
-        width: 70,
-        //height: 0,
-        backgroundColor: 'blue',
-        marginRight: 10,
+    headerWrap: {
+        backgroundColor: mainBackground,
+        paddingTop: 50,
+        alignItems: 'center',
+    },
+    headerText: {
+        fontSize: 26,
+        color: '#111',
+        fontWeight: 'bold',
+        //fontFamily: 'Lalezar',
+    },
+    headerText2: {
+        fontSize: 12,
+        color: '#555',
+        fontWeight: 'bold',
+        paddingTop: 8,
+        //fontFamily: 'Lalezar',
+    },
+    mainWrap: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        //flex: 1,
+        backgroundColor: mainBackground,
+    },
+    graphWrap: {
+        width: wrapWidth,
+        backgroundColor: '#EAEAEA',
+        margin: wrapMargin,
     },
     barGradient: {
-        width: 70,
-        marginRight: 10,
-    }
+        height: 50,
+    },
+    labelWrap: {
+        backgroundColor: mainBackground,
+        paddingTop: 17,
+        paddingBottom: 6,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    labelText: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#111',
+        //fontFamily: 'Lalezar',
+    },
 })
+
+const gradients = [
+    [
+        '#fe6e53',
+        '#FC5130',
+    ],
+    [
+        '#1ff879',
+        '#04E762',
+    ],
+    [
+        '#fc27ad',
+        '#F00699',
+    ],
+    [
+        '#36d3fd',
+        '#00C9FF',
+    ],
+    [
+        '#f6525e',
+        '#E63946',
+    ],
+]
 
 
 class Stats extends Component {
@@ -42,18 +99,28 @@ class Stats extends Component {
     constructor() {
         super()
 
-        // const shapeData = [
-        //     {"number":  8, "name": 'Fun activities'},
-        //     {"number": 7, "name": 'Dog'},
-        //     {"number": 16, "name": 'Food'},
-        //     {"number": 23, "name": 'Car'},
-        //     {"number": 42, "name": 'Rent'},
-        //     {"number":  4, "name": 'Misc'},
-        // ];
-
-        // const barHeight = new Animated.Value(100)
-        // //const barHeight = 150
-
+        const totalPercents = [
+            {
+                label: 'SPORTS',
+                percent: 0
+            },
+            {
+                label: 'HISTORY',
+                percent: 0
+            },
+            {
+                label: 'TV/MOVIES',
+                percent: 0
+            },
+            {
+                label: 'MUSIC',
+                percent: 0
+            },
+            {
+                label: 'GEOGRAPHY',
+                percent: 0
+            },
+        ]
 
         this.state = {
             sports_true: 0,
@@ -66,53 +133,124 @@ class Stats extends Component {
             music_false: 0,
             geography_true: 0,
             geography_false: 0,
-            historyPercent: 0,
-            sportsPercent: 0,
-            musicPercent: 0,
-            entertainmentPercent: 0,
-            geographyPercent: 0,
-            barHeight: new Animated.Value(100),
+            barWidth: [
+                new Animated.Value(0),
+                new Animated.Value(0),
+                new Animated.Value(0),
+                new Animated.Value(0),
+                new Animated.Value(0),
+            ],
+            totalPercents: totalPercents
         }
     }
 
     setDataFromStorage() {
-        if (this.state.history_true || this.state.history_false) {
-            if (!this.state.history_false) {
-                this.setState({
-                    historyPercent: 100
-                })
-            } else if (this.state.history_true) {
-                let historyTotal = this.state.history_true + this.state.history_false
-                let historyPercent = ( this.state.history_true / historyTotal ) * 100
-                let historyPercentFinal = historyPercent.toFixed(0)
-                this.setState({
-                    historyPercent: historyPercentFinal
-                })
-            }
-        }
-
         if (this.state.sports_true || this.state.sports_false) {
             if (!this.state.sports_false) {
+                let totalPerc = this.state.totalPercents
+                totalPerc[0].percent = 100
                 this.setState({
-                    sportsPercent: 100
+                    totalPercents: totalPerc
                 })
             } else if (this.state.sports_true) {
                 let sportsTotal = this.state.sports_true + this.state.sports_false
                 let sportsPercent = ( this.state.sports_true / sportsTotal ) * 100
                 let sportsPercentFinal = sportsPercent.toFixed(0)
+                let totalPerc = this.state.totalPercents
+                totalPerc[0].percent = sportsPercentFinal
                 this.setState({
-                    sportsPercent: sportsPercentFinal
+                    totalPercents: totalPerc
                 })
             }
         }
+
+        if (this.state.history_true || this.state.history_false) {
+            if (!this.state.history_false) {
+                let totalPerc = this.state.totalPercents
+                totalPerc[1].percent = 100
+                this.setState({
+                    totalPercents: totalPerc
+                })
+            } else if (this.state.history_true) {
+                let historyTotal = this.state.history_true + this.state.history_false
+                let historyPercent = ( this.state.history_true / historyTotal ) * 100
+                let historyPercentFinal = historyPercent.toFixed(0)
+                let totalPerc = this.state.totalPercents
+                totalPerc[1].percent = historyPercentFinal
+                this.setState({
+                    totalPercents: totalPerc
+                })
+            }
+        }
+
+        if (this.state.entertainment_true || this.state.entertainment_false) {
+            if (!this.state.entertainment_false) {
+                let totalPerc = this.state.totalPercents
+                totalPerc[2].percent = 100
+                this.setState({
+                    totalPercents: totalPerc
+                })
+            } else if (this.state.entertainment_true) {
+                let entertainmentTotal = this.state.entertainment_true + this.state.entertainment_false
+                let entertainmentPercent = ( this.state.entertainment_true / entertainmentTotal ) * 100
+                let entertainmentPercentFinal = entertainmentPercent.toFixed(0)
+                let totalPerc = this.state.totalPercents
+                totalPerc[2].percent = entertainmentPercentFinal
+                this.setState({
+                    totalPercents: totalPerc
+                })
+            }
+        }
+
+        if (this.state.music_true || this.state.music_false) {
+            if (!this.state.music_false) {
+                let totalPerc = this.state.totalPercents
+                totalPerc[3].percent = 100
+                this.setState({
+                    totalPercents: totalPerc
+                })
+            } else if (this.state.music_true) {
+                let musicTotal = this.state.music_true + this.state.music_false
+                let musicPercent = ( this.state.music_true / musicTotal ) * 100
+                let musicPercentFinal = musicPercent.toFixed(0)
+                let totalPerc = this.state.totalPercents
+                totalPerc[3].percent = musicPercentFinal
+                this.setState({
+                    totalPercents: totalPerc
+                })
+            }
+        }
+
+        if (this.state.geography_true || this.state.geography_false) {
+            if (!this.state.geography_false) {
+                let totalPerc = this.state.totalPercents
+                totalPerc[4].percent = 100
+                this.setState({
+                    totalPercents: totalPerc
+                })
+            } else if (this.state.geography_true) {
+                let geographyTotal = this.state.geography_true + this.state.geography_false
+                let geographyPercent = ( this.state.geography_true / geographyTotal ) * 100
+                let geographyPercentFinal = geographyPercent.toFixed(0)
+                let totalPerc = this.state.totalPercents
+                totalPerc[4].percent = geographyPercentFinal
+                this.setState({
+                    totalPercents: totalPerc
+                })
+            }
+        }
+
+        this.state.totalPercents.map((i, k) => {
+            Animated.timing(this.state.barWidth[k], {
+                toValue: wrapWidth * (i.percent / 100),
+                //toValue: wrapWidth * 0.3,
+                duration: 400,
+            }).start();
+        })
+
     }
 
     componentDidMount() {
-
-        Animated.timing(this.state.barHeight, {
-            toValue: 300,
-            duration: 400,
-        }).start();
 
         const asyncKeysInit = [
             'sports_true',
@@ -157,17 +295,30 @@ class Stats extends Component {
 
     render() {
 
-
+        const barGraphs = this.state.totalPercents.map((i, k) => {
+            return (
+                <View key={k}>
+                    <View style={styles.labelWrap}>
+                        <Text style={styles.labelText}>{i.label}</Text>
+                        <Text style={styles.labelText}>{i.percent}%</Text>
+                    </View>
+                    <LinearAnimate colors={gradients[k]}
+                                   style={[styles.barGradient, {width: this.state.barWidth[k]}]}>
+                    </LinearAnimate>
+                </View>
+            )
+        })
 
         return (
-            <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, backgroundColor: '#F7F7F7'}}>
-                <Text style={{fontSize: 20}}>History Questions - {this.state.historyPercent}% Correct</Text>
-                <Text style={{fontSize: 20}}>Sports Questions - {this.state.sportsPercent}% Correct</Text>
-                <View style={styles.graphWrap}>
-                    <Animated.View style={[styles.barGraph, {height: this.state.barHeight}]}/>
-                    <Animated.View style={[styles.barGraph, {height: this.state.barHeight}]} />
-                    <LinearAnimate colors={['blue', 'red']} style={[styles.barGradient, {height: this.state.barHeight}]} >
-                    </LinearAnimate>
+            <View style={styles.outerWrap}>
+                <View style={styles.headerWrap}>
+                    <Text style={styles.headerText}>YOUR STATISTICS</Text>
+                    <Text style={styles.headerText2}>PERCENTAGE OF CORRECT ANSWERS</Text>
+                </View>
+                <View style={styles.mainWrap}>
+                    <View style={styles.graphWrap}>
+                        {barGraphs}
+                    </View>
                 </View>
             </View>
         )

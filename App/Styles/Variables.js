@@ -5,4 +5,9 @@ let variables = {
     gradient: ['#00C9FF','#02b4e4'], // light blue darker custom
 };
 
+/**
+ * Other colors
+ * // E63946 - bright red
+ */
+
 module.exports = variables;
