@@ -11,6 +11,7 @@
   "dependencies": {
     "art": "^0.10.1",
     "d3": "^4.9.1",
+    "d3-scale": "^1.0.6",
     "d3-shape": "^1.2.0",
     "htmlentities": "^1.0.0",
     "react": "16.0.0-alpha.6",

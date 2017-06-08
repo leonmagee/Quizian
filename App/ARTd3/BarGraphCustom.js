@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {View, Dimensions, TouchableWithoutFeedback} from 'react-native'
+import Morph from 'art/morph/path'
 
 import Svg, {
     G,
@@ -28,17 +29,19 @@ import {
 //     path
 // } from 'd3-path'
 
-const colours = {
+const colors = {
     black: 'black',
     blue: 'steelblue',
     brown: 'brown',
     red: 'red',
 }
 
+
+
 // create the barchart (http://bl.ocks.org/mbostock/3885304)
 const data = [
-    {frequency: 20, letter: 'SPORTS'},
-    {frequency: 100, letter: 'GEOGR'},
+    {frequency: 100, letter: 'GEOGRAPHY'},
+    {frequency: 77.234234, letter: 'SPORTS'},
     {frequency: 40, letter: 'HISTORY'},
     {frequency: 10, letter: 'MUSIC'},
     {frequency: 23, letter: 'TV/MOVIES'},
@@ -55,8 +58,8 @@ class App extends Component {
     }
 }
 
-const colors_array = data.map(()=>colours.blue)
-//console.log(colors_array)
+const pathFrom = 3
+const pathTo = 5   // NEW SVG path
 
 class BarChart extends Component {
     state = {
@@ -64,14 +67,18 @@ class BarChart extends Component {
          * barColour is an array with 5 colors, one for each bar.
          * I can probably use a state for the height / width of the bar chart and animate that
          */
-        barColour: data.map(()=>colours.blue)
+        barColour: data.map(()=>colors.blue),
+        path: Morph.Tween(
+            pathFrom,  // OLD SVG path
+            pathTo,    // NEW SVG path
+        ),
     }
 
     toggleHighlight(i) {
         this.setState({
             barColour: [
                 ...this.state.barColour.slice(0, i),
-                this.state.barColour[i] === colours.blue ? colours.brown : colours.blue,
+                this.state.barColour[i] === colors.blue ? colors.brown : colors.blue,
                 ...this.state.barColour.slice(i+1)
             ]
         })
@@ -111,6 +118,7 @@ class BarChart extends Component {
         const notch = 5 // height of notch line
         const labelDistance = 20 // vertical label distance
         const notchWidth = 8
+        const axisMargin = [30,18,20,16,24]
 
         // first G is bottom graph element (x axis)
         const svg = (
@@ -118,31 +126,40 @@ class BarChart extends Component {
                 <G translate={margin.left + "," + margin.top}>
                     <G translate={"0," + height}>
                         <G key={-1}>
-                            <Path stroke={colours.black} d={bottomAxisD} key="-1"/>
+                            <Path stroke={colors.black} d={bottomAxisD} key="-1"/>
                             {
                                 data.map((d, i) => (
                                     <G key={i + 1} translate={x(d.letter) + labelDx + ",0"}>
-                                        <Line stroke={colours.black} y2={notch} strokeWidth={1}/>
-                                        <Text fontSize="10" fill={colours.black} y={labelDistance} x={-21}>{d.letter}</Text>
+                                        <Line stroke={colors.black} y2={notch} strokeWidth={1}/>
+                                        <Text fontSize="10" fill={colors.black} y={labelDistance} x={-axisMargin[i]}>{d.letter}</Text>
                                     </G>
                                 ))
                             }
                         </G>
                         <G key={-2}>
-                            <Path stroke={colours.black} d={leftAxisD} key="-1" strokeWidth={1}/>
+                            <Path stroke={colors.black} d={leftAxisD} key="-1" strokeWidth={1}/>
                             {
                                 leftAxis.map((d, i) => (
                                     <G key={i + 1} translate={"0," + (y(d) - height)}>
-                                        <Line stroke={colours.black} x1={notch} x2={notchWidth}/>
-                                        <Text fill={colours.black} x={-labelDistance} y={-notch}>{d}</Text>
+                                        <Line stroke={colors.black} x1={notch} x2={notchWidth}/>
+                                        <Text fill={colors.black} x={-labelDistance} y={-notch}>{d}</Text>
                                     </G>
                                 ))
                             }
                         </G>
                         {
+
                             data.map((d, i) => (
+                                //console.log('x', x(d.letter))
+                                //console.log('y', y(d.frequency))
+                            //data.map((d,i) => {
+                            //    console.log('d',d)
+                            //    console.log('i',i)
+                            //    console.log('x', x(d.letter))
+                            //    console.log('y', y(d.frequency))
+                            //})
                                 <TouchableWithoutFeedback key={i} onPress={()=>this.toggleHighlight(i)}>
-                                    <Rect x={x(d.letter)}
+                                    <Rect x={x(d.letter) + 5}
                                           y={y(d.frequency) - height}
                                           width={x.bandwidth()}
                                           height={height - y(d.frequency)}
