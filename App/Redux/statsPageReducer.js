@@ -2,6 +2,8 @@ import React from 'react';
 
 import {
     STATS_PAGE,
+    START_QUIZ,
+    QUIZ_RESET,
 } from './actions';
 
 /**
@@ -13,9 +15,12 @@ export const statsPageReducer = (state = false, action) => {
         case STATS_PAGE:
             return true;
             break;
-        // case QUIZ_RESET:
-        //     return false;
-        //     break;
+        case START_QUIZ:
+            return false;
+            break;
+        case QUIZ_RESET:
+            return false;
+            break;
         default:
             return state;
     }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {QuizWrap} from './QuizWrap'
+import Stats from './Stats'
 import StartQuizButton from './StartQuizButton'
 import {shuffleArray} from '../Utils/helper'
 import LinearGradient from 'react-native-linear-gradient'
@@ -18,8 +19,11 @@ let {width, height} = Dimensions.get('window')
 height = height - 50; // make space for bottom menu bar
 
 
-
 const styles = StyleSheet.create({
+    mainOuterWrap: {
+        flex: 1,
+        backgroundColor: '#FAFAFA', // @todo padding applied to stats page? Shouldn't need this
+    },
     homeWrapOuter: {
         flex: 1,
     },
@@ -210,35 +214,44 @@ class Homepage extends Component {
          * Toggle MainComponent based on 'started' state
          * not using Redux for this component
          */
-        if (this.props.quizStarted) {
-            var MainComponent = <QuizWrap/>
+        if (this.props.statsPage) {
+            var MainComponent = <Stats />;
+        } else if (this.props.quizStarted) {
+            var MainComponent = (
+                <LinearGradient colors={variables.gradient} style={{flex: 1}}>
+                    <QuizWrap/>
+                </LinearGradient>
+            )
         } else {
             var MainComponent = (
-                <View style={styles.homeWrapOuter}>
-                    <View style={styles.homeWrap}>
-                        <View style={[styles.homeTextWrap, {width: width, height: height}]}>
-                            <Text style={styles.homeText}>Quizian</Text>
+                <LinearGradient colors={variables.gradient} style={{flex: 1}}>
+                    <View style={styles.homeWrapOuter}>
+                        <View style={styles.homeWrap}>
+                            <View style={[styles.homeTextWrap, {width: width, height: height}]}>
+                                <Text style={styles.homeText}>Quizian</Text>
+                            </View>
+                            {grid}
                         </View>
-                        {grid}
+                        <View style={styles.menuBar}>
+                            <StartQuizButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
+                            <StartQuizButton handleClick={() => this.props.goToStats()} buttonText="STATS"/>
+                        </View>
                     </View>
-                    <View style={styles.menuBar}>
-                        <StartQuizButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
-                        <StartQuizButton handleClick={() => this.props.goToStats()} buttonText="STATS"/>
-                    </View>
-                </View>
+                </LinearGradient>
             );
         }
 
         return (
-            <LinearGradient colors={variables.gradient} style={{flex: 1}}>
+            <View style={styles.mainOuterWrap}>
                 {MainComponent}
-            </LinearGradient>
+            </View>
         )
     }
 }
 
 mapStateToProps = (state) => ({
     quizStarted: state.quizStarted,
+    statsPage: state.statsPage,
 })
 
 mapActionsToProps = (dispatch) => ({

@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
+import {connect} from 'react-redux'
+import StatsButton from './StatsButton'
 
 import {
     View,
@@ -67,6 +69,15 @@ const styles = new StyleSheet.create({
         fontWeight: 'bold',
         color: '#111',
         //fontFamily: 'Lalezar',
+    },
+    menuBar: {
+        height: 50,
+        paddingTop: 10,
+        paddingBottom: 10,
+        //backgroundColor: 'rgba(0,0,0,0.1)',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        flexDirection: 'row',
     },
 })
 
@@ -320,10 +331,29 @@ class Stats extends Component {
                         {barGraphs}
                     </View>
                 </View>
+                <View style={styles.menuBar}>
+                    <StatsButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
+                    <StatsButton handleClick={() => this.props.goToHome()} buttonText="HOME"/>
+                </View>
             </View>
         )
     }
 }
 
+mapStateToProps = (state) => ({
+    //quizStarted: state.quizStarted,
+    //statsPage: state.statsPage,
+})
 
-module.exports = Stats
+mapActionsToProps = (dispatch) => ({
+    startQuiz() {
+        dispatch({type: 'START_QUIZ'})
+    },
+    goToHome() {
+        dispatch({type: 'QUIZ_RESET'})
+    }
+})
+
+module.exports = connect(mapStateToProps, mapActionsToProps)(Stats)
+
+//module.exports = Stats

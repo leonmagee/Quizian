@@ -34,7 +34,6 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* QuizianTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* QuizianTests.m */; };
 		442C9986F7734A899F2295AB /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE423616D514595AA1FAC14 /* libBVLinearGradient.a */; };
-		5098EF9F1EE77B980030E9B8 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5098EF831EE77AFF0030E9B8 /* libART.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		936353B2AF6443B49141A085 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8711683CE7734B49ACA6CFEA /* libRNSVG.a */; };
@@ -209,13 +208,6 @@
 			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
 			remoteInfo = RNSVG;
 		};
-		5098EF821EE77AFF0030E9B8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5098EF7E1EE77AFF0030E9B8 /* ART.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
-			remoteInfo = ART;
-		};
 		50BB27591ECFF6DC00257E64 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 879652BE3B414E95A97724A0 /* BVLinearGradient.xcodeproj */;
@@ -276,7 +268,6 @@
 		2424C37856D948AFA39A3B35 /* Lalezar-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lalezar-Regular.ttf"; path = "../App/Assets/Fonts/Lalezar/Lalezar-Regular.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Quizian-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quizian-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Quizian-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Quizian-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5098EF7E1EE77AFF0030E9B8 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -302,7 +293,6 @@
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
-				5098EF9F1EE77B980030E9B8 /* libART.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
@@ -453,14 +443,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5098EF7F1EE77AFF0030E9B8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5098EF831EE77AFF0030E9B8 /* libART.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		50BB27561ECFF6DC00257E64 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,7 +472,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				5098EF7E1EE77AFF0030E9B8 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -664,10 +645,6 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 5098EF7F1EE77AFF0030E9B8 /* Products */;
-					ProjectRef = 5098EF7E1EE77AFF0030E9B8 /* ART.xcodeproj */;
-				},
 				{
 					ProductGroup = 50BB27561ECFF6DC00257E64 /* Products */;
 					ProjectRef = 879652BE3B414E95A97724A0 /* BVLinearGradient.xcodeproj */;
@@ -884,13 +861,6 @@
 			fileType = archive.ar;
 			path = libRNSVG.a;
 			remoteRef = 5019CF7C1EB1488600DC265E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5098EF831EE77AFF0030E9B8 /* libART.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libART.a;
-			remoteRef = 5098EF821EE77AFF0030E9B8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		50BB275A1ECFF6DC00257E64 /* libBVLinearGradient.a */ = {

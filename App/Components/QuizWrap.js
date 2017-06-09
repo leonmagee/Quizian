@@ -66,8 +66,7 @@ class _QuizWrap extends Component {
 
         if (this.props.statsPage) {
             var mainComponent = <Stats />;
-        }
-        if (this.props.quizResults) {
+        } else if (this.props.quizResults) {
             var mainComponent = <QuizResults />;
         } else if (this.props.chooseCat) {
             var mainComponent = <Categories />;
