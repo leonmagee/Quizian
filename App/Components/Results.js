@@ -8,6 +8,7 @@ import {
     Text,
     StyleSheet,
     Animated,
+    //Easing,
     Dimensions,
 } from 'react-native'
 
@@ -57,6 +58,16 @@ const styles = new StyleSheet.create({
     },
     barGradient: {
         width: gradientWidth,
+        alignItems: 'center',
+    },
+    gradientText: {
+        color: '#FFF',
+        backgroundColor: 'transparent',
+        fontWeight: 'bold',
+        fontSize: 23,
+        paddingTop: 10,
+        textShadowColor: 'rgba(0,0,0,0.1)',
+        textShadowOffset: {width: 1, height: 1},
     },
     labelWrap: {
         backgroundColor: mainBackground,
@@ -94,13 +105,16 @@ class _Results extends Component {
 
     constructor(props) {
         super(props)
-
-        const correctHeight = props.correctAnswer ? ( 340 * (props.correctAnswer / props.numberQuestions) ) : 0
-        const incorrectHeight = props.falseAnswer ? ( 340 * (props.falseAnswer / props.numberQuestions) ) : 0
+        const correctPercent = props.correctAnswer ? (props.correctAnswer / props.numberQuestions): 0
+        const correctHeight = correctPercent ? ( 340 * correctPercent ) : 0
+        const incorrectPercent = props.falseAnswer ? (props.falseAnswer / props.numberQuestions): 0
+        const incorrectHeight = incorrectPercent ? ( 340 * incorrectPercent ) : 0
         // const correctHeight: 340 * (this.props.falseAnswer / 10),
         //     const incorrectHeight: 340 * (this.props.correctAnswer / 10),
 
         this.state = {
+            correctPercent: correctPercent,
+            incorrectPercent: incorrectPercent,
             correctHeight: correctHeight,
             incorrectHeight: incorrectHeight,
             barHeight: [
@@ -120,11 +134,13 @@ class _Results extends Component {
         Animated.timing(this.state.barHeight[0], {
             toValue: this.state.correctHeight,
             duration: 500,
+            //easing: Easing.bounce,
         }).start();
 
         Animated.timing(this.state.barHeight[1], {
             toValue: this.state.incorrectHeight,
             duration: 500,
+            //easing: Easing.bounce,
         }).start();
     }
 
@@ -144,6 +160,7 @@ class _Results extends Component {
 
                         <LinearAnimate colors={gradients[0]}
                                        style={[styles.barGradient, {height: this.state.barHeight[0]}]}>
+                            <Text style={styles.gradientText}>{(this.state.correctPercent * 100)}%</Text>
                         </LinearAnimate>
                         <View style={styles.labelWrap}>
                             <Text style={styles.labelText}>CORRECT</Text>
@@ -154,6 +171,7 @@ class _Results extends Component {
 
                         <LinearAnimate colors={gradients[1]}
                                        style={[styles.barGradient, {height: this.state.barHeight[1]}]}>
+                            <Text style={styles.gradientText}>{(this.state.incorrectPercent * 100)}%</Text>
                         </LinearAnimate>
                         <View style={styles.labelWrap}>
                             <Text style={styles.labelText}>INCORRECT</Text>
