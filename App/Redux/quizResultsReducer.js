@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
     QUIZ_RESULTS,
+    START_QUIZ,
     START_NEW_QUIZ,
 } from './actions';
 
@@ -16,6 +17,9 @@ export const quizResultsReducer = (state = false, action) => {
             return true;
             break;
         case START_NEW_QUIZ:
+            return false;
+            break;
+        case START_QUIZ:
             return false;
             break;
         default:

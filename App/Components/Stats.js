@@ -15,7 +15,7 @@ import {
 let {width} = Dimensions.get('window')
 let wrapWidth = width * 0.8
 let wrapMargin = width * 0.1
-let mainBackground = '#FAFAFA'
+let mainBackground = '#FCFCFC'
 
 const LinearAnimate = Animated.createAnimatedComponent(LinearGradient)
 

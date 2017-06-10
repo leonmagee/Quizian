@@ -14,7 +14,8 @@ import {
 let {width} = Dimensions.get('window')
 let wrapWidth = width * 0.8
 let wrapMargin = width * 0.1
-let mainBackground = '#FAFAFA'
+let gradientWidth = width * 0.33
+let mainBackground = '#FCFCFC'
 
 const LinearAnimate = Animated.createAnimatedComponent(LinearGradient)
 
@@ -23,6 +24,7 @@ const styles = new StyleSheet.create({
     outerWrap: {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: mainBackground,
     },
     headerWrap: {
         backgroundColor: mainBackground,
@@ -41,29 +43,24 @@ const styles = new StyleSheet.create({
         paddingTop: 8,
     },
     graphWrap: {
-        alignItems: 'center',
         flex: 1,
-        //backgroundColor: mainBackground,
-        backgroundColor: 'red',
+        backgroundColor: mainBackground,
         width: wrapWidth,
         margin: wrapMargin,
         flexDirection: 'row',
         justifyContent: 'space-around',
+        alignItems: 'flex-end',
     },
     barItemWrap: {
-        backgroundColor: 'blue',
         margin: 10,
-        flex: 1,
-        //flexDirection: 'column',
+        alignItems: 'center',
     },
     barGradient: {
-        //height: 300,
-        width: 150,
+        width: gradientWidth,
     },
     labelWrap: {
         backgroundColor: mainBackground,
-        paddingTop: 17,
-        paddingBottom: 6,
+        paddingTop: 10,
         alignItems: 'center',
     },
     labelText: {
@@ -79,7 +76,6 @@ const styles = new StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
     },
-
 })
 
 const gradients = [
@@ -94,19 +90,24 @@ const gradients = [
 ]
 
 
-class Stats extends Component {
+class _Results extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
+
+        const correctHeight = props.correctAnswer ? ( 340 * (props.correctAnswer / props.numberQuestions) ) : 0
+        const incorrectHeight = props.falseAnswer ? ( 340 * (props.falseAnswer / props.numberQuestions) ) : 0
+        // const correctHeight: 340 * (this.props.falseAnswer / 10),
+        //     const incorrectHeight: 340 * (this.props.correctAnswer / 10),
 
         this.state = {
-            correctAnswers: 7,
-            incorrectAnswers: 3,
-            // barHeight: [
-            //     new Animated.Value(0),
-            //     new Animated.Value(0),
-            // ],
-            barHeight: [300, 300],
+            correctHeight: correctHeight,
+            incorrectHeight: incorrectHeight,
+            barHeight: [
+                new Animated.Value(0),
+                new Animated.Value(0),
+            ],
+            //barHeight: [200, 300],
             textPerfect: 'PERFECT SCORE!', // 100
             textGood: 'GREAT JOB!', // 80 - 90
             textOk: 'WELL DONE!', // 60 - 80
@@ -116,7 +117,15 @@ class Stats extends Component {
 
     componentDidMount() {
 
+        Animated.timing(this.state.barHeight[0], {
+            toValue: this.state.correctHeight,
+            duration: 500,
+        }).start();
 
+        Animated.timing(this.state.barHeight[1], {
+            toValue: this.state.incorrectHeight,
+            duration: 500,
+        }).start();
     }
 
     render() {
@@ -165,8 +174,9 @@ class Stats extends Component {
 }
 
 mapStateToProps = (state) => ({
-    //quizStarted: state.quizStarted,
-    //statsPage: state.statsPage,
+    correctAnswer: state.correctAnswer,
+    falseAnswer: state.falseAnswer,
+    numberQuestions: state.numberQuestions,
 })
 
 mapActionsToProps = (dispatch) => ({
@@ -178,6 +188,6 @@ mapActionsToProps = (dispatch) => ({
     }
 })
 
-module.exports = connect(mapStateToProps, mapActionsToProps)(Stats)
+export const Results = connect(mapStateToProps, mapActionsToProps)(_Results)
 
 //module.exports = Stats

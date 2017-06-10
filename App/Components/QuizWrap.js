@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Quiz} from './Quiz'
-import {QuizResults} from './QuizResults';
+import {Results} from './Results';
 import Stats from './Stats'
 import {Categories} from './Categories';
 import {connect} from 'react-redux';
@@ -67,7 +67,7 @@ class _QuizWrap extends Component {
         if (this.props.statsPage) {
             var mainComponent = <Stats />;
         } else if (this.props.quizResults) {
-            var mainComponent = <QuizResults />;
+            var mainComponent = <Results />;
         } else if (this.props.chooseCat) {
             var mainComponent = <Categories />;
         } else {
