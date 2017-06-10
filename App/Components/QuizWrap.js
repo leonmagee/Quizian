@@ -46,17 +46,14 @@ class _QuizWrap extends Component {
 
         dataInitArray.map((item) => {
             AsyncStorage.getItem('@QuestionIndex:' + item.data_key).then((value) => {
-                //console.log('ASYNC STORAGE IN QUIZ WRAP')
                 if (value) {
                     const parsedData = JSON.parse(value)
                     item.redux_action(parsedData)
-                    //console.log('VALUE IS TRUE')
                 } else {
                     const cat_keys = intermediateArray(item.array_length)
                     const data = JSON.stringify(cat_keys)
                     AsyncStorage.setItem('@QuestionIndex:' + item.data_key, data)
                     item.redux_action(cat_keys)
-                    //console.log('VALUE IS FALSE')
                 }
             }).done()
         })

@@ -98,7 +98,6 @@ class _Categories extends Component {
             if (index === 3) {
                 this.props.setCatIndex(this.props.historyIndex);
                 this.props.catWasSelected('history')
-                //console.log('HISTORY INDEX IS', this.props.historyIndex)
             }
             if (index === 4) {
                 this.props.setCatIndex(this.props.geographyIndex);

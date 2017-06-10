@@ -282,10 +282,8 @@ class Stats extends Component {
             let keyNew = '@QuestionAnswers:' + i
             asyncKeys.push(keyNew)
         })
-        console.log(asyncKeys)
 
         AsyncStorage.multiGet(asyncKeys, (err, stores) => {
-            console.log('all the stores!', stores)
 
             this.setState({
                 sports_true: Number(stores[0][1]),

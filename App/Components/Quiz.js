@@ -25,21 +25,6 @@ class _Quiz extends Component {
         this.state = {
             timerValue: 15,
         }
-
-        /**
-         * test data retrieval
-         */
-
-
-
-        // let storageKey = 'sports_true'
-        // AsyncStorage.getItem('@QuestionAnswers:' + storageKey).then((value) => {
-        //     console.log('I have this many correct sports answers!!!!', value)
-        // }).done()
-        // storageKey = 'geography_false'
-        // AsyncStorage.getItem('@QuestionAnswers:' + storageKey).then((value) => {
-        //     console.log('I have this many incorrect geography answers!!!!', value)
-        // }).done()
     }
 
     componentDidMount() {
@@ -139,21 +124,17 @@ class _Quiz extends Component {
          * Handle stored index data
          */
         let cat_array = this.props.catIndex
-        //console.log('CAT ARRAY START', cat_array)
         cat_array.shift()
 
         const cat = this.props.currentCat
 
         if (cat === 'history') {
 
-            //console.log('CAT ARRAY END', cat_array)
             if (cat_array.length > 0) {
                 this.props.answerHistoryQuestion(cat_array)
-                //console.log('HISTORY QUESTIONS STILL')
             } else {
                 const cat_keys = intermediateArray(quizData[0].history.length)
                 this.props.answerHistoryQuestion(cat_keys)
-                //console.log('I RAN OUT OF HISTORY QUESTIONS!!!!')
             }
         } else if (cat === 'sports') {
             if (cat_array.length > 0) {
@@ -203,15 +184,10 @@ class _Quiz extends Component {
                 const valueNew = Number(value) + 1
                 const valueNewString = valueNew.toString()
                 AsyncStorage.setItem('@QuestionAnswers:' + storageKey, valueNewString)
-                console.log('updated value...')
             } else {
                 AsyncStorage.setItem('@QuestionAnswers:' + storageKey, "1")
-                console.log('saved first time')
             }
         }).done()
-
-        // console.log('current cat?', cat)
-        // console.log('was correct?', correct)
     }
 
     answerChosen(correct, key) {
@@ -344,7 +320,6 @@ const mapActionsToProps = (dispatch) => ({
         const key = 'history'
         setAsyncIndex(key, array)
         dispatch({type: 'HISTORY_QUESTION', payload: array})
-        //console.log('HISTORY QUESTION PAYLOAD DISPATCHED IN QUIZ.JS')
     },
     answerSportsQuestion(array) {
         const key = 'sports'
