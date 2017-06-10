@@ -71,9 +71,10 @@ const styles = new StyleSheet.create({
         //fontFamily: 'Lalezar',
     },
     menuBar: {
-        height: 50,
+        //height: 50,
         paddingTop: 10,
-        paddingBottom: 10,
+        paddingBottom: 15,
+        backgroundColor: mainBackground,
         //backgroundColor: 'rgba(0,0,0,0.1)',
         justifyContent: 'space-around',
         alignItems: 'center',
