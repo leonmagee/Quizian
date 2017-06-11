@@ -3,6 +3,7 @@
  */
 import React, {Component} from 'react';
 import Homepage from './App/Components/Homepage';
+//import {Categories} from './App/Components/Categories';
 //import {Results} from './App/Components/Results';
 import {Provider} from 'react-redux';
 import store from './App/Redux/store';

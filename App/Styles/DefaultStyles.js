@@ -24,6 +24,9 @@ const defaultStyles = StyleSheet.create({
     outerWrap: {
         flex: 1,
     },
+    animatedQuizWrap: {
+     flex: 1,
+    },
 
     topBar: {
         flexDirection: 'row',

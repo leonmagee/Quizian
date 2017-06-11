@@ -155,7 +155,7 @@ class _Categories extends Component {
                     <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
                     <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}></View>
                     <View style={[styles.categoriesBox, {width: item_width, height: item_height}]}>
-                        <SvgElement svg_data={geography} svg_scale={1.38}/>
+                        <SvgElement svg_data={geography} svg_scale={0.122}/>
                         <Text style={styles.categoriesText}>Geography</Text>
                         <Animated.View
                             style={[styles.catColorOverlay, {opacity: this.state.animatedOpacity[4]}]}></Animated.View>

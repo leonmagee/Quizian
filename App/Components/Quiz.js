@@ -238,31 +238,35 @@ class _Quiz extends Component {
         return (
             <LinearGradient colors={variables.gradient} style={styles.outerWrap}>
 
-                <View style={styles.topBar}>
-                    <View style={styles.topBarDetails}>
-                        <Text style={styles.topBarDetailsText}>
-                            Question {this.props.currentQuestion + 1} of {this.props.numberQuestions}
-                        </Text>
-                        <Text style={styles.topBarDetailsText}>
-                            Correct: {this.props.correctAnswer} - Incorrect: {this.props.falseAnswer}
-                        </Text>
-                    </View>
-                    <View style={styles.topBarTimer}>
-                        <Text style={styles.topBarTimerText}>{this.state.timerValue}</Text>
-                    </View>
-                </View>
+                <Animated.View style={[styles.animatedQuizWrap, {opacity: animatedOpacity}]}>
 
-                <Animated.View style={[styles.quizWrap, {opacity: animatedOpacity}]}>
-                    <View style={styles.catHeaderWrap}>
-                        <Text style={styles.catHeaderText}>{this.props.catText}</Text>
+                    <View style={styles.topBar}>
+                        <View style={styles.topBarDetails}>
+                            <Text style={styles.topBarDetailsText}>
+                                Question {this.props.currentQuestion + 1} of {this.props.numberQuestions}
+                            </Text>
+                            <Text style={styles.topBarDetailsText}>
+                                Correct: {this.props.correctAnswer} - Incorrect: {this.props.falseAnswer}
+                            </Text>
+                        </View>
+                        <View style={styles.topBarTimer}>
+                            <Text style={styles.topBarTimerText}>{this.state.timerValue}</Text>
+                        </View>
                     </View>
-                    {currentQuiz}
+
+                    <View style={styles.quizWrap}>
+                        <View style={styles.catHeaderWrap}>
+                            <Text style={styles.catHeaderText}>{this.props.catText}</Text>
+                        </View>
+                        {currentQuiz}
+                    </View>
+
+                    <View style={styles.menuBar}>
+                        <QuizButton handleClick={() => this.resetQuiz()} buttonText="RESET"/>
+                        {nextQuestionButton}
+                    </View>
+
                 </Animated.View>
-
-                <View style={styles.menuBar}>
-                    <QuizButton handleClick={() => this.resetQuiz()} buttonText="RESET"/>
-                    {nextQuestionButton}
-                </View>
 
             </LinearGradient>
         )

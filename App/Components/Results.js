@@ -38,8 +38,8 @@ const styles = new StyleSheet.create({
         fontWeight: 'bold',
     },
     headerText2: {
-        fontSize: 12,
-        color: '#555',
+        fontSize: 16,
+        color: '#456990',
         fontWeight: 'bold',
         paddingTop: 8,
     },
@@ -146,12 +146,22 @@ class _Results extends Component {
 
     render() {
 
+        if ( this.state.correctPercent === 1 ) {
+            var resultsText = this.state.textPerfect
+        } else if ( this.state.correctPercent >= 0.8 ) {
+            var resultsText = this.state.textGood
+        } else if ( this.state.correctPercent >= 0.6 ) {
+            var resultsText = this.state.textOk
+        } else {
+            var resultsText = this.state.textBad
+        }
+
         return (
             <View style={styles.outerWrap}>
 
                 <View style={styles.headerWrap}>
                     <Text style={styles.headerText}>QUIZ RESULTS</Text>
-                    <Text style={styles.headerText2}>HERE IS HOW YOU DID</Text>
+                    <Text style={styles.headerText2}>{resultsText}</Text>
                 </View>
 
                 <View style={styles.graphWrap}>
@@ -168,7 +178,6 @@ class _Results extends Component {
                     </View>
 
                     <View style={styles.barItemWrap}>
-
                         <LinearAnimate colors={gradients[1]}
                                        style={[styles.barGradient, {height: this.state.barHeight[1]}]}>
                             <Text style={styles.gradientText}>{(this.state.incorrectPercent * 100)}%</Text>
@@ -177,10 +186,7 @@ class _Results extends Component {
                             <Text style={styles.labelText}>INCORRECT</Text>
                         </View>
                     </View>
-
-
                 </View>
-
 
                 <View style={styles.menuBar}>
                     <StatsButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
@@ -207,5 +213,3 @@ mapActionsToProps = (dispatch) => ({
 })
 
 export const Results = connect(mapStateToProps, mapActionsToProps)(_Results)
-
-//module.exports = Stats
