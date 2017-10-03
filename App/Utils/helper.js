@@ -1,5 +1,8 @@
 import React from 'react'
-import {AsyncStorage} from 'react-native'
+import {
+    Dimensions,
+    AsyncStorage
+} from 'react-native'
 
 /**
  * Helper Functions
@@ -33,3 +36,35 @@ export const setAsyncIndex = (key, array) => {
     AsyncStorage.setItem('@QuestionIndex:' + key, dataString).then(() => {
     }).done()
 }
+
+/**
+ * react-native-viewport-units package
+ */
+let {width, height} = Dimensions.get('window')
+
+const units = {
+    vw: width/100,
+    vh: height/100
+}
+
+export const {vw, vh} = units
+//export const vw = units.vw
+//export const vh = units.vh
+
+
+// const units = {
+//     vw: width/100, vh: height/100
+// };
+
+// units.vmin = Math.min(units.vw, units.vh);
+// units.vmax = Math.max(units.vw, units.vh);
+
+//const {vw, vh} = units
+//const {vw, vh, vmin, vmax} = units
+
+console.log('width', width)
+console.log('height', height)
+console.log('vw', vw)
+console.log('vh', vh)
+// console.log('vmin', vmin)
+// console.log('vmax', vmax)

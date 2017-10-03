@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import {connect} from 'react-redux'
 import StatsButton from './StatsButton'
+import {vh} from '../Utils/helper'
 
 import {
     View,
@@ -23,11 +24,12 @@ const LinearAnimate = Animated.createAnimatedComponent(LinearGradient)
 const styles = new StyleSheet.create({
     outerWrap: {
         flex: 1,
-        justifyContent: 'center',
+        //justifyContent: 'center',
+        justifyContent: 'space-between',
     },
     headerWrap: {
         backgroundColor: mainBackground,
-        paddingTop: 50,
+        paddingTop: 40,
         alignItems: 'center',
     },
     headerText: {
@@ -55,7 +57,8 @@ const styles = new StyleSheet.create({
         margin: wrapMargin,
     },
     barGradient: {
-        height: 50,
+        //height: 50,
+        height: vh * 7,
     },
     labelWrap: {
         backgroundColor: mainBackground,
@@ -73,7 +76,7 @@ const styles = new StyleSheet.create({
     menuBar: {
         //height: 50,
         paddingTop: 10,
-        paddingBottom: 15,
+        paddingBottom: 25,
         backgroundColor: mainBackground,
         //backgroundColor: 'rgba(0,0,0,0.1)',
         justifyContent: 'space-around',

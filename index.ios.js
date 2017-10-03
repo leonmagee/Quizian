@@ -2,7 +2,8 @@
  * IOS Index file
  */
 import React, {Component} from 'react';
-import Homepage from './App/Components/Homepage';
+//import Homepage from './App/Components/Homepage';
+import HomepageImage from './App/Components/HomepageImage';
 //import {Categories} from './App/Components/Categories';
 //import {Results} from './App/Components/Results';
 import {Provider} from 'react-redux';
@@ -18,7 +19,7 @@ export default class Quizian extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Homepage />
+                <HomepageImage />
             </Provider>
         )
     }

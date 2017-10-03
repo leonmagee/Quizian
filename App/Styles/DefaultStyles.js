@@ -1,6 +1,7 @@
 import React from 'react'
 import variables from './Variables'
 import {Dimensions} from 'react-native'
+import {vw} from '../Utils/helper'
 
 import {
     StyleSheet,
@@ -9,13 +10,20 @@ import {
 const {width} = Dimensions.get('window')
 const button_width = ( width * 0.9 )
 
-if ( width < 321 ) {
-    var question_font_size = 16;
-    var question_height = 110;
-} else {
-    var question_font_size = 22;
-    var question_height = 150;
-}
+/**
+ * Here I'm setting some responsive styles without using the import of
+ */
+// if ( width < 321 ) {
+//     var question_font_size = 16;
+//     var question_height = 110;
+// } else {
+//     var question_font_size = 22;
+//     var question_height = 150;
+// }
+
+const question_font_size = vw * 6
+const question_height = vw * 40
+const answer_font_size = vw * 4
 
 const defaultStyles = StyleSheet.create({
     outerWrapMain: { // wraps everything
@@ -138,7 +146,7 @@ const defaultStyles = StyleSheet.create({
     },
     answerText: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: answer_font_size,
         color: '#222',
         textAlign: 'center',
         fontFamily: 'Lalezar',

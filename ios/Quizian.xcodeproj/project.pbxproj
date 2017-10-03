@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -451,6 +452,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		50C98C031F83F3F6009BAED3 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				8711683CE7734B49ACA6CFEA /* libRNSVG.a */,
+				CDE423616D514595AA1FAC14 /* libBVLinearGradient.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +516,7 @@
 				00E356EF1AD99517003FC87E /* QuizianTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				F5A69015536D47958903D6A1 /* Resources */,
+				50C98C031F83F3F6009BAED3 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1096,6 +1107,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Quizian;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1120,6 +1132,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Quizian;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

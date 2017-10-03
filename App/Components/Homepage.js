@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {QuizWrap} from './QuizWrap'
 import Stats from './Stats'
 import StartQuizButton from './StartQuizButton'
-import {shuffleArray} from '../Utils/helper'
+import {shuffleArray, vw, vh} from '../Utils/helper'
 import LinearGradient from 'react-native-linear-gradient'
 import variables from '../Styles/Variables'
 
@@ -22,7 +22,7 @@ height = height - 50; // make space for bottom menu bar
 const styles = StyleSheet.create({
     mainOuterWrap: {
         flex: 1,
-        backgroundColor: '#FAFAFA', // @todo padding applied to stats page? Shouldn't need this
+        backgroundColor: '#FCFCFC', // @todo padding applied to stats page? Shouldn't need this
     },
     homeWrapOuter: {
         flex: 1,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     },
     homeText: {
         color: 'rgba(255,255,255,1)',
-        fontSize: 90,
+        fontSize: 15 * vw,
         fontWeight: 'bold',
         shadowColor: '#000',
         shadowOpacity: 0.2,
