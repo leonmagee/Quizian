@@ -4,6 +4,7 @@ import {shuffleArray, vw, vh} from '../Utils/helper'
 import {QuizWrap} from './QuizWrap'
 import Stats from './Stats'
 import StartQuizButton from './StartQuizButton'
+import LinearGradient from 'react-native-linear-gradient'
 import variables from '../Styles/Variables'
 
 import {
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     },
     homeText: {
         color: 'rgba(255,255,255,1)',
-        fontSize: 15 * vw,
+        fontSize: 24 * vw,
         fontWeight: 'bold',
         shadowColor: '#000',
         shadowOpacity: 0.2,
@@ -92,7 +93,7 @@ class HomepageImage extends Component {
 
 
         this.state = {
-            //started: false,
+            started: false,
             // grid_array: grid_array,
             // shuffled_grid_array: shuffled_grid_array,
             // grid_styles_array: grid_styles_array,
@@ -113,10 +114,16 @@ class HomepageImage extends Component {
 
     render() {
 
-
-        return (
-            <View style={styles.mainOuterWrap}>
-
+        if (this.props.statsPage) {
+            var MainComponent = <Stats />;
+        } else if (this.props.quizStarted) {
+            var MainComponent = (
+                <LinearGradient colors={variables.gradient} style={{flex: 1}}>
+                    <QuizWrap/>
+                </LinearGradient>
+            )
+        } else {
+            var MainComponent = (
                 <View style={styles.homeWrapOuter}>
 
                     <View style={styles.homeWrap}>
@@ -132,8 +139,13 @@ class HomepageImage extends Component {
                     </View>
 
                 </View>
+            );
+        }
 
 
+        return (
+            <View style={styles.mainOuterWrap}>
+                {MainComponent}
             </View>
         )
     }

@@ -46,7 +46,7 @@ class _Categories extends Component {
 
     colorOpacity(index, shuffle) {
         Animated.timing(this.state.animatedOpacity[shuffle[index]], {
-            toValue: 0.3,
+            toValue: 0.2,
             duration: 300,
         }).start(() => this.fadeOpacity(index, shuffle));
     }
@@ -76,7 +76,7 @@ class _Categories extends Component {
 
     catAnimationFinal(index) {
         Animated.timing(this.state.animatedOpacity[index], {
-            toValue: 0.3,
+            toValue: 0.2,
             duration: 300,
         }).start();
 

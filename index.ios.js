@@ -2,7 +2,7 @@
  * IOS Index file
  */
 import React, {Component} from 'react';
-//import Homepage from './App/Components/Homepage';
+import Homepage from './App/Components/Homepage';
 import HomepageImage from './App/Components/HomepageImage';
 //import {Categories} from './App/Components/Categories';
 //import {Results} from './App/Components/Results';
