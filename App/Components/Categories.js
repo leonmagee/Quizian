@@ -1,15 +1,16 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import styles from '../Styles/DefaultStyles'
 import variables from '../Styles/Variables'
-import LinearGradient from 'react-native-linear-gradient';
-import SvgElement from './SvgElement';
-import television from '../SVG/television';
-import history from '../SVG/history';
-import music from '../SVG/music';
-import sports from '../SVG/sports';
-import geography from '../SVG/geography';
-import {shuffleArray} from '../Utils/helper';
+import LinearGradient from 'react-native-linear-gradient'
+import SvgElement from './SvgElement'
+import television from '../SVG/television'
+import history from '../SVG/history'
+import music from '../SVG/music'
+import sports from '../SVG/sports'
+import geography from '../SVG/geography'
+import StatusBarSizeIOS from 'react-native-status-bar-size'
+import {shuffleArray} from '../Utils/helper'
 
 import {
     View,
@@ -18,6 +19,18 @@ import {
     Animated,
 } from 'react-native';
 let {width, height} = Dimensions.get('window');
+
+let status_height = StatusBarSizeIOS.currentHeight;
+
+console.log('so far???', status_height);
+/**
+ * Height should pull from state?
+ */
+if (status_height) {
+    console.log('status height', status_height);
+    height = ( height - status_height );
+    console.log('height new', height);
+}
 
 class _Categories extends Component {
 
@@ -36,12 +49,34 @@ class _Categories extends Component {
         }
     }
 
+//
+//     componentDidMount: function() {
+//     StatusBarSizeIOS.addEventListener('willChange', this._handleStatusBarSizeWillChange);
+//     StatusBarSizeIOS.addEventListener('didChange', this._handleStatusBarSizeDidChange);
+// },
+//
+//     componentWillUnmount: function() {
+//     StatusBarSizeIOS.removeEventListener('willChange', this._handleStatusBarSizeWillChange);
+//     StatusBarSizeIOS.removeEventListener('didChange', this._handleStatusBarSizeDidChange);
+// },
+//
+//     _handleStatusBarSizeWillChange: function(nextStatusBarHeight) {
+//     console.log('Will Change: ' + nextStatusBarHeight);
+// },
+//
+//     _handleStatusBarSizeDidChange: function(currentStatusBarHeight) {
+//     console.log('changed');
+//     this.setState({ currentStatusBarHeight: currentStatusBarHeight });
+// },
+
+
     componentDidMount() {
         const base_array = [0, 1, 2, 3, 4]
         const shuffle = shuffleArray(base_array)
-        setTimeout( () => {
+        StatusBarSizeIOS.addEventListener('willChange', this._handleStatusBarSizeWillChange);
+        setTimeout(() => {
             this.colorOpacity(0, shuffle)
-        }, 300 )
+        }, 300)
     }
 
     colorOpacity(index, shuffle) {
@@ -81,8 +116,8 @@ class _Categories extends Component {
         }).start();
 
         setTimeout(() => {
-                // this.props.setCatIndex(this.props.historyIndex);
-                // this.props.catWasSelected('history')
+            // this.props.setCatIndex(this.props.historyIndex);
+            // this.props.catWasSelected('history')
             if (index === 0) {
                 this.props.setCatIndex(this.props.sportsIndex);
                 this.props.catWasSelected('sports')

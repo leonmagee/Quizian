@@ -6,6 +6,10 @@ import Stats from './Stats'
 import StartQuizButton from './StartQuizButton'
 import LinearGradient from 'react-native-linear-gradient'
 import variables from '../Styles/Variables'
+/**
+ * @todo remove this
+ */
+//import StatusBarSizeIOS from 'react-native-status-bar-size'
 
 import {
     StyleSheet,
@@ -88,9 +92,14 @@ const styles = StyleSheet.create({
 
 class HomepageImage extends Component {
 
+
+
     constructor(props) {
         super(props);
 
+        let es6_tester = 'test';
+        es6_tester = 'tessssst';
+        console.log(es6_tester);
 
         this.state = {
             started: false,
@@ -127,7 +136,7 @@ class HomepageImage extends Component {
                 <View style={styles.homeWrapOuter}>
 
                     <View style={styles.homeWrap}>
-                        <Image source={require('../Assets/Images/home-image.png')}
+                        <Image source={require('../Assets/Images/home-image-books.png')}
                                style={styles.imageContainer}></Image>
                         <View style={[styles.homeTextWrap, {width: width, height: height}]}>
                             <Text style={styles.homeText}>Quizian</Text>
