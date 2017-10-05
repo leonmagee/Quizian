@@ -20,17 +20,25 @@ import {
 } from 'react-native';
 let {width, height} = Dimensions.get('window');
 
+
+/**
+ * This doesn't work here - I should instead pass this through the Quiz Wrap component (top level)? And then maybe
+ * save it as a action, and whenever the status bar height changes that can be dispatched as an action and update accordingly?
+ * @todo test this by subtracting 20 from the 'height' to see if that actually reduces the app height?
+ */
 let status_height = StatusBarSizeIOS.currentHeight;
 
 console.log('so far???', status_height);
 /**
  * Height should pull from state?
  */
-if (status_height) {
-    console.log('status height', status_height);
-    height = ( height - status_height );
-    console.log('height new', height);
-}
+// if (status_height) {
+//     console.log('status height', status_height);
+//     height = ( height - status_height );
+//     console.log('height new', height);
+// }
+
+height = ( height - 20 );
 
 class _Categories extends Component {
 
