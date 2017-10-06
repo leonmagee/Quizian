@@ -19,6 +19,7 @@ import {
     Animated,
 } from 'react-native';
 let {width, height} = Dimensions.get('window');
+var height_new = false;
 
 
 /**
@@ -44,12 +45,17 @@ class _Categories extends Component {
     constructor(props) {
         super(props);
         let status_height = props.statusBarHeight;
-        console.log('heightzzz', status_height);
+        /**
+         * This function is behaving recursively - since it fires multiple times as this is rended...
+         */
 
-        if (status_height === 20) {
-            height = ( height - ( status_height - 20 ) );
+        if (!height_new) {
+            if (status_height > 20) { // @todo if this doesn't work, just check if status_height
+                height_new = ( height - ( status_height - 20 ) );
+            } else {
+                height_new = height;
+            }
         }
-
 
         this.state = {
             animatedOpacity: [
@@ -166,7 +172,7 @@ class _Categories extends Component {
             grid_array.push(i);
         }
         const item_width = ( ( ( width) / num_horizontal ) );
-        const item_height = ( ( ( height) / num_vertical ) );
+        const item_height = ( ( ( height_new) / num_vertical ) );
 
 
         return (
