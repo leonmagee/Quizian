@@ -11,6 +11,7 @@ import variables from '../Styles/Variables'
  */
 //import StatusBarSizeIOS from 'react-native-status-bar-size'
 
+
 import {
     StyleSheet,
     Text,
@@ -22,6 +23,8 @@ import {
 let {width, height} = Dimensions.get('window')
 height = height - 50; // make space for bottom menu bar
 
+console.log('width', width);
+console.log('vw', vw);
 
 const styles = StyleSheet.create({
     imageContainer: {
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
     },
     homeText: {
         color: 'rgba(255,255,255,1)',
-        fontSize: 24 * vw,
+        fontSize: 26 * vw,
         fontWeight: 'bold',
         shadowColor: '#000',
         shadowOpacity: 0.2,
@@ -91,7 +94,6 @@ const styles = StyleSheet.create({
 });
 
 class HomepageImage extends Component {
-
 
 
     constructor(props) {
