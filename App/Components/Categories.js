@@ -9,7 +9,7 @@ import history from '../SVG/history'
 import music from '../SVG/music'
 import sports from '../SVG/sports'
 import geography from '../SVG/geography'
-import StatusBarSizeIOS from 'react-native-status-bar-size'
+//import StatusBarSizeIOS from 'react-native-status-bar-size'
 import {shuffleArray} from '../Utils/helper'
 
 import {
@@ -26,24 +26,30 @@ let {width, height} = Dimensions.get('window');
  * save it as a action, and whenever the status bar height changes that can be dispatched as an action and update accordingly?
  * @todo test this by subtracting 20 from the 'height' to see if that actually reduces the app height?
  */
-let status_height = StatusBarSizeIOS.currentHeight;
-
-console.log('so far???', status_height);
-/**
- * Height should pull from state?
- */
+// let status_height = StatusBarSizeIOS.currentHeight;
+//
+// console.log('so far???', status_height);
+// /**
+//  * Height should pull from state?
+//  */
 // if (status_height) {
 //     console.log('status height', status_height);
 //     height = ( height - status_height );
 //     console.log('height new', height);
 // }
 
-height = ( height - 20 );
 
 class _Categories extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        let status_height = props.statusBarHeight;
+        console.log('heightzzz', status_height);
+
+        if (status_height === 20) {
+            height = ( height - ( status_height - 20 ) );
+        }
+
 
         this.state = {
             animatedOpacity: [
@@ -81,7 +87,7 @@ class _Categories extends Component {
     componentDidMount() {
         const base_array = [0, 1, 2, 3, 4]
         const shuffle = shuffleArray(base_array)
-        StatusBarSizeIOS.addEventListener('willChange', this._handleStatusBarSizeWillChange);
+        //StatusBarSizeIOS.addEventListener('willChange', this._handleStatusBarSizeWillChange);
         setTimeout(() => {
             this.colorOpacity(0, shuffle)
         }, 300)
@@ -162,6 +168,7 @@ class _Categories extends Component {
         const item_width = ( ( ( width) / num_horizontal ) );
         const item_height = ( ( ( height) / num_vertical ) );
 
+
         return (
             <LinearGradient colors={variables.gradient} style={{flex: 1}}>
                 <View style={styles.categoriesWrap}>
@@ -219,6 +226,7 @@ const mapStateToProps = (state) => ({
     entertainmentIndex: state.entertainmentIndex,
     musicIndex: state.musicIndex,
     geographyIndex: state.geographyIndex,
+    statusBarHeight: state.statusBarHeight,
 })
 
 const mapActionsToProps = (dispatch) => ({

@@ -9,7 +9,6 @@ import variables from '../Styles/Variables'
 /**
  * @todo remove this
  */
-//import StatusBarSizeIOS from 'react-native-status-bar-size'
 
 
 import {
@@ -19,12 +18,13 @@ import {
     Image,
     Dimensions
 } from 'react-native';
+// import StatusBarSizeIOS from 'react-native-status-bar-size'
+//
+// let status_height_new = StatusBarSizeIOS;
+// console.log( 'current status home', status_height_new.currentHeight);
 
 let {width, height} = Dimensions.get('window')
 height = height - 50; // make space for bottom menu bar
-
-console.log('width', width);
-console.log('vw', vw);
 
 const styles = StyleSheet.create({
     imageContainer: {
@@ -99,10 +99,6 @@ class HomepageImage extends Component {
     constructor(props) {
         super(props);
 
-        let es6_tester = 'test';
-        es6_tester = 'tessssst';
-        console.log(es6_tester);
-
         this.state = {
             started: false,
             // grid_array: grid_array,
@@ -165,6 +161,7 @@ class HomepageImage extends Component {
 mapStateToProps = (state) => ({
     quizStarted: state.quizStarted,
     statsPage: state.statsPage,
+
 })
 
 mapActionsToProps = (dispatch) => ({

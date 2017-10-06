@@ -62,9 +62,9 @@ export const {vw, vh} = units
 //const {vw, vh} = units
 //const {vw, vh, vmin, vmax} = units
 
-console.log('width', width)
-console.log('height', height)
-console.log('vw', vw)
-console.log('vh', vh)
+// console.log('width', width)
+// console.log('height', height)
+// console.log('vw', vw)
+// console.log('vh', vh)
 // console.log('vmin', vmin)
 // console.log('vmax', vmax)

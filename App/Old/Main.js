@@ -20,6 +20,9 @@ import {
 } from 'react-native';
 
 
+console.log('I"m using main.js???');
+
+
 const styles = StyleSheet.create({
     homeWrap: {
         flex: 1,
@@ -156,7 +159,7 @@ class Main extends Component {
 
 
         } else {
-            console.log('finalize');
+            //console.log('finalize');
         }
 
     }
