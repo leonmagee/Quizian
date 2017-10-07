@@ -19,7 +19,7 @@ import {
     Animated,
 } from 'react-native';
 let {width, height} = Dimensions.get('window');
-var height_new = false;
+//var height_new = false;
 
 
 /**
@@ -44,18 +44,18 @@ class _Categories extends Component {
 
     constructor(props) {
         super(props);
-        let status_height = props.statusBarHeight;
+        //let status_height = props.statusBarHeight;
         /**
-         * This function is behaving recursively - since it fires multiple times as this is rended...
+         *
          */
 
-        if (!height_new) {
-            if (status_height > 20) { // @todo if this doesn't work, just check if status_height
-                height_new = ( height - ( status_height - 20 ) );
-            } else {
-                height_new = height;
-            }
-        }
+        //if (!height_new) {
+        // if (status_height > 20) {
+        //     height_new = ( height - ( status_height - 20 ) );
+        // } else {
+        //     height_new = height;
+        // }
+        //}
 
         this.state = {
             animatedOpacity: [
@@ -68,27 +68,6 @@ class _Categories extends Component {
             //numberAnimations: 0,
         }
     }
-
-//
-//     componentDidMount: function() {
-//     StatusBarSizeIOS.addEventListener('willChange', this._handleStatusBarSizeWillChange);
-//     StatusBarSizeIOS.addEventListener('didChange', this._handleStatusBarSizeDidChange);
-// },
-//
-//     componentWillUnmount: function() {
-//     StatusBarSizeIOS.removeEventListener('willChange', this._handleStatusBarSizeWillChange);
-//     StatusBarSizeIOS.removeEventListener('didChange', this._handleStatusBarSizeDidChange);
-// },
-//
-//     _handleStatusBarSizeWillChange: function(nextStatusBarHeight) {
-//     console.log('Will Change: ' + nextStatusBarHeight);
-// },
-//
-//     _handleStatusBarSizeDidChange: function(currentStatusBarHeight) {
-//     console.log('changed');
-//     this.setState({ currentStatusBarHeight: currentStatusBarHeight });
-// },
-
 
     componentDidMount() {
         const base_array = [0, 1, 2, 3, 4]
@@ -172,7 +151,8 @@ class _Categories extends Component {
             grid_array.push(i);
         }
         const item_width = ( ( ( width) / num_horizontal ) );
-        const item_height = ( ( ( height_new) / num_vertical ) );
+        //const item_height = ( ( ( height_new) / num_vertical ) );
+        const item_height = ( ( ( height) / num_vertical ) );
 
 
         return (
@@ -232,7 +212,7 @@ const mapStateToProps = (state) => ({
     entertainmentIndex: state.entertainmentIndex,
     musicIndex: state.musicIndex,
     geographyIndex: state.geographyIndex,
-    statusBarHeight: state.statusBarHeight,
+    //statusBarHeight: state.statusBarHeight,
 })
 
 const mapActionsToProps = (dispatch) => ({

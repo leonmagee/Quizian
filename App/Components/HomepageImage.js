@@ -18,10 +18,6 @@ import {
     Image,
     Dimensions
 } from 'react-native';
-// import StatusBarSizeIOS from 'react-native-status-bar-size'
-//
-// let status_height_new = StatusBarSizeIOS;
-// console.log( 'current status home', status_height_new.currentHeight);
 
 let {width, height} = Dimensions.get('window')
 height = height - 50; // make space for bottom menu bar
@@ -61,17 +57,6 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 1, height: 1},
         fontFamily: 'Lalezar',
     },
-    // gridItem: {
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     margin: 1,
-    // },
-    // questionText: {
-    //     fontSize: 70,
-    //     fontWeight: 'bold',
-    //     color: '#FFF',
-    //     opacity: 0,
-    // },
     menuText: {
         fontSize: 27,
         fontFamily: 'Lalezar',
@@ -101,23 +86,8 @@ class HomepageImage extends Component {
 
         this.state = {
             started: false,
-            // grid_array: grid_array,
-            // shuffled_grid_array: shuffled_grid_array,
-            // grid_styles_array: grid_styles_array,
-            // item_width: item_width,
-            // item_height: item_height,
         }
     }
-
-    componentWillMount() {
-
-    }
-
-
-    componentDidMount() {
-
-    }
-
 
     render() {
 
@@ -149,7 +119,6 @@ class HomepageImage extends Component {
             );
         }
 
-
         return (
             <View style={styles.mainOuterWrap}>
                 {MainComponent}
@@ -161,7 +130,6 @@ class HomepageImage extends Component {
 mapStateToProps = (state) => ({
     quizStarted: state.quizStarted,
     statsPage: state.statsPage,
-
 })
 
 mapActionsToProps = (dispatch) => ({
