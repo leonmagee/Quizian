@@ -42,12 +42,19 @@ const styles = StyleSheet.create({
     },
     homeText: {
         color: 'rgba(255,255,255,1)',
-        fontSize: 15 * vw,
-        fontWeight: 'bold',
+        fontSize: 30,
+        //fontWeight: 'bold',
         shadowColor: '#000',
         shadowOpacity: 0.2,
         shadowOffset: {width: 1, height: 1},
         fontFamily: 'Lalezar',
+    },
+    homeText2: {
+        fontSize: 23,
+        marginTop: 10,
+    },
+    homeText3: {
+        fontSize: 23,
     },
     gridItem: {
         justifyContent: 'center',
@@ -179,12 +186,6 @@ class Credits extends Component {
         this.questionOpacityRecursive(new_styles_array, new_styles_array.length, i, null, this.state.shuffled_grid_array);
     }
 
-    // startQuiz() {
-    //     this.setState({
-    //         started: true,
-    //     })
-    // }
-
     render() {
 
         const grid = this.state.grid_array.map((item, key) => {
@@ -228,11 +229,14 @@ class Credits extends Component {
                     <View style={styles.homeWrapOuter}>
                         <View style={styles.homeWrap}>
                             <View style={[styles.homeTextWrap, {width: width, height: height}]}>
-                                <Text style={styles.homeText}>Quizian</Text>
+                                <Text style={styles.homeText}>Developed by Levon.io</Text>
+                                <Text style={[styles.homeText, styles.homeText2]}>Questions by Leon Magee</Text>
+                                <Text style={[styles.homeText, styles.homeText3]}>and Maryana Avagyan</Text>
                             </View>
                             {grid}
                         </View>
                         <View style={styles.menuBar}>
+                            {/* add button for Home (this is no longer home) */}
                             <StartQuizButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
                             <StartQuizButton handleClick={() => this.props.goToStats()} buttonText="STATS"/>
                         </View>

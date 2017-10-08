@@ -5,6 +5,7 @@ export const QUIZ_RESULTS = 'QUIZ_RESULTS';
 export const START_QUIZ = 'START_QUIZ';
 export const START_NEW_QUIZ = 'START_NEW_QUIZ';
 export const STATS_PAGE = 'STATS_PAGE';
+export const CREDITS_PAGE = 'CREDITS_PAGE';
 export const QUIZ_RESET = 'QUIZ_RESET';
 export const CORRECT_ANSWER = 'CORRECT_ANSWER';
 export const INCORRECT_ANSWER = 'INCORRECT_ANSWER';

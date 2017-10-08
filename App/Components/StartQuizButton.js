@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     button: {
         color: '#FFF',
         fontWeight: 'bold',
-        fontSize: 28,
+        fontSize: 19,
         fontFamily: 'lalezar',
         backgroundColor: 'transparent',
     },

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {shuffleArray, vw, vh} from '../Utils/helper'
 import {QuizWrap} from './QuizWrap'
 import Stats from './Stats'
+import Credits from './Credits'
 import StartQuizButton from './StartQuizButton'
 import LinearGradient from 'react-native-linear-gradient'
 import variables from '../Styles/Variables'
@@ -90,8 +91,14 @@ class HomepageImage extends Component {
     }
 
     render() {
+        /**
+         * Insert Credits page here...
+         */
 
-        if (this.props.statsPage) {
+        if ( this.props.creditsPage) {
+            var MainComponent = <Credits />;
+        }
+        else if (this.props.statsPage) {
             var MainComponent = <Stats />;
         } else if (this.props.quizStarted) {
             var MainComponent = (
@@ -110,8 +117,9 @@ class HomepageImage extends Component {
                             <Text style={styles.homeText}>Quizian</Text>
                         </View>
                         <View style={styles.menuBar}>
-                            <StartQuizButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
-                            <StartQuizButton handleClick={() => this.props.goToStats()} buttonText="STATS"/>
+                            <StartQuizButton handleClick={() => this.props.startQuiz()} buttonText="NEW  GAME"/>
+                            <StartQuizButton handleClick={() => this.props.goToStats()} buttonText="YOUR  STATS"/>
+                            <StartQuizButton handleClick={() => this.props.goToCredits()} buttonText="CREDITS"/>
                         </View>
                     </View>
 
@@ -130,6 +138,7 @@ class HomepageImage extends Component {
 mapStateToProps = (state) => ({
     quizStarted: state.quizStarted,
     statsPage: state.statsPage,
+    creditsPage: state.creditsPage,
 })
 
 mapActionsToProps = (dispatch) => ({
@@ -138,6 +147,9 @@ mapActionsToProps = (dispatch) => ({
     },
     goToStats() {
         dispatch({type: 'STATS_PAGE'})
+    },
+    goToCredits() {
+        dispatch({type: 'CREDITS_PAGE'})
     }
 })
 

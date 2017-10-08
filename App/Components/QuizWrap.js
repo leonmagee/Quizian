@@ -8,54 +8,13 @@ import {View, AsyncStorage} from 'react-native';
 import {intermediateArray} from '../Utils/helper'
 import quizData from '../Data/quizData'
 import styles from '../Styles/DefaultStyles'
-//import StatusBarSizeIOS from 'react-native-status-bar-size'
-
-
-/**
- * Height should pull from state?
- */
-// let status_height = StatusBarSizeIOS.currentHeight;
-// dispatch({type: 'STATUS_BAR_HEIGHT', payload: 77})
-// //console.log('QuizWrap', status_height);
-// if (status_height) {
-//
-//     //height = ( height - status_height );
-//     //console.log('height new', height);
-// }
 
 
 class _QuizWrap extends Component {
 
     constructor(props) {
         super(props)
-
-        // let status_height = StatusBarSizeIOS.currentHeight;
-        // if (status_height) {
-        //     props.statusBarHeightInit(status_height);
-        // }
     }
-
-    componentWillMount() {
-        //this.testyMcTesterMethod();
-        //StatusBarSizeIOS.removeEventListener('willChange', this._handleStatusBarSizeWillChange);
-        //StatusBarSizeIOS.removeEventListener('didChange', this.handleStatusBarSizeDidChange);
-    }
-
-    // testyMcTesterMethod() {
-    //     console.log('this test method is working!');
-    //     let currentStatusBarHeight = 60;
-    //     this.props.statusBarHeightInit(currentStatusBarHeight);
-    // }
-
-    // _handleStatusBarSizeWillChange(nextStatusBarHeight) {
-    //     //console.log('Will Change: ' + nextStatusBarHeight);
-    // }
-
-    // handleStatusBarSizeDidChange(currentStatusBarHeight) {
-    //     //console.log('changed');
-    //     //this.setState({currentStatusBarHeight: currentStatusBarHeight});
-    //     this.props.statusBarHeightInit(currentStatusBarHeight);
-    // }
 
     componentDidMount() {
         const dataInitArray = [
@@ -99,8 +58,6 @@ class _QuizWrap extends Component {
                 }
             }).done()
         })
-        //StatusBarSizeIOS.addEventListener('willChange', this._handleStatusBarSizeWillChange);
-        //StatusBarSizeIOS.addEventListener('didChange', this.handleStatusBarSizeDidChange);
     }
 
     render() {
@@ -145,9 +102,6 @@ const mapActionsToProps = (dispatch) => ({
     entertainmentIndexInit(array) {
         dispatch({type: 'ENTERTAINMENT_QUESTION', payload: array})
     },
-    // statusBarHeightInit(value) {
-    //     dispatch({type: 'STATUS_BAR_HEIGHT', payload: value})
-    // }
 })
 
 export const QuizWrap = connect(mapStateToProps, mapActionsToProps)(_QuizWrap);
