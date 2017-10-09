@@ -20,9 +20,9 @@ height = height - 50; // make space for bottom menu bar
 
 
 const styles = StyleSheet.create({
-    mainOuterWrap: {
+    mainOuterWrapCredits: {
         flex: 1,
-        backgroundColor: '#FCFCFC', // @todo padding applied to stats page? Shouldn't need this
+        backgroundColor: '#FCFCFC',
     },
     homeWrapOuter: {
         flex: 1,
@@ -125,14 +125,18 @@ class Credits extends Component {
             grid_styles_array: grid_styles_array,
             item_width: item_width,
             item_height: item_height,
+            currentTimeout: null,
         }
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.state.currentTimeout);
     }
 
     componentWillMount() {
         this.animatedValue = [];
         this.animatedValueColor = [];
         this.state.grid_array.forEach((item) => {
-
             this.animatedValue[item] = new Animated.Value(0);
         })
     }
@@ -141,7 +145,7 @@ class Credits extends Component {
 
         if (i < ( length )) {
 
-            setTimeout(() => {
+            this.state.currentTimeout = setTimeout(() => {
 
                 Animated.timing(this.animatedValue[i], {
                     toValue: 0.7,
@@ -211,42 +215,30 @@ class Credits extends Component {
             )
         })
 
-        /**
-         * Toggle MainComponent based on 'started' state
-         * not using Redux for this component
-         */
-        if (this.props.statsPage) {
-            var MainComponent = <Stats />;
-        } else if (this.props.quizStarted) {
-            var MainComponent = (
-                <LinearGradient colors={variables.gradient} style={{flex: 1}}>
-                    <QuizWrap/>
-                </LinearGradient>
-            )
-        } else {
-            var MainComponent = (
-                <LinearGradient colors={variables.gradient} style={{flex: 1}}>
-                    <View style={styles.homeWrapOuter}>
-                        <View style={styles.homeWrap}>
-                            <View style={[styles.homeTextWrap, {width: width, height: height}]}>
-                                <Text style={styles.homeText}>Developed by Levon.io</Text>
-                                <Text style={[styles.homeText, styles.homeText2]}>Questions by Leon Magee</Text>
-                                <Text style={[styles.homeText, styles.homeText3]}>and Maryana Avagyan</Text>
-                            </View>
-                            {grid}
+        var MainComponent = (
+            <LinearGradient colors={variables.gradient} style={{flex: 1}}>
+                <View style={styles.homeWrapOuter}>
+                    <View style={styles.homeWrap}>
+                        <View style={[styles.homeTextWrap, {width: width, height: height}]}>
+                            <Text style={styles.homeText}>Developed by Levon.io</Text>
+                            <Text style={[styles.homeText, styles.homeText2]}>Questions by Leon Magee</Text>
+                            <Text style={[styles.homeText, styles.homeText3]}>and Maryana Avagyan</Text>
                         </View>
-                        <View style={styles.menuBar}>
-                            {/* add button for Home (this is no longer home) */}
-                            <StartQuizButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
-                            <StartQuizButton handleClick={() => this.props.goToStats()} buttonText="STATS"/>
-                        </View>
+                        {grid}
                     </View>
-                </LinearGradient>
-            );
-        }
+                    <View style={styles.menuBar}>
+                        {/* add button for Home (this is no longer home) */}
+                        <StartQuizButton handleClick={() => this.props.goToHome()} buttonText="HOME"/>
+                        <StartQuizButton handleClick={() => this.props.startQuiz()} buttonText="NEW GAME"/>
+                        <StartQuizButton handleClick={() => this.props.goToStats()} buttonText="STATS"/>
+                    </View>
+                </View>
+            </LinearGradient>
+        );
+
 
         return (
-            <View style={styles.mainOuterWrap}>
+            <View style={styles.mainOuterWrapCredits}>
                 {MainComponent}
             </View>
         )
@@ -254,8 +246,8 @@ class Credits extends Component {
 }
 
 mapStateToProps = (state) => ({
-    quizStarted: state.quizStarted,
-    statsPage: state.statsPage,
+    // quizStarted: state.quizStarted,
+    // statsPage: state.statsPage,
 })
 
 mapActionsToProps = (dispatch) => ({
@@ -264,6 +256,9 @@ mapActionsToProps = (dispatch) => ({
     },
     goToStats() {
         dispatch({type: 'STATS_PAGE'})
+    },
+    goToHome() {
+        dispatch({type: 'QUIZ_RESET'})
     }
 })
 
