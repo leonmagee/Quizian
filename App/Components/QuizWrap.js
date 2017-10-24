@@ -6,8 +6,7 @@ import {Categories} from './Categories';
 import {connect} from 'react-redux';
 import {View, AsyncStorage} from 'react-native';
 import {intermediateArray} from '../Utils/helper'
-//import quizData from '../Data/quizData'
-import quizData from '../Data/quizDataAccents'
+import quizData from '../Data/quizData'
 import styles from '../Styles/DefaultStyles'
 
 
