@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontWeight: 'bold',
         fontSize: 22,
-        fontFamily: 'lalezar',
+        fontFamily: 'Lalezar-Regular',
         backgroundColor: 'transparent',
     },
 });

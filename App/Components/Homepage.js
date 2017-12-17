@@ -41,13 +41,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     homeText: {
-        color: 'rgba(255,255,255,1)',
+        //color: 'rgba(255,255,255,1)',
+        color: 'red',
         fontSize: 15 * vw,
-        fontWeight: 'bold',
+        fontWeight: '400',
         shadowColor: '#000',
         shadowOpacity: 0.2,
         shadowOffset: {width: 1, height: 1},
-        fontFamily: 'Lalezar',
+        fontFamily: 'Lalezar-Regular',
     },
     gridItem: {
         justifyContent: 'center',
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     },
     menuText: {
         fontSize: 27,
-        fontFamily: 'Lalezar',
+        fontFamily: 'Lalezar-Regular',
         fontWeight: 'bold',
         color: '#FFF',
         backgroundColor: 'transparent',

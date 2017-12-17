@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -1114,7 +1113,7 @@
 				PRODUCT_NAME = Quizian;
 				PROVISIONING_PROFILE = "8456f417-67d2-4bbb-a24c-6427601a1446";
 				PROVISIONING_PROFILE_SPECIFIER = QuizianDistribution;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1142,7 +1141,7 @@
 				PRODUCT_NAME = Quizian;
 				PROVISIONING_PROFILE = "8456f417-67d2-4bbb-a24c-6427601a1446";
 				PROVISIONING_PROFILE_SPECIFIER = QuizianDistribution;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1333,7 +1332,7 @@
 				PRODUCT_NAME = Quizian;
 				PROVISIONING_PROFILE = "8456f417-67d2-4bbb-a24c-6427601a1446";
 				PROVISIONING_PROFILE_SPECIFIER = QuizianDistribution;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Distribution;
