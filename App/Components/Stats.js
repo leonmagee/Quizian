@@ -36,14 +36,14 @@ const styles = new StyleSheet.create({
         fontSize: 26,
         color: '#111',
         fontWeight: 'bold',
-        //fontFamily: 'Lalezar',
+        //fontFamily: 'Lalezar-Regular',
     },
     headerText2: {
         fontSize: 12,
         color: '#555',
         fontWeight: 'bold',
         paddingTop: 8,
-        //fontFamily: 'Lalezar',
+        //fontFamily: 'Lalezar-Regular',
     },
     mainWrap: {
         alignItems: 'center',
@@ -71,7 +71,7 @@ const styles = new StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         color: '#111',
-        //fontFamily: 'Lalezar',
+        //fontFamily: 'Lalezar-Regular',
     },
     menuBar: {
         //height: 50,

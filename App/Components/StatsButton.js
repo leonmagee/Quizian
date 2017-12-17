@@ -12,9 +12,9 @@ import {
 const styles = StyleSheet.create({
     button: {
         color: '#222',
-        fontWeight: 'bold',
+        fontWeight: '400',
         fontSize: 25,
-        fontFamily: 'Lalezar',
+        fontFamily: 'Lalezar-Regular',
         //backgroundColor: 'transparent',
     },
 });

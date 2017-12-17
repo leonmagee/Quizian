@@ -12,7 +12,7 @@ import {
 const styles = StyleSheet.create({
     button: {
         color: '#FFF',
-        fontWeight: 'bold',
+        fontWeight: '400',
         fontSize: 19,
         fontFamily: 'Lalezar-Regular',
         backgroundColor: 'transparent',

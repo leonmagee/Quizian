@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
         shadowColor: '#000',
         shadowOpacity: 0.2,
         shadowOffset: {width: 1, height: 1},
-        fontFamily: 'Lalezar',
+        fontFamily: 'Lalezar-Regular',
+        fontWeight: '400',
     },
     homeText2: {
         fontSize: 23,
@@ -69,8 +70,8 @@ const styles = StyleSheet.create({
     },
     menuText: {
         fontSize: 27,
-        fontFamily: 'Lalezar',
-        fontWeight: 'bold',
+        fontFamily: 'Lalezar-Regular',
+        fontWeight: '400',
         color: '#FFF',
         backgroundColor: 'transparent',
     },

@@ -41,8 +41,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     homeText: {
-        //color: 'rgba(255,255,255,1)',
-        color: 'red',
+        color: 'rgba(255,255,255,1)',
         fontSize: 15 * vw,
         fontWeight: '400',
         shadowColor: '#000',
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
     menuText: {
         fontSize: 27,
         fontFamily: 'Lalezar-Regular',
-        fontWeight: 'bold',
+        fontWeight: '400',
         color: '#FFF',
         backgroundColor: 'transparent',
     },
