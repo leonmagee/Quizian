@@ -29,7 +29,7 @@ const styles = new StyleSheet.create({
     },
     headerWrap: {
         backgroundColor: mainBackground,
-        paddingTop: 40,
+        paddingTop: 20,
         alignItems: 'center',
     },
     headerText: {
@@ -58,11 +58,11 @@ const styles = new StyleSheet.create({
     },
     barGradient: {
         //height: 50,
-        height: vh * 7,
+        height: vh * 5,
     },
     labelWrap: {
         backgroundColor: mainBackground,
-        paddingTop: 17,
+        paddingTop: 12,
         paddingBottom: 6,
         flexDirection: 'row',
         justifyContent: 'space-between',
