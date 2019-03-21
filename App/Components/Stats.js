@@ -3,11 +3,11 @@ import LinearGradient from 'react-native-linear-gradient'
 import {connect} from 'react-redux'
 import StatsButton from './StatsButton'
 import {vh} from '../Utils/helper'
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {
     View,
     Text,
-    AsyncStorage,
     StyleSheet,
     Animated,
     Dimensions,
