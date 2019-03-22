@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
-import { shuffleArray, vw, vh } from '../Utils/helper';
+import { vw } from '../Utils/helper';
 import { QuizWrap } from './QuizWrap';
 import Stats from './Stats';
 import Credits from './Credits';
@@ -72,31 +72,33 @@ const styles = StyleSheet.create({
 });
 
 class HomepageImage extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      started: false,
-    };
-  }
+  //   this.state = {
+  //     started: false,
+  //   };
+  // }
 
   render() {
     /**
      * Insert Credits page here...
      */
 
+    let MainComponent = <View />;
+
     if (this.props.creditsPage) {
-      var MainComponent = <Credits />;
+      MainComponent = <Credits />;
     } else if (this.props.statsPage) {
-      var MainComponent = <Stats />;
+      MainComponent = <Stats />;
     } else if (this.props.quizStarted) {
-      var MainComponent = (
+      MainComponent = (
         <LinearGradient colors={variables.gradient} style={{ flex: 1 }}>
           <QuizWrap />
         </LinearGradient>
       );
     } else {
-      var MainComponent = (
+      MainComponent = (
         <View style={styles.homeWrapOuter}>
           <View style={styles.homeWrap}>
             <Image
@@ -112,7 +114,7 @@ class HomepageImage extends Component {
                 buttonText="RANDOM  GAME"
               />
               <StartQuizButton
-                handleClick={() => this.props.startQuiz()}
+                handleClick={() => this.props.startQuizChoose()}
                 buttonText="CHOOSE  GAME"
               />
               <StartQuizButton
@@ -133,15 +135,18 @@ class HomepageImage extends Component {
   }
 }
 
-mapStateToProps = state => ({
+const mapStateToProps = state => ({
   quizStarted: state.quizStarted,
   statsPage: state.statsPage,
   creditsPage: state.creditsPage,
 });
 
-mapActionsToProps = dispatch => ({
+const mapActionsToProps = dispatch => ({
   startQuiz() {
     dispatch({ type: 'START_QUIZ' });
+  },
+  startQuizChoose() {
+    dispatch({ type: 'START_QUIZ_CHOOSE' });
   },
   goToStats() {
     dispatch({ type: 'STATS_PAGE' });

@@ -3,6 +3,7 @@ export const ANSWER_SUBMITTED = 'ANSWER_SUBMITTED';
 export const ANSWER_KEY = 'ANSWER_KEY';
 export const QUIZ_RESULTS = 'QUIZ_RESULTS';
 export const START_QUIZ = 'START_QUIZ';
+export const START_QUIZ_CHOOSE = 'START_QUIZ_CHOOSE';
 export const START_NEW_QUIZ = 'START_NEW_QUIZ';
 export const STATS_PAGE = 'STATS_PAGE';
 export const CREDITS_PAGE = 'CREDITS_PAGE';

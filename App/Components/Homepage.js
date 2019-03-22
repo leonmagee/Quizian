@@ -212,16 +212,20 @@ class Homepage extends Component {
      * Toggle MainComponent based on 'started' state
      * not using Redux for this component
      */
-    if (this.props.statsPage) {
-      var MainComponent = <Stats />;
-    } else if (this.props.quizStarted) {
-      var MainComponent = (
+    let MainComponent = <view />;
+
+    const { props } = this;
+
+    if (props.statsPage) {
+      MainComponent = <Stats />;
+    } else if (props.quizStarted) {
+      MainComponent = (
         <LinearGradient colors={variables.gradient} style={{ flex: 1 }}>
           <QuizWrap />
         </LinearGradient>
       );
     } else {
-      var MainComponent = (
+      MainComponent = (
         <LinearGradient colors={variables.gradient} style={{ flex: 1 }}>
           <View style={styles.homeWrapOuter}>
             <View style={styles.homeWrap}>
@@ -232,11 +236,11 @@ class Homepage extends Component {
             </View>
             <View style={styles.menuBar}>
               <StartQuizButton
-                handleClick={() => this.props.startQuiz()}
+                handleClick={() => props.startQuiz()}
                 buttonText="NEW GAME"
               />
               <StartQuizButton
-                handleClick={() => this.props.goToStats()}
+                handleClick={() => props.goToStats()}
                 buttonText="STATS"
               />
             </View>

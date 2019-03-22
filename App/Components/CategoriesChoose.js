@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
-import { View, Text, Dimensions, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  Dimensions,
+  Animated,
+  TouchableHighlight,
+} from 'react-native';
 import styles from '../Styles/DefaultStyles';
 import variables from '../Styles/Variables';
 import SvgElement from './SvgElement';
@@ -10,44 +16,13 @@ import history from '../SVG/history';
 import music from '../SVG/music';
 import sports from '../SVG/sports';
 import geography from '../SVG/geography';
-// import StatusBarSizeIOS from 'react-native-status-bar-size'
-import { shuffleArray } from '../Utils/helper';
+// import console = require('console');
 
 const { width, height } = Dimensions.get('window');
-// var height_new = false;
 
-/**
- * This doesn't work here - I should instead pass this through the Quiz Wrap component (top level)? And then maybe
- * save it as a action, and whenever the status bar height changes that can be dispatched as an action and update accordingly?
- * @todo test this by subtracting 20 from the 'height' to see if that actually reduces the app height?
- */
-// let status_height = StatusBarSizeIOS.currentHeight;
-//
-// console.log('so far???', status_height);
-// /**
-//  * Height should pull from state?
-//  */
-// if (status_height) {
-//     console.log('status height', status_height);
-//     height = ( height - status_height );
-//     console.log('height new', height);
-// }
-
-class _Categories extends Component {
+class _CategoriesChoose extends Component {
   constructor(props) {
     super(props);
-    // let status_height = props.statusBarHeight;
-    /**
-     *
-     */
-
-    // if (!height_new) {
-    // if (status_height > 20) {
-    //     height_new = ( height - ( status_height - 20 ) );
-    // } else {
-    //     height_new = height;
-    // }
-    // }
 
     this.state = {
       animatedOpacity: [
@@ -62,12 +37,12 @@ class _Categories extends Component {
   }
 
   componentDidMount() {
-    const base_array = [0, 1, 2, 3, 4];
-    const shuffle = shuffleArray(base_array);
-    // StatusBarSizeIOS.addEventListener('willChange', this._handleStatusBarSizeWillChange);
-    setTimeout(() => {
-      this.colorOpacity(0, shuffle);
-    }, 300);
+    // const base_array = [0, 1, 2, 3, 4];
+    // const shuffle = shuffleArray(base_array);
+    // // StatusBarSizeIOS.addEventListener('willChange', this._handleStatusBarSizeWillChange);
+    // setTimeout(() => {
+    //   this.colorOpacity(0, shuffle);
+    // }, 300);
   }
 
   colorOpacity(index, shuffle) {
@@ -96,51 +71,55 @@ class _Categories extends Component {
     });
   }
 
-  catAnimationFinal(index) {
-    Animated.timing(this.state.animatedOpacity[index], {
-      toValue: 0.2,
-      duration: 300,
-    }).start();
+  // catAnimationFinal(index) {
+  //   // Animated.timing(this.state.animatedOpacity[index], {
+  //   //   toValue: 0.2,
+  //   //   duration: 300,
+  //   // }).start();
+  //   // setTimeout(() => {
+  //   // this.props.setCatIndex(this.props.historyIndex);
+  //   // this.props.catWasSelected('history')
+  //   //   if (index === 0) {
+  //   //     this.props.setCatIndex(this.props.sportsIndex);
+  //   //     this.props.catWasSelected('sports');
+  //   //   }
+  //   //   if (index === 1) {
+  //   //     this.props.setCatIndex(this.props.musicIndex);
+  //   //     this.props.catWasSelected('music');
+  //   //   }
+  //   //   if (index === 2) {
+  //   //     this.props.setCatIndex(this.props.entertainmentIndex);
+  //   //     this.props.catWasSelected('entertainment');
+  //   //   }
+  //   //   if (index === 3) {
+  //   //     this.props.setCatIndex(this.props.historyIndex);
+  //   //     this.props.catWasSelected('history');
+  //   //   }
+  //   //   if (index === 4) {
+  //   //     this.props.setCatIndex(this.props.geographyIndex);
+  //   //     this.props.catWasSelected('geography');
+  //   //   }
+  //   // }, 1000);
+  // }
 
-    setTimeout(() => {
-      // this.props.setCatIndex(this.props.historyIndex);
-      // this.props.catWasSelected('history')
-      if (index === 0) {
-        this.props.setCatIndex(this.props.sportsIndex);
-        this.props.catWasSelected('sports');
-      }
-      if (index === 1) {
-        this.props.setCatIndex(this.props.musicIndex);
-        this.props.catWasSelected('music');
-      }
-      if (index === 2) {
-        this.props.setCatIndex(this.props.entertainmentIndex);
-        this.props.catWasSelected('entertainment');
-      }
-      if (index === 3) {
-        this.props.setCatIndex(this.props.historyIndex);
-        this.props.catWasSelected('history');
-      }
-      if (index === 4) {
-        this.props.setCatIndex(this.props.geographyIndex);
-        this.props.catWasSelected('geography');
-      }
-    }, 1000);
+  clickTestFuction() {
+    console.log('this has been clicked!');
   }
 
   render() {
+    console.log('just a test');
     // 0 - sports / 1 - music / 2 - entertainment / 3 - history / 4 - geography
 
-    const num_horizontal = 3; // 6
-    const num_vertical = 5; // 10
-    const total_grid_items = num_horizontal * num_vertical;
-    const grid_array = [];
-    for (i = 0; i < total_grid_items; i++) {
-      grid_array.push(i);
+    const numHorizontal = 3; // 6
+    const numVertical = 5; // 10
+    const totalGridItems = numHorizontal * numVertical;
+    const gridArray = [];
+    for (i = 0; i < totalGridItems; i++) {
+      gridArray.push(i);
     }
-    const item_width = width / num_horizontal;
-    // const item_height = ( ( ( height_new) / num_vertical ) );
-    const item_height = height / num_vertical;
+    const itemWidth = width / numHorizontal;
+    // const itemHeight = ( ( ( height_new) / num_vertical ) );
+    const itemHeight = height / numVertical;
 
     return (
       <LinearGradient colors={variables.gradient} style={{ flex: 1 }}>
@@ -148,52 +127,55 @@ class _Categories extends Component {
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
-          <View
+          <TouchableHighlight
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
+            onPress={() => this.clickTestFuction()}
           >
-            <SvgElement svg_data={sports} svg_scale={0.375} />
-            <Text style={styles.categoriesText}>Sports</Text>
-            <Animated.View
-              style={[
-                styles.catColorOverlay,
-                { opacity: this.state.animatedOpacity[0] },
-              ]}
-            />
-          </View>
+            <>
+              <SvgElement svg_data={sports} svg_scale={0.375} />
+              <Text style={styles.categoriesText}>Sports</Text>
+              <Animated.View
+                style={[
+                  styles.catColorOverlay,
+                  { opacity: this.state.animatedOpacity[0] },
+                ]}
+              />
+            </>
+          </TouchableHighlight>
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           >
             <SvgElement svg_data={music} svg_scale={1.4} />
@@ -208,7 +190,7 @@ class _Categories extends Component {
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           >
             <SvgElement svg_data={television} svg_scale={0.15} />
@@ -223,7 +205,7 @@ class _Categories extends Component {
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           >
             <SvgElement svg_data={history} svg_scale={0.7} />
@@ -238,25 +220,25 @@ class _Categories extends Component {
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           >
             <SvgElement svg_data={geography} svg_scale={0.122} />
@@ -271,13 +253,13 @@ class _Categories extends Component {
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
           <View
             style={[
               styles.categoriesBox,
-              { width: item_width, height: item_height },
+              { width: itemWidth, height: itemHeight },
             ]}
           />
         </View>
@@ -301,12 +283,12 @@ const mapActionsToProps = dispatch => ({
   catWasSelected(cat) {
     dispatch({ type: 'CAT_CHOSEN', payload: cat });
   },
-  setCatIndex(index_array) {
-    dispatch({ type: 'SET_CAT_INDEX', payload: index_array });
+  setCatIndex(indexArray) {
+    dispatch({ type: 'SET_CAT_INDEX', payload: indexArray });
   },
 });
 
-export const Categories = connect(
+export const CategoriesChoose = connect(
   mapStateToProps,
   mapActionsToProps
-)(_Categories);
+)(_CategoriesChoose);

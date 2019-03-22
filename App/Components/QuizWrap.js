@@ -6,6 +6,7 @@ import { Quiz } from './Quiz';
 import { Results } from './Results';
 import Stats from './Stats';
 import { Categories } from './Categories';
+import { CategoriesChoose } from './CategoriesChoose';
 import { intermediateArray } from '../Utils/helper';
 import quizData from '../Data/quizData';
 import styles from '../Styles/DefaultStyles';
@@ -16,31 +17,33 @@ class _QuizWrap extends Component {
   // }
 
   componentDidMount() {
+    const { props } = this;
+
     const dataInitArray = [
       {
         data_key: 'sports',
         array_length: quizData[0].sports.length,
-        redux_action: this.props.sportsIndexInit,
+        redux_action: props.sportsIndexInit,
       },
       {
         data_key: 'history',
         array_length: quizData[0].history.length,
-        redux_action: this.props.historyIndexInit,
+        redux_action: props.historyIndexInit,
       },
       {
         data_key: 'entertainment',
         array_length: quizData[0].entertainment.length,
-        redux_action: this.props.entertainmentIndexInit,
+        redux_action: props.entertainmentIndexInit,
       },
       {
         data_key: 'music',
         array_length: quizData[0].music.length,
-        redux_action: this.props.musicIndexInit,
+        redux_action: props.musicIndexInit,
       },
       {
         data_key: 'geography',
         array_length: quizData[0].geography.length,
-        redux_action: this.props.geographyIndexInit,
+        redux_action: props.geographyIndexInit,
       },
     ];
 
@@ -62,16 +65,17 @@ class _QuizWrap extends Component {
   }
 
   render() {
-    if (this.props.statsPage) {
-      var mainComponent = <Stats />;
-    } else if (this.props.quizResults) {
-      var mainComponent = <Results />;
-    } else if (this.props.chooseCat) {
-      var mainComponent = <Categories />;
+    const { props } = this;
+    let mainComponent = <View />;
+    if (props.statsPage) {
+      mainComponent = <Stats />;
+    } else if (props.quizResults) {
+      mainComponent = <Results />;
+    } else if (props.chooseCat) {
+      mainComponent = <CategoriesChoose />;
     } else {
-      var mainComponent = <Quiz />;
+      mainComponent = <Quiz />;
     }
-
     return <View style={styles.outerWrapMain}>{mainComponent}</View>;
   }
 }
