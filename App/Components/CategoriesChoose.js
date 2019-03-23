@@ -102,9 +102,9 @@ class _CategoriesChoose extends Component {
   //   // }, 1000);
   // }
 
-  clickTestFuction() {
-    console.log('this has been clicked!');
-  }
+  // clickTestFuction() {
+  //   console.log('this has been clicked!');
+  // }
 
   render() {
     console.log('just a test');
@@ -120,6 +120,8 @@ class _CategoriesChoose extends Component {
     const itemWidth = width / numHorizontal;
     // const itemHeight = ( ( ( height_new) / num_vertical ) );
     const itemHeight = height / numVertical;
+
+    const { props } = this;
 
     return (
       <LinearGradient colors={variables.gradient} style={{ flex: 1 }}>
@@ -141,7 +143,10 @@ class _CategoriesChoose extends Component {
               styles.categoriesBox,
               { width: itemWidth, height: itemHeight },
             ]}
-            onPress={() => this.clickTestFuction()}
+            onPress={() => {
+              props.setCatIndex(props.sportsIndex);
+              props.catWasSelected('sports');
+            }}
           >
             <>
               <SvgElement svg_data={sports} svg_scale={0.375} />
@@ -172,51 +177,69 @@ class _CategoriesChoose extends Component {
               { width: itemWidth, height: itemHeight },
             ]}
           />
-          <View
+          <TouchableHighlight
             style={[
               styles.categoriesBox,
               { width: itemWidth, height: itemHeight },
             ]}
+            onPress={() => {
+              props.setCatIndex(props.musicIndex);
+              props.catWasSelected('music');
+            }}
           >
-            <SvgElement svg_data={music} svg_scale={1.4} />
-            <Text style={styles.categoriesText}>Music</Text>
-            <Animated.View
-              style={[
-                styles.catColorOverlay,
-                { opacity: this.state.animatedOpacity[1] },
-              ]}
-            />
-          </View>
-          <View
+            <>
+              <SvgElement svg_data={music} svg_scale={1.4} />
+              <Text style={styles.categoriesText}>Music</Text>
+              <Animated.View
+                style={[
+                  styles.catColorOverlay,
+                  { opacity: this.state.animatedOpacity[1] },
+                ]}
+              />
+            </>
+          </TouchableHighlight>
+          <TouchableHighlight
             style={[
               styles.categoriesBox,
               { width: itemWidth, height: itemHeight },
             ]}
+            onPress={() => {
+              props.setCatIndex(props.entertainmentIndex);
+              props.catWasSelected('entertainment');
+            }}
           >
-            <SvgElement svg_data={television} svg_scale={0.15} />
-            <Text style={styles.categoriesText}>TV & Movies</Text>
-            <Animated.View
-              style={[
-                styles.catColorOverlay,
-                { opacity: this.state.animatedOpacity[2] },
-              ]}
-            />
-          </View>
-          <View
+            <>
+              <SvgElement svg_data={television} svg_scale={0.15} />
+              <Text style={styles.categoriesText}>TV & Movies</Text>
+              <Animated.View
+                style={[
+                  styles.catColorOverlay,
+                  { opacity: this.state.animatedOpacity[2] },
+                ]}
+              />
+            </>
+          </TouchableHighlight>
+          <TouchableHighlight
             style={[
               styles.categoriesBox,
               { width: itemWidth, height: itemHeight },
             ]}
+            onPress={() => {
+              props.setCatIndex(props.historyIndex);
+              props.catWasSelected('history');
+            }}
           >
-            <SvgElement svg_data={history} svg_scale={0.7} />
-            <Text style={styles.categoriesText}>History</Text>
-            <Animated.View
-              style={[
-                styles.catColorOverlay,
-                { opacity: this.state.animatedOpacity[3] },
-              ]}
-            />
-          </View>
+            <>
+              <SvgElement svg_data={history} svg_scale={0.7} />
+              <Text style={styles.categoriesText}>History</Text>
+              <Animated.View
+                style={[
+                  styles.catColorOverlay,
+                  { opacity: this.state.animatedOpacity[3] },
+                ]}
+              />
+            </>
+          </TouchableHighlight>
           <View
             style={[
               styles.categoriesBox,
@@ -235,21 +258,27 @@ class _CategoriesChoose extends Component {
               { width: itemWidth, height: itemHeight },
             ]}
           />
-          <View
+          <TouchableHighlight
             style={[
               styles.categoriesBox,
               { width: itemWidth, height: itemHeight },
             ]}
+            onPress={() => {
+              props.setCatIndex(props.geographyIndex);
+              props.catWasSelected('geography');
+            }}
           >
-            <SvgElement svg_data={geography} svg_scale={0.122} />
-            <Text style={styles.categoriesText}>Geography</Text>
-            <Animated.View
-              style={[
-                styles.catColorOverlay,
-                { opacity: this.state.animatedOpacity[4] },
-              ]}
-            />
-          </View>
+            <>
+              <SvgElement svg_data={geography} svg_scale={0.122} />
+              <Text style={styles.categoriesText}>Geography</Text>
+              <Animated.View
+                style={[
+                  styles.catColorOverlay,
+                  { opacity: this.state.animatedOpacity[4] },
+                ]}
+              />
+            </>
+          </TouchableHighlight>
           <View
             style={[
               styles.categoriesBox,
