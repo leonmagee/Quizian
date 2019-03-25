@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   button: {
     color: '#FFF',
     fontWeight: '400',
-    fontSize: 14,
+    fontSize: 17,
     fontFamily: 'Lalezar-Regular',
     backgroundColor: 'transparent',
   },

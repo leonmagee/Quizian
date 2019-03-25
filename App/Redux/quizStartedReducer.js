@@ -1,4 +1,4 @@
-import { START_QUIZ, START_QUIZ_CHOOSE, QUIZ_RESET } from './actions';
+import { START_QUIZ, QUIZ_RESET } from './actions';
 
 /**
  * quizStartedReducer
@@ -7,8 +7,6 @@ import { START_QUIZ, START_QUIZ_CHOOSE, QUIZ_RESET } from './actions';
 export const quizStartedReducer = (state = false, action) => {
   switch (action.type) {
     case START_QUIZ:
-      return true;
-    case START_QUIZ_CHOOSE:
       return true;
     case QUIZ_RESET:
       return false;

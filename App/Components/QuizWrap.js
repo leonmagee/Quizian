@@ -12,9 +12,13 @@ import quizData from '../Data/quizData';
 import styles from '../Styles/DefaultStyles';
 
 class _QuizWrap extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor() {
+    super();
+
+    this.state = {
+      randomQuestionMode: false,
+    };
+  }
 
   componentDidMount() {
     const { props } = this;
@@ -47,6 +51,16 @@ class _QuizWrap extends Component {
       },
     ];
 
+    AsyncStorage.getItem(`@RandomQuestionMode`)
+      .then(setting => {
+        if (setting === 'true') {
+          this.setState({
+            randomQuestionMode: true,
+          });
+        }
+      })
+      .done();
+
     dataInitArray.map(item => {
       AsyncStorage.getItem(`@QuestionIndex:${item.data_key}`)
         .then(value => {
@@ -72,7 +86,11 @@ class _QuizWrap extends Component {
     } else if (props.quizResults) {
       mainComponent = <Results />;
     } else if (props.chooseCat) {
-      mainComponent = <CategoriesChoose />;
+      if (this.state.randomQuestionMode) {
+        mainComponent = <Categories />;
+      } else {
+        mainComponent = <CategoriesChoose />;
+      }
     } else {
       mainComponent = <Quiz />;
     }

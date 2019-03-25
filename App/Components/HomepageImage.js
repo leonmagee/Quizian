@@ -6,6 +6,7 @@ import { vw } from '../Utils/helper';
 import { QuizWrap } from './QuizWrap';
 import Stats from './Stats';
 import Credits from './Credits';
+import Settings from './Settings';
 import StartQuizButton from './StartQuizButton';
 import variables from '../Styles/Variables';
 /**
@@ -87,11 +88,15 @@ class HomepageImage extends Component {
 
     let MainComponent = <View />;
 
-    if (this.props.creditsPage) {
+    const { props } = this;
+
+    if (props.creditsPage) {
       MainComponent = <Credits />;
-    } else if (this.props.statsPage) {
+    } else if (props.statsPage) {
       MainComponent = <Stats />;
-    } else if (this.props.quizStarted) {
+    } else if (props.settingsPage) {
+      MainComponent = <Settings />;
+    } else if (props.quizStarted) {
       MainComponent = (
         <LinearGradient colors={variables.gradient} style={{ flex: 1 }}>
           <QuizWrap />
@@ -110,20 +115,20 @@ class HomepageImage extends Component {
             </View>
             <View style={styles.menuBar}>
               <StartQuizButton
-                handleClick={() => this.props.startQuiz()}
-                buttonText="RANDOM  GAME"
+                handleClick={() => props.startQuiz()}
+                buttonText="NEW  GAME"
               />
               <StartQuizButton
-                handleClick={() => this.props.startQuizChoose()}
-                buttonText="CHOOSE  GAME"
-              />
-              <StartQuizButton
-                handleClick={() => this.props.goToStats()}
+                handleClick={() => props.goToStats()}
                 buttonText="STATS"
               />
               <StartQuizButton
-                handleClick={() => this.props.goToCredits()}
+                handleClick={() => props.goToCredits()}
                 buttonText="CREDITS"
+              />
+              <StartQuizButton
+                handleClick={() => props.goToSettings()}
+                buttonText="SETTINGS"
               />
             </View>
           </View>
@@ -139,20 +144,21 @@ const mapStateToProps = state => ({
   quizStarted: state.quizStarted,
   statsPage: state.statsPage,
   creditsPage: state.creditsPage,
+  settingsPage: state.settingsPage,
 });
 
 const mapActionsToProps = dispatch => ({
   startQuiz() {
     dispatch({ type: 'START_QUIZ' });
   },
-  startQuizChoose() {
-    dispatch({ type: 'START_QUIZ_CHOOSE' });
-  },
   goToStats() {
     dispatch({ type: 'STATS_PAGE' });
   },
   goToCredits() {
     dispatch({ type: 'CREDITS_PAGE' });
+  },
+  goToSettings() {
+    dispatch({ type: 'SETTINGS_PAGE' });
   },
 });
 

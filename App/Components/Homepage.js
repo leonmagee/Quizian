@@ -122,6 +122,19 @@ class Homepage extends Component {
     });
   }
 
+  componentDidMount() {
+    const new_styles_array = this.state.grid_styles_array;
+
+    const i = 0;
+    this.questionOpacityRecursive(
+      new_styles_array,
+      new_styles_array.length,
+      i,
+      null,
+      this.state.shuffled_grid_array
+    );
+  }
+
   questionOpacityRecursive(array, length, i, old_i = null, shuffled) {
     if (i < length) {
       setTimeout(() => {
@@ -156,19 +169,6 @@ class Homepage extends Component {
 
       array[shuffled[old_i]].opacity = this.animatedValue[old_i];
     }
-  }
-
-  componentDidMount() {
-    const new_styles_array = this.state.grid_styles_array;
-
-    const i = 0;
-    this.questionOpacityRecursive(
-      new_styles_array,
-      new_styles_array.length,
-      i,
-      null,
-      this.state.shuffled_grid_array
-    );
   }
 
   // startQuiz() {
