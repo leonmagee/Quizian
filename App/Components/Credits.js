@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { StyleSheet, Text, View, Dimensions, Animated } from 'react-native';
-// import { QuizWrap } from './QuizWrap';
-// import Stats from './Stats';
 import StartQuizButton from './StartQuizButton';
-import { shuffleArray, vw, vh } from '../Utils/helper';
+import { shuffleArray } from '../Utils/helper';
 import variables from '../Styles/Variables';
+import DefaultStyles from '../Styles/DefaultStyles';
 
 let { width, height } = Dimensions.get('window');
 height -= 50; // make space for bottom menu bar
@@ -14,7 +13,6 @@ height -= 50; // make space for bottom menu bar
 const styles = StyleSheet.create({
   mainOuterWrapCredits: {
     flex: 1,
-    // backgroundColor: '#FCFCFC',
   },
   homeWrapOuter: {
     flex: 1,
@@ -68,13 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   menuBar: {
-    height: 50,
-    paddingTop: 10,
-    paddingBottom: 5,
     backgroundColor: 'rgba(0,0,0,0.1)',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'row',
   },
 });
 
@@ -230,12 +222,8 @@ class Credits extends Component {
             </View>
             {grid}
           </View>
-          <View style={styles.menuBar}>
+          <View style={[DefaultStyles.globalNavStyles, styles.menuBar]}>
             {/* add button for Home (this is no longer home) */}
-            <StartQuizButton
-              handleClick={() => this.props.goToHome()}
-              buttonText="HOME"
-            />
             <StartQuizButton
               handleClick={() => this.props.startQuiz()}
               buttonText="NEW GAME"
@@ -243,6 +231,14 @@ class Credits extends Component {
             <StartQuizButton
               handleClick={() => this.props.goToStats()}
               buttonText="STATS"
+            />
+            <StartQuizButton
+              handleClick={() => this.props.goToSettings()}
+              buttonText="SETTINGS"
+            />
+            <StartQuizButton
+              handleClick={() => this.props.goToHome()}
+              buttonText="HOME"
             />
           </View>
         </View>
@@ -253,17 +249,20 @@ class Credits extends Component {
   }
 }
 
-mapStateToProps = state => ({
+const mapStateToProps = state => ({
   // quizStarted: state.quizStarted,
   // statsPage: state.statsPage,
 });
 
-mapActionsToProps = dispatch => ({
+const mapActionsToProps = dispatch => ({
   startQuiz() {
     dispatch({ type: 'START_QUIZ' });
   },
   goToStats() {
     dispatch({ type: 'STATS_PAGE' });
+  },
+  goToSettings() {
+    dispatch({ type: 'SETTINGS_PAGE' });
   },
   goToHome() {
     dispatch({ type: 'QUIZ_RESET' });

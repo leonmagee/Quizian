@@ -1,8 +1,4 @@
-import React from 'react';
-
-import {
-    ENTERTAINMENT_QUESTION,
-} from './actions';
+import { ENTERTAINMENT_QUESTION } from './actions';
 
 /**
  * entertainmentIndexReducer
@@ -10,11 +6,10 @@ import {
  * the initial state is set in QuizWrap
  */
 export const entertainmentIndexReducer = (state = null, action) => {
-    switch (action.type) {
-        case ENTERTAINMENT_QUESTION:
-            return action.payload;
-            break;
-        default:
-            return state;
-    }
-}
+  switch (action.type) {
+    case ENTERTAINMENT_QUESTION:
+      return action.payload;
+    default:
+      return state;
+  }
+};

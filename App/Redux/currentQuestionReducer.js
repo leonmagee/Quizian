@@ -1,10 +1,4 @@
-import React from 'react';
-
-import {
-    NEXT_QUESTION,
-    START_QUIZ,
-    START_NEW_QUIZ,
-} from './actions';
+import { NEXT_QUESTION, START_QUIZ, START_NEW_QUIZ } from './actions';
 
 /**
  * currentQuestionReducer
@@ -13,19 +7,14 @@ import {
  * Resets value to 0 when quiz is restarted
  */
 export const currentQuestionReducer = (state = 0, action) => {
-
-    switch (action.type) {
-        case NEXT_QUESTION:
-            return state + 1;
-            break;
-        case START_QUIZ:
-            return 0
-            break;
-        case START_NEW_QUIZ:
-            return 0
-            break;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case NEXT_QUESTION:
+      return state + 1;
+    case START_QUIZ:
+      return 0;
+    case START_NEW_QUIZ:
+      return 0;
+    default:
+      return state;
+  }
 };
-

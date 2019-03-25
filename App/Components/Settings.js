@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import variables from '../Styles/Variables';
-import NavBar from './NavBar';
+import NavBarSettings from './NavBarSettings';
 
 const mainBackground = '#FCFCFC';
 
@@ -77,7 +77,7 @@ class Settings extends Component {
             checkedColor={variables.brandThird}
           />
         </View>
-        <NavBar />
+        <NavBarSettings />
       </View>
     );
   }

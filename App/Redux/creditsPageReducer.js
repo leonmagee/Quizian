@@ -1,4 +1,4 @@
-import { CREDITS_PAGE, STATS_PAGE, START_QUIZ, QUIZ_RESET } from './actions';
+import { CREDITS_PAGE } from './actions';
 
 /**
  * statsPageReducer
@@ -8,12 +8,6 @@ export const creditsPageReducer = (state, action) => {
   switch (action.type) {
     case CREDITS_PAGE:
       return true;
-    // case STATS_PAGE:
-    //   return false;
-    // case START_QUIZ:
-    //   return false;
-    // case QUIZ_RESET:
-    //   return false;
     default:
       return false;
   }

@@ -1,8 +1,4 @@
-import React from 'react';
-
-import {
-    MUSIC_QUESTION,
-} from './actions';
+import { MUSIC_QUESTION } from './actions';
 
 /**
  * musicIndexReducer
@@ -10,11 +6,10 @@ import {
  * the initial state is set in QuizWrap
  */
 export const musicIndexReducer = (state = null, action) => {
-    switch (action.type) {
-        case MUSIC_QUESTION:
-            return action.payload;
-            break;
-        default:
-            return state;
-    }
-}
+  switch (action.type) {
+    case MUSIC_QUESTION:
+      return action.payload;
+    default:
+      return state;
+  }
+};

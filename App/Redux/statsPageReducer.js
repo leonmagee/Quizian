@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { STATS_PAGE } from './actions';
 
 /**

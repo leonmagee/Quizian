@@ -1,8 +1,4 @@
-import React from 'react';
-
-import {
-    GEOGRAPHY_QUESTION,
-} from './actions';
+import { GEOGRAPHY_QUESTION } from './actions';
 
 /**
  * geographyIndexReducer
@@ -10,11 +6,10 @@ import {
  * the initial state is set in QuizWrap
  */
 export const geographyIndexReducer = (state = null, action) => {
-    switch (action.type) {
-        case GEOGRAPHY_QUESTION:
-            return action.payload;
-            break;
-        default:
-            return state;
-    }
-}
+  switch (action.type) {
+    case GEOGRAPHY_QUESTION:
+      return action.payload;
+    default:
+      return state;
+  }
+};

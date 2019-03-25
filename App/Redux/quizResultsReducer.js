@@ -1,10 +1,4 @@
-import React from 'react';
-
-import {
-    QUIZ_RESULTS,
-    START_QUIZ,
-    START_NEW_QUIZ,
-} from './actions';
+import { QUIZ_RESULTS, START_QUIZ, START_NEW_QUIZ } from './actions';
 
 /**
  * quizResultsReducer
@@ -12,17 +6,14 @@ import {
  * used in QuizWrap.js
  */
 export const quizResultsReducer = (state = false, action) => {
-    switch (action.type) {
-        case QUIZ_RESULTS:
-            return true;
-            break;
-        case START_NEW_QUIZ:
-            return false;
-            break;
-        case START_QUIZ:
-            return false;
-            break;
-        default:
-            return state;
-    }
-}
+  switch (action.type) {
+    case QUIZ_RESULTS:
+      return true;
+    case START_NEW_QUIZ:
+      return false;
+    case START_QUIZ:
+      return false;
+    default:
+      return state;
+  }
+};

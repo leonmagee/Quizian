@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class NavBar extends Component {
+class NavBarStats extends Component {
   render() {
     const { props } = this;
     return (
@@ -20,7 +20,6 @@ class NavBar extends Component {
           handleClick={() => props.startQuiz()}
           buttonText="NEW GAME"
         />
-        <NavButton handleClick={() => props.goToHome()} buttonText="HOME" />
         <NavButton
           handleClick={() => props.goToSettings()}
           buttonText="SETTINGS"
@@ -29,6 +28,7 @@ class NavBar extends Component {
           handleClick={() => props.goToCredits()}
           buttonText="CREDITS"
         />
+        <NavButton handleClick={() => props.goToHome()} buttonText="HOME" />
       </View>
     );
   }
@@ -52,4 +52,4 @@ const mapActionsToProps = dispatch => ({
 module.exports = connect(
   null,
   mapActionsToProps
-)(NavBar);
+)(NavBarStats);

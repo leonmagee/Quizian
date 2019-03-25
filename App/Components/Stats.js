@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-community/async-storage';
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
-import NavBar from './NavBar';
+import NavBarStats from './NavBarStats';
 import { vh } from '../Utils/helper';
 import Variables from '../Styles/Variables';
 
@@ -291,7 +291,7 @@ class Stats extends Component {
         <View style={styles.mainWrap}>
           <View style={styles.graphWrap}>{barGraphs}</View>
         </View>
-        <NavBar />
+        <NavBarStats />
       </View>
     );
   }
