@@ -1,4 +1,3 @@
-import React from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Dimensions } from 'react-native';
 

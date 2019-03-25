@@ -3,15 +3,20 @@ import { StyleSheet, View, Text } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import variables from '../Styles/Variables';
+import NavBar from './NavBar';
 
 const mainBackground = '#FCFCFC';
 
 const styles = StyleSheet.create({
-  mainWrap: {
+  outerWrap: {
     backgroundColor: mainBackground,
     flex: 1,
-    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingTop: 100,
+  },
+  innerWrap: {
+    flex: 1,
+    alignItems: 'center',
   },
   titleText: {
     fontSize: 26,
@@ -62,14 +67,17 @@ class Settings extends Component {
   render() {
     const { state } = this;
     return (
-      <View style={styles.mainWrap}>
-        <Text style={styles.titleText}>Quizian Settings</Text>
-        <CheckBox
-          title="Random Question Mode"
-          checked={state.randomQuestionMode}
-          onPress={() => this.toggleClick()}
-          checkedColor={variables.brandThird}
-        />
+      <View style={styles.outerWrap}>
+        <View style={styles.innerWrap}>
+          <Text style={styles.titleText}>Quizian Settings</Text>
+          <CheckBox
+            title="Random Question Mode"
+            checked={state.randomQuestionMode}
+            onPress={() => this.toggleClick()}
+            checkedColor={variables.brandThird}
+          />
+        </View>
+        <NavBar />
       </View>
     );
   }

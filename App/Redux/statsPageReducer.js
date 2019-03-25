@@ -1,27 +1,16 @@
 import React from 'react';
 
-import {
-    STATS_PAGE,
-    START_QUIZ,
-    QUIZ_RESET,
-} from './actions';
+import { STATS_PAGE } from './actions';
 
 /**
  * statsPageReducer
  * toggles stats page
  */
-export const statsPageReducer = (state = false, action) => {
-    switch (action.type) {
-        case STATS_PAGE:
-            return true;
-            break;
-        case START_QUIZ:
-            return false;
-            break;
-        case QUIZ_RESET:
-            return false;
-            break;
-        default:
-            return state;
-    }
-}
+export const statsPageReducer = (state, action) => {
+  switch (action.type) {
+    case STATS_PAGE:
+      return true;
+    default:
+      return false;
+  }
+};

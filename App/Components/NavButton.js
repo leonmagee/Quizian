@@ -1,5 +1,5 @@
 /**
- * Button Component
+ * Nav Button Component
  */
 import React, { Component } from 'react';
 
@@ -7,25 +7,25 @@ import { StyleSheet, Text, TouchableHighlight } from 'react-native';
 
 const styles = StyleSheet.create({
   button: {
-    color: '#222',
+    color: '#FFF',
     fontWeight: '400',
-    fontSize: 25,
+    fontSize: 17,
     fontFamily: 'Lalezar-Regular',
-    // backgroundColor: 'transparent',
   },
 });
 
-class StatsButton extends Component {
+class NavButton extends Component {
   render() {
+    const { props } = this;
     return (
       <TouchableHighlight
-        onPress={() => this.props.handleClick()}
+        onPress={() => props.handleClick()}
         underlayColor="transparent"
       >
-        <Text style={styles.button}>{this.props.buttonText}</Text>
+        <Text style={styles.button}>{props.buttonText}</Text>
       </TouchableHighlight>
     );
   }
 }
 
-module.exports = StatsButton;
+module.exports = NavButton;

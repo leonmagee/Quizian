@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
-import StatsButton from './StatsButton';
+import NavBar from './NavBar';
 import { vh } from '../Utils/helper';
+import Variables from '../Styles/Variables';
 
 const { width } = Dimensions.get('window');
 const wrapWidth = width * 0.8;
 const wrapMargin = width * 0.1;
-const mainBackground = '#FCFCFC';
 
 const LinearAnimate = Animated.createAnimatedComponent(LinearGradient);
 
 const styles = StyleSheet.create({
   outerWrap: {
     flex: 1,
-    // justifyContent: 'center',
     justifyContent: 'space-between',
   },
   headerWrap: {
-    backgroundColor: mainBackground,
+    backgroundColor: Variables.mainBackground,
     paddingTop: 45,
     alignItems: 'center',
   },
@@ -41,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // flex: 1,
-    backgroundColor: mainBackground,
+    backgroundColor: Variables.mainBackground,
   },
   graphWrap: {
     width: wrapWidth,
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
     height: vh * 5,
   },
   labelWrap: {
-    backgroundColor: mainBackground,
+    backgroundColor: Variables.mainBackground,
     paddingTop: 12,
     paddingBottom: 6,
     flexDirection: 'row',
@@ -64,16 +62,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#111',
     // fontFamily: 'Lalezar-Regular',
-  },
-  menuBar: {
-    // height: 50,
-    paddingTop: 10,
-    paddingBottom: 25,
-    backgroundColor: mainBackground,
-    // backgroundColor: 'rgba(0,0,0,0.1)',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'row',
   },
 });
 
@@ -134,115 +122,6 @@ class Stats extends Component {
     };
   }
 
-  setDataFromStorage() {
-    if (this.state.sports_true || this.state.sports_false) {
-      if (!this.state.sports_false) {
-        const totalPerc = this.state.totalPercents;
-        totalPerc[0].percent = 100;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      } else if (this.state.sports_true) {
-        const sportsTotal = this.state.sports_true + this.state.sports_false;
-        const sportsPercent = (this.state.sports_true / sportsTotal) * 100;
-        const sportsPercentFinal = sportsPercent.toFixed(0);
-        const totalPerc = this.state.totalPercents;
-        totalPerc[0].percent = sportsPercentFinal;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      }
-    }
-
-    if (this.state.history_true || this.state.history_false) {
-      if (!this.state.history_false) {
-        const totalPerc = this.state.totalPercents;
-        totalPerc[1].percent = 100;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      } else if (this.state.history_true) {
-        const historyTotal = this.state.history_true + this.state.history_false;
-        const historyPercent = (this.state.history_true / historyTotal) * 100;
-        const historyPercentFinal = historyPercent.toFixed(0);
-        const totalPerc = this.state.totalPercents;
-        totalPerc[1].percent = historyPercentFinal;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      }
-    }
-
-    if (this.state.entertainment_true || this.state.entertainment_false) {
-      if (!this.state.entertainment_false) {
-        const totalPerc = this.state.totalPercents;
-        totalPerc[2].percent = 100;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      } else if (this.state.entertainment_true) {
-        const entertainmentTotal =
-          this.state.entertainment_true + this.state.entertainment_false;
-        const entertainmentPercent =
-          (this.state.entertainment_true / entertainmentTotal) * 100;
-        const entertainmentPercentFinal = entertainmentPercent.toFixed(0);
-        const totalPerc = this.state.totalPercents;
-        totalPerc[2].percent = entertainmentPercentFinal;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      }
-    }
-
-    if (this.state.music_true || this.state.music_false) {
-      if (!this.state.music_false) {
-        const totalPerc = this.state.totalPercents;
-        totalPerc[3].percent = 100;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      } else if (this.state.music_true) {
-        const musicTotal = this.state.music_true + this.state.music_false;
-        const musicPercent = (this.state.music_true / musicTotal) * 100;
-        const musicPercentFinal = musicPercent.toFixed(0);
-        const totalPerc = this.state.totalPercents;
-        totalPerc[3].percent = musicPercentFinal;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      }
-    }
-
-    if (this.state.geography_true || this.state.geography_false) {
-      if (!this.state.geography_false) {
-        const totalPerc = this.state.totalPercents;
-        totalPerc[4].percent = 100;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      } else if (this.state.geography_true) {
-        const geographyTotal =
-          this.state.geography_true + this.state.geography_false;
-        const geographyPercent =
-          (this.state.geography_true / geographyTotal) * 100;
-        const geographyPercentFinal = geographyPercent.toFixed(0);
-        const totalPerc = this.state.totalPercents;
-        totalPerc[4].percent = geographyPercentFinal;
-        this.setState({
-          totalPercents: totalPerc,
-        });
-      }
-    }
-
-    this.state.totalPercents.map((i, k) => {
-      Animated.timing(this.state.barWidth[k], {
-        toValue: wrapWidth * (i.percent / 100),
-        // toValue: wrapWidth * 0.3,
-        duration: 400,
-      }).start();
-    });
-  }
-
   componentDidMount() {
     const asyncKeysInit = [
       'sports_true',
@@ -281,6 +160,114 @@ class Stats extends Component {
     });
   }
 
+  setDataFromStorage() {
+    const { state } = this;
+    if (state.sports_true || state.sports_false) {
+      if (!state.sports_false) {
+        const totalPerc = state.totalPercents;
+        totalPerc[0].percent = 100;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      } else if (state.sports_true) {
+        const sportsTotal = state.sports_true + state.sports_false;
+        const sportsPercent = (state.sports_true / sportsTotal) * 100;
+        const sportsPercentFinal = sportsPercent.toFixed(0);
+        const totalPerc = state.totalPercents;
+        totalPerc[0].percent = sportsPercentFinal;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      }
+    }
+
+    if (state.history_true || state.history_false) {
+      if (!state.history_false) {
+        const totalPerc = state.totalPercents;
+        totalPerc[1].percent = 100;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      } else if (state.history_true) {
+        const historyTotal = state.history_true + state.history_false;
+        const historyPercent = (state.history_true / historyTotal) * 100;
+        const historyPercentFinal = historyPercent.toFixed(0);
+        const totalPerc = state.totalPercents;
+        totalPerc[1].percent = historyPercentFinal;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      }
+    }
+
+    if (state.entertainment_true || state.entertainment_false) {
+      if (!state.entertainment_false) {
+        const totalPerc = state.totalPercents;
+        totalPerc[2].percent = 100;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      } else if (state.entertainment_true) {
+        const entertainmentTotal =
+          state.entertainment_true + state.entertainment_false;
+        const entertainmentPercent =
+          (state.entertainment_true / entertainmentTotal) * 100;
+        const entertainmentPercentFinal = entertainmentPercent.toFixed(0);
+        const totalPerc = state.totalPercents;
+        totalPerc[2].percent = entertainmentPercentFinal;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      }
+    }
+
+    if (state.music_true || state.music_false) {
+      if (!state.music_false) {
+        const totalPerc = state.totalPercents;
+        totalPerc[3].percent = 100;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      } else if (state.music_true) {
+        const musicTotal = state.music_true + state.music_false;
+        const musicPercent = (state.music_true / musicTotal) * 100;
+        const musicPercentFinal = musicPercent.toFixed(0);
+        const totalPerc = state.totalPercents;
+        totalPerc[3].percent = musicPercentFinal;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      }
+    }
+
+    if (state.geography_true || state.geography_false) {
+      if (!state.geography_false) {
+        const totalPerc = state.totalPercents;
+        totalPerc[4].percent = 100;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      } else if (state.geography_true) {
+        const geographyTotal = state.geography_true + state.geography_false;
+        const geographyPercent = (state.geography_true / geographyTotal) * 100;
+        const geographyPercentFinal = geographyPercent.toFixed(0);
+        const totalPerc = state.totalPercents;
+        totalPerc[4].percent = geographyPercentFinal;
+        this.setState({
+          totalPercents: totalPerc,
+        });
+      }
+    }
+
+    state.totalPercents.map((i, k) => {
+      Animated.timing(state.barWidth[k], {
+        toValue: wrapWidth * (i.percent / 100),
+        // toValue: wrapWidth * 0.3,
+        duration: 400,
+      }).start();
+    });
+  }
+
   render() {
     const barGraphs = this.state.totalPercents.map((i, k) => (
       <View key={k}>
@@ -304,38 +291,10 @@ class Stats extends Component {
         <View style={styles.mainWrap}>
           <View style={styles.graphWrap}>{barGraphs}</View>
         </View>
-        <View style={styles.menuBar}>
-          <StatsButton
-            handleClick={() => this.props.startQuiz()}
-            buttonText="NEW GAME"
-          />
-          <StatsButton
-            handleClick={() => this.props.goToHome()}
-            buttonText="HOME"
-          />
-        </View>
+        <NavBar />
       </View>
     );
   }
 }
 
-mapStateToProps = state => ({
-  // quizStarted: state.quizStarted,
-  // statsPage: state.statsPage,
-});
-
-mapActionsToProps = dispatch => ({
-  startQuiz() {
-    dispatch({ type: 'START_QUIZ' });
-  },
-  goToHome() {
-    dispatch({ type: 'QUIZ_RESET' });
-  },
-});
-
-module.exports = connect(
-  mapStateToProps,
-  mapActionsToProps
-)(Stats);
-
-// module.exports = Stats
+module.exports = Stats;

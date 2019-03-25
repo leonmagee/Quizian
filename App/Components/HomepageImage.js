@@ -9,6 +9,7 @@ import Credits from './Credits';
 import Settings from './Settings';
 import StartQuizButton from './StartQuizButton';
 import variables from '../Styles/Variables';
+import DefaultStyles from '../Styles/DefaultStyles';
 /**
  * @todo remove this
  */
@@ -60,13 +61,7 @@ const styles = StyleSheet.create({
   },
   menuBar: {
     position: 'absolute',
-    height: 50,
-    paddingTop: 10,
-    paddingBottom: 5,
     backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'row',
     bottom: 0,
     width,
   },
@@ -113,7 +108,7 @@ class HomepageImage extends Component {
             <View style={[styles.homeTextWrap, { width, height }]}>
               <Text style={styles.homeText}>Quizian</Text>
             </View>
-            <View style={styles.menuBar}>
+            <View style={[DefaultStyles.globalNavStyles, styles.menuBar]}>
               <StartQuizButton
                 handleClick={() => props.startQuiz()}
                 buttonText="NEW  GAME"
